@@ -45,7 +45,7 @@ class ArticleController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
         }
-        return view('admin.pages.article.list');
+        return view('admin.pages.article.index');
     }
 
     /**
@@ -86,7 +86,7 @@ class ArticleController extends Controller
         if($request->redirect_article){
             return redirect('/admin/article/show/'.$article->id);
         }
-        return redirect('/admin/article/list');
+        return redirect('/admin/article');
     }
 
     /**

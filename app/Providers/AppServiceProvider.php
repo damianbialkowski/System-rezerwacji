@@ -27,13 +27,13 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
-        $settings_website = Settings::where('type','website')->get(['key','value'])->toArray();
-        $settings_arr = [];
+        $settings_website = Settings::where('type','website')->get(['key','value']);
+        $settings = [];
         foreach($settings_website as $v){
-            $settings_arr[$v['key']] = $v['value'];
+            $settings[$v->key] = $v->value;
         }
 
-        view()->share('settings', $settings_arr);
+        view()->share('settings', $settings);
         if(\Auth::check()){
             view()->share('user', \Auth::user());
         }

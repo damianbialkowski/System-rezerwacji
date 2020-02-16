@@ -1,4 +1,4 @@
-@extends('layouts.app',['settings' => $settings])
+@extends('layouts.app')
 @section('main')
 <div class="content">
     <section class="container-fluid searchPage ptop">
@@ -7,13 +7,13 @@
         <div class="search-articles">
             @if($articles->count())
                 @foreach($articles as $article)
-                <a href="{{ url('article/'.$article->id.','.$article->slug) }}" class="link_post">
+                <a href="{{ $article->url }}" class="link_post" id="post_{{ $article->id }}">
                     <div class="post_category space_top">
                     <img src="{{ $article->getMedia('images')->first() ? $article->getMedia('images')->first()->getFullUrl() : '' }}" class="post_logo" title="{{ $article->title }}">
                     <div class="post_content">
                         <h2>{{ str_limit($article->title,50) }}</h2>
                         <p>{!! str_limit($article->content,150) !!}</p>
-                        <span>{{ date('d.m.y, H:i',strtotime($article->created_at)) }}</span>
+                        <span>{{ date('d.m.Y, H:i',strtotime($article->created_at)) }}</span>
                     </div>
                     <span class="post_more_info">
                         <i class="fas fa-chevron-right"></i>

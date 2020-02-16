@@ -6,7 +6,6 @@
         <div class="content mTop30">
         @yield('admin.main')
         </div>
-        
     </section>
     @include('admin.partials.footer')
     @yield('admin.script')

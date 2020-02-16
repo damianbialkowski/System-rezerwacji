@@ -53,7 +53,7 @@
                       <a class="dropdown-item" href="{{ url('/admin') }}">Panel</a>
                     @endif
                     <a class="dropdown-item" href="#">Ustawienia</a>
-                    <a class="dropdown-item" href="{{ route('user.logout') }}">Wyloguj się</a>
+                    <a class="dropdown-item" href="{{ route('logout') }}">Wyloguj się</a>
                   </div>
                 </li>
                 @else

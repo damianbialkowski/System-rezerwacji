@@ -30,4 +30,9 @@ class Category extends Model
         return $this->articles()->where('visible',1)->orderBy('created_at','desc');
         // return $this->article()->where('category_id',$category_id);
     }
+
+    public function getUrlAttribute()
+    {
+        return url('/category/'.$this->id.','.$this->slug);
+    }
 }

@@ -15,9 +15,11 @@ Route::get('/configClear','AppController@configClear');
 
 Auth::routes();
 
-Route::group(['name' => 'front.', 'prefix' => 'front'], function () {
+Route::group(['namespace' => 'Front','name' => 'front.'], function () {
     Route::get('/', 'HomeController@home')->name('home');
     Route::get('/search','SearchController@search');
+    Route::get('/article/{id},{slug}','ArticleController@show');
+    Route::get('/category/{id},{slug}','CategoryController@show');
 });
 
 // Route::group(['name' => 'auth.', 'prefix' => 'auth'], function () {
@@ -34,13 +36,8 @@ Route::group(['name' => 'front.', 'prefix' => 'front'], function () {
 
 // Route::get('/newsletter/subscribe','NewsletterController@subscribe');
 
-// Route::group(['middleware' => ['guest']],function(){
-    
-// });
-Route::get('/logout','Auth\LoginController@logout')->name('user.logout');
+// Route::get('/logout','Auth\LoginController@logout')->name('user.logout');
 
-Route::get('/article/{id},{slug}','ArticleController@show');
-Route::get('/category/{id},{slug}','CategoryController@show');
 
 Route::group(['namespace' => 'Admin','middleware' => 'admin','prefix' => 'admin'], function (){
     Route::get('/','DashboardController@main');
@@ -48,18 +45,18 @@ Route::group(['namespace' => 'Admin','middleware' => 'admin','prefix' => 'admin'
     Route::get('/article/create','ArticleController@create');
     Route::post('/article/create','ArticleController@store');
     Route::get('/article/index','ArticleController@index');
-    Route::get('/article/show/{slug}','ArticleController@show');
-    Route::get('/article/edit/{slug}','ArticleController@edit');
-    Route::post('/article/edit/{slug}','ArticleController@update');
+    Route::get('/article/show/{id}','ArticleController@show');
+    Route::get('/article/edit/{id}','ArticleController@edit');
+    Route::post('/article/edit/{id}','ArticleController@update');
     Route::get('/article/destroy/{id}','ArticleController@destroy');
 
     // admin - category
     Route::get('/category/create','CategoryController@create');
     Route::post('/category/create','CategoryController@store');
     Route::get('/category/index','CategoryController@index');
-    Route::get('/category/show/{slug}','CategoryController@show');
-    Route::get('/category/edit/{slug}','CategoryController@edit');
-    Route::post('/category/edit/{slug}','CategoryController@update');
+    Route::get('/category/show/{id}','CategoryController@show');
+    Route::get('/category/edit/{id}','CategoryController@edit');
+    Route::post('/category/edit/{id}','CategoryController@update');
 
     // admin - settings
     Route::get('/settings/website','SettingsController@editWebsite');

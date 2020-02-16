@@ -1,4 +1,4 @@
-@extends('layouts.app',['settings' => $settings])
+@extends('layouts.app')
 @section('main')
 <div class="content">
     <section class="container-fluid">
@@ -10,7 +10,7 @@
         @endphp
         @if($items)
             @foreach($items as $article)      
-                <a href="{{ $article->getUrl() }}" class="link_post">
+                <a href="{{ $article->url }}" class="link_post" id="post_{{ $article->id }}">
                 <div class="post_category space_top">
                     <img src="{{ $article->getMedia('images')->first() ? $article->getMedia('images')->first()->getFullUrl() : '' }}" title="{{ $article->title }}" class="post_logo" alt="top">
                     <div class="post_content">

@@ -26,8 +26,8 @@ class Article extends Model implements HasMedia
         return $this->belongsTo('App\Category');
     }
 
-    public function getUrl()
+    public function getUrlAttribute()
     {
-        return url('/').'/article/'.$this->id.','.$this->slug;
+        return url('/article/'.$this->id.','.$this->slug);
     }
 }

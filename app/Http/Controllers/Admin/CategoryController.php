@@ -37,7 +37,7 @@ class CategoryController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
         }
-        return view('admin.pages.category.list');
+        return view('admin.pages.category.index');
     }
 
     /**
@@ -75,7 +75,7 @@ class CategoryController extends Controller
         $category->save();
 
         if($category){
-            return redirect('admin/category/list');
+            return redirect('admin/category/index');
         }
     }
 

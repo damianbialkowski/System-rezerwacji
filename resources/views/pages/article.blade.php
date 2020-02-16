@@ -1,4 +1,4 @@
-@extends('layouts.app',['settings' => $settings])
+@extends('layouts.app')
 @section('main')
 <div class="content">
 <section class="container-fluid main post_single ptop spaceSection">
@@ -42,10 +42,9 @@
               <h2>Podobne wyszukiwania</h2>
           </div>
           <div class="row">
-            
               @foreach($random_articles as $random_article)
                 <div class="col-md-4 col-sm-6 col-xs-12">
-                  <a href="{{ url('article/'.$random_article->id.','.$random_article->slug) }}" class="link_post post_1">
+                  <a href="{{ $random_article->url }}" class="link_post post_1">
                     <div class="post_main post_smaller">
                       <img src="{{ $random_article->getMedia('images')->first() ? $random_article->getMedia('images')->first()->getFullUrl() : '' }}" title="{{ $random_article->title }}" class="post_main_img" alt="top">
                       <div class="post_main_overlay">

@@ -9,7 +9,7 @@
               <h1>Logowanie</h1>
               <hr class="hr_login">
           </div>
-          <form action="{{ route('user.login') }}" method="POST">
+          <form action="{{ route('login') }}" method="POST">
             @csrf
             <div class="form-group">
               <label for="email">Adres e-mail:</label>

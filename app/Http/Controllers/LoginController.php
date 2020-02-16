@@ -27,7 +27,7 @@ class LoginController extends Controller
         
 
         // dd(\Cookie::get('laravel_cookie_consent'));
-        return \Response::view('auth.login')->withCookie($cookie);
+        // return \Response::view('auth.login')->withCookie($cookie);
     }
 
     public function login(LoginRequest $request)

@@ -8,21 +8,21 @@
                 <li class="sideMenuElement">
                     <div><i class="fas fa-clipboard-list"></i> <span class="textElement">Artykuły <i class="fa fa-angle-right arrowRight"></i></span></div>
                     <ul>
-                        <li><a href="{{ url('/admin/article/list') }}">Lista</a></li>
+                        <li><a href="{{ url('/admin/article/index') }}">Lista</a></li>
                         <li><a href="{{ url('/admin/article/create') }}">Nowy</a></li>
                     </ul>
                 </li>
                 <li class="sideMenuElement">
                     <div><i class="fas fa-list"></i> <span class="textElement">Kategorie <i class="fa fa-angle-right arrowRight"></i></span></div>
                     <ul>
-                        <li><a href="{{ url('/admin/category/list') }}">Lista</a></li>
+                        <li><a href="{{ url('/admin/category/index') }}">Lista</a></li>
                         <li><a href="{{ url('/admin/category/create') }}">Nowa</a></li>
                     </ul>
                 </li>
                 <li class="sideMenuElement">
                     <div><i class="fa fa-user"></i> <span class="textElement">Użytkownicy <i class="fa fa-angle-right arrowRight"></i></span></div>
                     <ul>
-                        <li><a href="{{ url('/admin/user/list') }}">Lista</a></li>
+                        <li><a href="{{ url('/admin/user/index') }}">Lista</a></li>
                         <li><a href="{{ url('/admin/user/create') }}">Nowy</a></li>
                     </ul>
                 </li>

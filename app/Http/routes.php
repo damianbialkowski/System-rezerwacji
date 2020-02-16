@@ -18,7 +18,7 @@ Route::get('/configClear','AppController@configClear');
 
 Auth::routes();
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@home')->name('home');
 Route::get('/register','RegisterController@create');
 // Route::get('/register',function(){
 //     return redirect('/');
@@ -37,39 +37,35 @@ Route::get('/logout','Auth\LoginController@logout')->name('user.logout');
 Route::get('/article/{id},{slug}','ArticleController@show');
 Route::get('/category/{id},{slug}','CategoryController@show');
 
-Route::group(['middleware' => ['admin']],function(){
+Route::group(['name' => 'admin.' ,'prefix' => 'admin' ,'middleware' => 'admin'],function(){
 
-    Route::get('/admin','Admin\DashboardController@main');
+    Route::get('/','Admin\DashboardController@main');
     // admin - article
-    Route::get('/admin/article/create','Admin\ArticleController@create');
-    Route::post('/admin/article/create','Admin\ArticleController@store');
-    Route::get('/admin/article/list','Admin\ArticleController@index');
-    Route::get('/admin/article/show/{slug}','Admin\ArticleController@show');
-    Route::get('/admin/article/edit/{slug}','Admin\ArticleController@edit');
-    Route::post('/admin/article/edit/{slug}','Admin\ArticleController@update');
-    Route::get('/admin/article/destroy/{id}','Admin\ArticleController@destroy');
+    Route::get('/article/create','Admin\ArticleController@create');
+    Route::post('/article/create','Admin\ArticleController@store');
+    Route::get('/article/index','Admin\ArticleController@index');
+    Route::get('/article/show/{slug}','Admin\ArticleController@show');
+    Route::get('/article/edit/{slug}','Admin\ArticleController@edit');
+    Route::post('/article/edit/{slug}','Admin\ArticleController@update');
+    Route::get('/article/destroy/{id}','Admin\ArticleController@destroy');
 
     // admin - category
-    Route::get('/admin/category/create','Admin\CategoryController@create');
-    Route::post('/admin/category/create','Admin\CategoryController@store');
-    Route::get('/admin/category/list','Admin\CategoryController@index');
-    Route::get('/admin/category/show/{slug}','Admin\CategoryController@show');
-    Route::get('/admin/category/edit/{slug}','Admin\CategoryController@edit');
-    Route::post('/admin/category/edit/{slug}','Admin\CategoryController@update');
+    Route::get('/category/create','Admin\CategoryController@create');
+    Route::post('/category/create','Admin\CategoryController@store');
+    Route::get('/category/index','Admin\CategoryController@index');
+    Route::get('/category/show/{slug}','Admin\CategoryController@show');
+    Route::get('/category/edit/{slug}','Admin\CategoryController@edit');
+    Route::post('/category/edit/{slug}','Admin\CategoryController@update');
 
     // admin - settings
-    Route::get('/admin/settings/website','Admin\SettingsController@editWebsite');
-    Route::patch('/admin/settings/website','Admin\SettingsController@updateWebsite');
-    Route::get('/admin/settings/account','Admin\SettingsController@editAccount');
+    Route::get('/settings/website','Admin\SettingsController@editWebsite');
+    Route::patch('/settings/website','Admin\SettingsController@updateWebsite');
+    Route::get('/settings/account','Admin\SettingsController@editAccount');
 
     // admin - user
-    Route::get('/admin/user/create','Admin\UserController@create');
-    Route::post('/admin/user/create','Admin\UserController@store');
-    Route::get('/admin/user/list','Admin\UserController@index');
-    Route::get('/admin/user/edit/{id}','Admin\UserController@edit');
-    Route::post('/admin/user/edit/{id}','Admin\UserController@update');
-});
-
-Route::get('/polityka-prywatnosci',function(){
-    return view('pages.polityka-prywatnosci');
+    Route::get('/user/create','Admin\UserController@create');
+    Route::post('/user/create','Admin\UserController@store');
+    Route::get('/user/index','Admin\UserController@index');
+    Route::get('/user/edit/{id}','Admin\UserController@edit');
+    Route::post('/user/edit/{id}','Admin\UserController@update');
 });

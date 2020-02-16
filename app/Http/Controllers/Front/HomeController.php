@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Front;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Article;
 use App\Category;
-use App\User;
-use App\Settings;
-use Auth;
 
 class HomeController extends Controller
 {
@@ -22,20 +20,16 @@ class HomeController extends Controller
     }
 
     /**
-     * Show the application dashboard.
+     * Show the application home.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function home()
     {
         $categories = Category::get();
-        $last_articles = Article::latest()->where('visible',1)->take(3)->get(['id','title','category_id','slug','created_at']);
-        $user = null;
-        if(Auth::check()){
-            $user = Auth::user();
-        }
-        
-        return view('pages.main',['last_articles' => $last_articles,'categories' => $categories,'user' => $user]);
+        $last_articles = Article::latest()->where('visible',1)->take(3)->get();
+          
+        return view('pages.main',['last_articles' => $last_articles,'categories' => $categories]);
 
         
     }

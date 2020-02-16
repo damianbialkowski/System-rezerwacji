@@ -34,5 +34,8 @@ class AppServiceProvider extends ServiceProvider
         }
 
         view()->share('settings', $settings_arr);
+        if(\Auth::check()){
+            view()->share('user', \Auth::user());
+        }
     }
 }

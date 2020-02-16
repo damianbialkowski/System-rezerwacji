@@ -7,7 +7,7 @@
             @foreach($last_articles as $key => $item)
               @if($loop->first)
                 <div class="col-md-8">
-                <a href="{{ url('article/'.$item->id.','.$item->slug) }}" class="link_post post_{{$key}}">
+                <a href="{{ url('article/'.$item->id.','.$item->slug) }}" class="link_post" id="post_{{$key}}">
                   <div class="post_main post_bigger">
                     <img src="{{ $item->getMedia('images')->first() ? $item->getMedia('images')->first()->getFullUrl() : '' }}" title="{{ $item->title }}" class="post_main_img img-fluid" alt="top">
                     <div class="post_main_overlay">
@@ -21,7 +21,7 @@
               </div>
               <div class="col-md-4 align-self-center">
               @else
-                <a href="{{ url('article/'.$item->id.','.$item->slug) }}" class="link_post post_{{$key}}">
+                <a href="{{ url('article/'.$item->id.','.$item->slug) }}" class="link_post" id="post_{{$key}}">
                   <div class="post_main {{ ($loop->last) ? 'space_top' : 'post_smaller' }}">
                     <img src="{{ $item->getMedia('images')->first() ? $item->getMedia('images')->first()->getFullUrl() : '' }}" title="{{ $item->title }}" class="post_main_img img-fluid" alt="top">
                     <div class="post_main_overlay">

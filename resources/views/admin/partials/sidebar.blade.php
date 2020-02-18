@@ -37,7 +37,7 @@
                     </ul>
                 </li>
                 <li class="sideMenuElement logout" style="">
-                <div><i class="fas fa-sign-out-alt"></i> <a href="{{ route('user.logout') }}" class="textElement">Wyloguj</a></div>
+                <div><i class="fas fa-sign-out-alt"></i> <a href="{{ route('logout') }}" class="textElement">Wyloguj</a></div>
                 </li>
             </ul>
     </section>

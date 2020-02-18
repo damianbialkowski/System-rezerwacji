@@ -64,7 +64,6 @@
                         @endif
                     </table>
                 </div>
-                {{dd($user)}}
                 <div class="listOfTakenTickets">
                     <h1>Moje artykuły</h1>
                     <table class="table">

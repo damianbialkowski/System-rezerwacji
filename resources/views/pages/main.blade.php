@@ -43,7 +43,7 @@
           @if($category->getCategoryArticles()->count())
           <section class="category_posts" data-name="{{ $category->name }}" data-category_id = "{{ $category->id }}">
               <div class="category_section-header">
-                <a href="{{ url('category/'.$category->id.','.$category->slug) }}"><h2>{{ $category->name }}</h2></a>
+                <a href="{{ $category->url }}"><h2>{{ $category->name }}</h2></a>
               </div>
               <div class="row post_list">
                 <div class="col-md-10" style="border-right: 1px solid #e5e5e5">
@@ -51,7 +51,7 @@
                   
                     @foreach($category->getCategoryArticles()->get() as $article)
                     
-                    <a href="{{ url('article/'.$article->id.','.$article->slug) }}" class="link_post">
+                    <a href="{{ $article->url }}" class="link_post">
                       <div class="post_category space_top">
                         <img src="{{ $article->getMedia('images')->first() ? $article->getMedia('images')->first()->getFullUrl() : '' }}" class="post_logo" title="{{ $article->title }}">
                         <div class="post_content">
@@ -66,7 +66,7 @@
                     </a>
                     @endforeach
                     <div class="btn_more_posts">
-                        <a href="{{ url('category/'.$category->id.','.$category->slug) }}">Więcej <span><i class="fas fa-chevron-right"></i></span></a>
+                        <a href="{{ $category->url }}">Więcej <span><i class="fas fa-chevron-right"></i></span></a>
                     </div>
                   <!-- </div> -->
                 </div>

@@ -12,7 +12,7 @@
                 </div>
             @endif
             <div class="blockSettings" data-id="website">
-                <form action="{{ url('admin/settings/website') }}" method="POST" class="form category">
+                <form action="{{ route('admin.settings.editWebsite') }}" method="POST" class="form category">
                 @csrf
                 @method('PATCH')
                     <div class="header flex justify-content-space-between align-items-center flex-wrap">

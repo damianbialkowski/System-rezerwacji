@@ -34,7 +34,7 @@ Route::group(['namespace' => 'Front','name' => 'front.'], function () {
 
 
 Route::group(['namespace' => 'Admin','middleware' => 'admin','prefix' => 'admin','as' => 'admin.'], function (){
-    Route::get('/','DashboardController@main');
+    Route::get('/','DashboardController@main')->name('dashboard');
     // admin - article
     Route::get('/article/create','ArticleController@create')->name('article.create');
     Route::post('/article/create','ArticleController@store')->name('article.store');

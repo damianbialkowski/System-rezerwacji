@@ -20,7 +20,7 @@
                     <p>{!! \Session::get('success') !!}</p>
                 </div>
             @endif
-                <form action="{{ url('admin/user/create') }}" method="POST" class="form">
+                <form action="{{ route('admin.user.create') }}" method="POST" class="form">
                     @csrf
                     <h2>Podstawowe informacje</h2>
                     <div class="form-group">

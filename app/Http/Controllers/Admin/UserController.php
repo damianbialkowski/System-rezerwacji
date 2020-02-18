@@ -38,7 +38,7 @@ class UserController extends Controller
                     ->rawColumns(['action'])
                     ->make(true);
         }
-        return view('admin.pages.user.list');
+        return view('admin.pages.user.index');
     }
 
     /**

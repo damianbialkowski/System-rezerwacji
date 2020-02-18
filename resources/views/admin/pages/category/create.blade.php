@@ -15,7 +15,7 @@
                     </ul>
                 </div>
             @endif
-                <form action="{{ url('/admin/category/create') }}" method="POST"  class="form category">
+                <form action="{{ route('admin.category.create') }}" method="POST"  class="form category">
                     @csrf
                     <div class="header flex justify-content-space-between align-items-center flex-wrap">
                         <h2>Podstawowe informacje</h2>

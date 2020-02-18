@@ -81,8 +81,8 @@
                             </td>
                             <td>
                                 <div class="flex align-items-center justify-content-center flex-wrap">
-                                    <a href="{{ url('admin/article/show/'.$article->id) }}" class="btn-action-table"><i class="far fa-eye"></i></a>
-                                    <a href="{{ url('admin/article/edit/'.$article->id) }}" class="btn-action-table"><i class="fas fa-pencil-alt"></i></a>
+                                    <a href="{{ route('admin.article.show', ['id' => $article->id]) }}" class="btn-action-table"><i class="far fa-eye"></i></a>
+                                    <a href="{{ route('admin.article.edit', ['id' => $article->id]) }}" class="btn-action-table"><i class="fas fa-pencil-alt"></i></a>
                                 </div>
                             </td>
                         </tr>

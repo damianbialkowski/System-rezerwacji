@@ -21,7 +21,7 @@
                     </tbody>
                 </table>
                 <div class="addNewUser flex flex-direction-column justify-content-center align-items-center">
-                    <a href="{{ url('admin/category/create') }}"><i class="fas fa-plus"></i></a>
+                    <a href="{{ route('admin.category.create') }}"><i class="fas fa-plus"></i></a>
                 </div>
 @endsection
 @section('admin.script')

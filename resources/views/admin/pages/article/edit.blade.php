@@ -26,7 +26,7 @@
                         <h2>Podstawowe informacje</h2>
                         <div class="d-flex">
                             <a href="{{ url()->previous() }}" title="Powrót do poprzedniej strony" class="return_back"><i class="fa fa-arrow-left"></i></a>
-                            <a href="{{ $article->getUrl() }}" title="Podgląd na żywo" class="return_back"><i class="fa fa-eye"></i></a>
+                            <a href="{{ $article->url }}" title="Podgląd na żywo" class="return_back"><i class="fa fa-eye"></i></a>
                         </div>
                     </div>
                     <div class="form-group">

@@ -5,8 +5,6 @@ namespace App\Http\Controllers\Front;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Article;
-use Auth;
-use App\User;
 
 class ArticleController extends Controller
 {

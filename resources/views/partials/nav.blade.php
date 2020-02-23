@@ -2,13 +2,13 @@
         <div class="container-fluid">
             <div class="d-flex justify-content-between socialLinks">
               <div class="web_page_title">
-                <p>Easy Lay-Up</p>
+                <p>web_page_title</p>
               </div>
               <div class="social-media d-flex">
                   <p>Social media</p>
-                  <a href="mailto:easylayup.poland@gmail.com" class="google" title="google"><i class="fab fa-google"></i></a>
-                  <a href="https://www.facebook.com/Easy-Lay-Up-108902007143415/" target="_blank" class="facebook" title="facebook"><i class="fab fa-facebook-square"></i></a>
-                  <a href="https://www.instagram.com/easylayup.poland/" target="_blank" class="instagram" title="instagram"><i class="fab fa-instagram"></i></a>
+                  <a href="mailto:" class="google" title="google"><i class="fab fa-google"></i></a>
+                  <a href="" target="_blank" class="facebook" title="facebook"><i class="fab fa-facebook-square"></i></a>
+                  <a href="" target="_blank" class="instagram" title="instagram"><i class="fab fa-instagram"></i></a>
                   
               </div>
             </div>

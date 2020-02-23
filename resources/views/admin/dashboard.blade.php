@@ -12,7 +12,7 @@
                 <div class="blockStatistic closedTickets">
                     <i class="fa fa-info"></i>
                     <div class="textBlock flex flex-direction-column justify-content-center">
-                        <h1>{{ $item->where('created_by',\Auth::user()->id)->count() }}</h1>
+                        <h1>{{ $item->myArticles()->count() }}</h1>
                         <hr>
                         <p>Moje artykuły</p>
                     </div>
@@ -43,8 +43,8 @@
                             <th class="rowBiggerTextTable">Informacje</th>
                             <th class="rowOtherTable">Działania</th>
                         </tr>
-                        @if($item->where('created_by','!=',\Auth::user()->id)->sortBy('id')->take(5)->count())
-                            @foreach($item->where('created_by','!=',\Auth::user()->id)->sortBy('id')->take(5) as $article)
+                        @if($item->where('created_by','!=',\Auth::user()->id)->take(5)->get()->count())
+                            @foreach($item->where('created_by','!=',\Auth::user()->id)->take(5)->get() as $article)
                             <tr>
                                 <td class="text-center">{{ $article->id }}</td>
                                 <td>
@@ -53,8 +53,8 @@
                                 </td>
                                 <td>
                                     <div class="flex align-items-center justify-content-center flex-wrap">
-                                        <a href="{{ url('admin/article/show/'.$article->id) }}" class="btn-action-table"><i class="far fa-eye"></i></a>
-                                        <a href="{{ url('admin/article/edit/'.$article->id) }}" class="btn-action-table"><i class="fas fa-pencil-alt"></i></a>
+                                        <a href="{{ route('admin.article.show',['id' => $article->id]) }}" class="btn-action-table"><i class="far fa-eye"></i></a>
+                                        <a href="{{ route('admin.article.edit',['id' => $article->id]) }}" class="btn-action-table"><i class="fas fa-pencil-alt"></i></a>
                                     </div>
                                 </td>
                             </tr>
@@ -72,7 +72,7 @@
                             <th class="rowBiggerTextTable">Informacje</th>
                             <th class="rowOtherTable">Działania</th>
                         </tr>
-                        @foreach($item->where('created_by',\Auth::user()->id)->sortBy('id')->take(5) as $article)
+                        @foreach($item->where('created_by',\Auth::user()->id)->take(5)->get() as $article)
                         <tr>
                             <td class="text-center">{{ $article->id }}</td>
                             <td>

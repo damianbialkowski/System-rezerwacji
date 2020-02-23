@@ -12,7 +12,7 @@ class DashboardController extends Controller
 
     public function main()
     {
-        $item = Article::all();
+        $item = new Article;
         $user = Auth::user();
         return view('admin.dashboard',['item' => $item,'user' => $user]);
     }

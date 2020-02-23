@@ -30,4 +30,9 @@ class Article extends Model implements HasMedia
     {
         return url('/article/'.$this->id.','.$this->slug);
     }
+
+    public function myArticles()
+    {
+        return $this->where('created_by',\Auth::user()->id)->get();
+    }
 }

@@ -11,14 +11,14 @@ class Article extends Model implements HasMedia
 {
     use HasMediaTrait;
     use SoftDeletes;
-    
+
     protected $table = 'articles';
-    protected $fillable = ['title','introduction','content','slug'];
+    protected $fillable = ['title', 'introduction', 'content', 'slug'];
     protected $dates = ['deleted_at'];
 
     public function author()
     {
-        return $this->belongsTo('App\User','created_by','id')->first();
+        return $this->belongsTo('App\User', 'created_by', 'id')->first();
     }
 
     public function category()
@@ -28,11 +28,11 @@ class Article extends Model implements HasMedia
 
     public function getUrlAttribute()
     {
-        return url('/article/'.$this->id.','.$this->slug);
+        return url('/article/' . $this->id . ',' . $this->slug);
     }
 
     public function myArticles()
     {
-        return $this->where('created_by',\Auth::user()->id)->get();
+        return $this->where('created_by', \Auth::user()->id)->get();
     }
 }

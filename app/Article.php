@@ -6,15 +6,33 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\Translatable\HasTranslations;
+use Cviebrock\EloquentSluggable\Sluggable;
 
 class Article extends Model implements HasMedia
 {
-    use HasMediaTrait;
-    use SoftDeletes;
+    use HasMediaTrait, SoftDeletes, Sluggable, HasTranslations;
 
     protected $table = 'articles';
-    protected $fillable = ['title', 'introduction', 'content', 'slug'];
+    protected $fillable = [
+        'title',
+        'introduction',
+        'content',
+        'slug'
+    ];
+
+    public $translatable = ['title', 'slug', 'content'];
+
     protected $dates = ['deleted_at'];
+
+    public function sluggable()
+    {
+        return [
+            'slug' => [
+                'source' => 'title'
+            ]
+        ];
+    }
 
     public function author()
     {
@@ -28,7 +46,7 @@ class Article extends Model implements HasMedia
 
     public function getUrlAttribute()
     {
-        return url('/article/' . $this->id . ',' . $this->slug);
+        return url('/articles/' . $this->id . ',' . $this->slug);
     }
 
     public function myArticles()

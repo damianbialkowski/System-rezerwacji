@@ -21,7 +21,7 @@
                     </tbody>
                 </table>
                 <div class="addNewUser flex flex-direction-column justify-content-center align-items-center">
-                    <a href="{{ url('admin/article/create') }}"><i class="fas fa-plus"></i></a>
+                    <a href="{{ url('admin/articles/create') }}"><i class="fas fa-plus"></i></a>
                 </div>
                 <div class="shadow_bg"></div>
                 <div class="alert">
@@ -41,11 +41,11 @@
 
     <script type="text/javascript">
   $(function () {
-    
+
     var table = $('#users_list').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('admin.article.index') }}",
+        ajax: "{{ route('admin.articles.index') }}",
         columns: [
             {data: 'id', name: 'id'},
             {data: 'title', name: 'title'},
@@ -58,7 +58,7 @@
             "url": "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Polish.json"
         },
     });
-    
+
   });
 </script>
 @endsection

@@ -7,7 +7,7 @@ use App\Article;
 
 class Category extends Model
 {
-    protected $table = 'category';
+    protected $table = 'categories';
 
     public function author()
     {
@@ -28,7 +28,7 @@ class Category extends Model
     {
         // dd($category_id);
         return $this->articles()->where('visible',1)->orderBy('created_at','desc');
-        // return $this->article()->where('category_id',$category_id);
+        // return $this->articles()->where('category_id',$category_id);
     }
 
     public function getUrlAttribute()

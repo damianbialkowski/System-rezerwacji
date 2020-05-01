@@ -18,7 +18,7 @@ Auth::routes();
 Route::group(['namespace' => 'Front','name' => 'front.'], function () {
     Route::get('/', 'HomeController@home')->name('');
     Route::get('/search','SearchController@search');
-    Route::get('/article/{id},{slug}','ArticleController@show');
+    Route::get('/articles/{id},{slug}','ArticleController@show');
     Route::get('/category/{id},{slug}','CategoryController@show');
 });
 
@@ -35,23 +35,17 @@ Route::group(['namespace' => 'Front','name' => 'front.'], function () {
 
 Route::group(['namespace' => 'admin','middleware' => 'admin','prefix' => 'admin','as' => 'admin.'], function (){
     Route::get('/','DashboardController@main')->name('dashboard');
-    // admin - article
-//    Route::get('/article/create','ArticleController@create')->name('article.create');
-//    Route::post('/article/create','ArticleController@store')->name('article.store');
-//    Route::get('/article/index','ArticleController@index')->name('article.index');
-//    Route::get('/article/show/{id}','ArticleController@show')->name('article.show');
-//    Route::get('/article/edit/{id}','ArticleController@edit')->name('article.edit');
-//    Route::post('/article/edit/{id}','ArticleController@update')->name('article.update');
-//    Route::get('/article/destroy/{id}','ArticleController@destroy')->name('article.destroy');
+    // admin - articles
     Route::resource('articles', 'ArticleController');
 
     // admin - category
-    Route::get('/category/create','CategoryController@create')->name('category.create');
-    Route::post('/category/create','CategoryController@store')->name('category.store');
-    Route::get('/category/index','CategoryController@index')->name('category.index');
-    Route::get('/category/show/{id}','CategoryController@show')->name('category.show');
-    Route::get('/category/edit/{id}','CategoryController@edit')->name('category.edit');
-    Route::post('/category/edit/{id}','CategoryController@update')->name('category.update');
+//    Route::get('/category/create','CategoryController@create')->name('category.create');
+//    Route::post('/category/create','CategoryController@store')->name('category.store');
+//    Route::get('/category/index','CategoryController@index')->name('category.index');
+//    Route::get('/category/show/{id}','CategoryController@show')->name('category.show');
+//    Route::get('/category/edit/{id}','CategoryController@edit')->name('category.edit');
+//    Route::post('/category/edit/{id}','CategoryController@update')->name('category.update');
+    Route::resource('categories', 'CategoryController');
 
     // admin - settings
     Route::get('/settings/website','SettingsController@editWebsite')->name('settings.editWebsite');

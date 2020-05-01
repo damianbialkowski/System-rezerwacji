@@ -15,8 +15,8 @@
                 <li class="sideMenuElement">
                     <div><i class="fas fa-list"></i> <span class="textElement">Kategorie <i class="fa fa-angle-right arrowRight"></i></span></div>
                     <ul>
-                        <li><a href="{{ route('admin.category.index') }}">Lista</a></li>
-                        <li><a href="{{ route('admin.category.create') }}">Nowa</a></li>
+                        <li><a href="{{ route('admin.categories.index') }}">Lista</a></li>
+                        <li><a href="{{ route('admin.categories.create') }}">Nowa</a></li>
                     </ul>
                 </li>
                 <li class="sideMenuElement">

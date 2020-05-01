@@ -214,7 +214,7 @@ body {width:100%;height:100%;background-color: #f4f7f6;overflow-x:hidden;font-fa
             .addNewUser:hover a {transform:rotate(360deg);}
             .addNewUser:hover {box-shadow:2px 4px 20px 2px rgba(0,0,0,.3);}
 
-    /* new article */
+    /* new articles */
     .form.article input:not([type=checkbox]) {width: calc(100% - 20px);}
     .form.article select {width: calc(100% - 20px);}
     .form.article textarea {margin: 0 10px;padding: 5px 10px;border: 0;border: 1px solid #dbdbdb;background-color: #f4f7f6;width: calc(100% - 20px);resize: none;}

@@ -20,7 +20,7 @@
                     <p>{!! \Session::get('success') !!}</p>
                 </div>
             @endif
-                <form action="{{ url('admin/article/edit/'.$article->id) }}" method="POST" enctype="multipart/form-data" class="form article">
+                <form action="{{ url('admin/articles/edit/'.$article->id) }}" method="POST" enctype="multipart/form-data" class="form article">
                     @csrf
                     <div class="header flex justify-content-space-between align-items-center flex-wrap">
                         <h2>Podstawowe informacje</h2>
@@ -44,13 +44,13 @@
                                 @endforeach
                             </select>
                         </div>
-                    </div> 
+                    </div>
                     <div class="form-group">
                         <label>Grafika główna:</label>
                         <div class="form-input">
                             <input type="file" name="image_article">
                         </div>
-                    </div>  
+                    </div>
                     <div class="form-group">
                         <label>Widoczny:</label>
                         <div class="form-input">
@@ -78,8 +78,8 @@
                     </div>
                     <div class="btnForm">
                         <button type="submit" class="addNewUser"><i class="fa fa-edit"></i></button>
-                    </div>  
-                                   
+                    </div>
+
                 </form>
 @endsection
 @section('admin.script')

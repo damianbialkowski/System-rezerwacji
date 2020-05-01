@@ -30,7 +30,7 @@ class User extends Authenticatable
         parent::boot();
 
         static::updating(function($table) {
-           $table->updated_by = Auth::id()+999;
+           $table->updated_by = Auth::id();
         });
 
         static::deleting(function($table) {

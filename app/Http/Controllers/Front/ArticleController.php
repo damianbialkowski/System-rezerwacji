@@ -29,7 +29,7 @@ class ArticleController extends Controller
     {
         $article = Article::where('id',$id)->where('visible',1)->first();
         if($article){
-            return view('pages.article',['article' => $article]);
+            return view('pages.articles',['articles' => $article]);
         }
         return abort(404);
     }

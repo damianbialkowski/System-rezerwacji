@@ -5,13 +5,13 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=1" />
-  <meta name="description" content="{{ $settings['site_description'] }}">
-  <meta name="keywords" content="{{ $settings['site_keys'] }}">
+  <meta name="description" content="test">
+  <meta name="keywords" content="test">
   <meta name="author" content="Damian Białkowski">
   <meta name="theme-color" content="#000">
   <meta name="robots" content="index, follow">
-  
-  <title>{{ $settings['site_title'] }}</title>
+
+  <title>test</title>
 
   <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}" />
   <link rel="stylesheet" href="{{asset('css/style.css')}}">

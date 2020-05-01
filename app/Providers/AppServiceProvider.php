@@ -28,7 +28,7 @@ class AppServiceProvider extends ServiceProvider
         Schema::defaultStringLength(191);
 
         if(\Auth::check()){
-            view()->share('user', \Auth::user());
+            view()->share('users', \Auth::user());
         }
     }
 }

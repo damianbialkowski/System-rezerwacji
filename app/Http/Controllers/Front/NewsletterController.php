@@ -17,7 +17,7 @@ class NewsletterController extends Controller
     {
         $item = Newsletter::where('email','=',$request->get('email'))->exists();
         $user = User::findOrFail(Auth::user()->id)->toArray();
-        // dd($user);
+        // dd($users);
 
         if(!$item){
             $subscribe = Newsletter::create([
@@ -25,7 +25,7 @@ class NewsletterController extends Controller
                 'email' => $request->email,
             ]);
             if($subscribe){
-                Mail::send('emails.subscribe_newsletter',['user' => $user], function($message) use ($subscribe){
+                Mail::send('emails.subscribe_newsletter',['users' => $user], function($message) use ($subscribe){
                     $message->subject('Rejestracja do Newslettera');
                     $message->from(env('MAIL_USERNAME',''),env('MAIL_FROM_NAME'));
                     $message->to($subscribe->email,'');

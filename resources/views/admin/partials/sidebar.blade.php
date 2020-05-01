@@ -8,8 +8,8 @@
                 <li class="sideMenuElement">
                     <div><i class="fas fa-clipboard-list"></i> <span class="textElement">Artykuły <i class="fa fa-angle-right arrowRight"></i></span></div>
                     <ul>
-                        <li><a href="{{ route('admin.article.index') }}">Lista</a></li>
-                        <li><a href="{{ route('admin.article.create') }}">Nowy</a></li>
+                        <li><a href="{{ route('admin.articles.index') }}">Lista</a></li>
+                        <li><a href="{{ route('admin.articles.create') }}">Nowy</a></li>
                     </ul>
                 </li>
                 <li class="sideMenuElement">
@@ -22,8 +22,8 @@
                 <li class="sideMenuElement">
                     <div><i class="fa fa-user"></i> <span class="textElement">Użytkownicy <i class="fa fa-angle-right arrowRight"></i></span></div>
                     <ul>
-                        <li><a href="{{ route('admin.user.index') }}">Lista</a></li>
-                        <li><a href="{{ route('admin.user.create') }}">Nowy</a></li>
+                        <li><a href="{{ route('admin.users.index') }}">Lista</a></li>
+                        <li><a href="{{ route('admin.users.create') }}">Nowy</a></li>
                     </ul>
                 </li>
                 <li class="sideMenuElement">

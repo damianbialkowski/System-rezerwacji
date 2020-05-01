@@ -20,7 +20,7 @@
                 <div class="blockStatistic activeTickets">
                     <i class="fa fa-info"></i>
                     <div class="textBlock flex flex-direction-column justify-content-center">
-                        <h1>{{ $item->where('visible',1)->count() }}</h1>
+                        <h1>{{ $item->where('active',1)->count() }}</h1>
                         <hr>
                         <p>Widoczne artykuły</p>
                     </div>
@@ -28,7 +28,7 @@
                 <div class="blockStatistic takenTickets">
                     <i class="fa fa-info"></i>
                     <div class="textBlock flex flex-direction-column justify-content-center">
-                        <h1>{{ $item->where('visible',0)->count() }}</h1>
+                        <h1>{{ $item->where('active',0)->count() }}</h1>
                         <hr>
                         <p>Niewidoczne artykuły</p>
                     </div>
@@ -48,7 +48,7 @@
                             <tr>
                                 <td class="text-center">{{ $article->id }}</td>
                                 <td>
-                                    <p><span class="titleTable">@if($article->visible === 0) <i class="fa fa-eye-slash" aria-hidden="true"></i> | @endif {{ $article->title }}</span></p>
+                                    <p><span class="titleTable">@if($article->active === 0) <i class="fa fa-eye-slash" aria-hidden="true"></i> | @endif {{ $article->title }}</span></p>
                                     <p><span>{{ $article->created_at }}</span> <span class="label-info-bg">{{ $article->category->name }}</span></p>
                                 </td>
                                 <td>
@@ -60,7 +60,7 @@
                             </tr>
                             @endforeach
                         @else
-                            
+
                         @endif
                     </table>
                 </div>
@@ -76,7 +76,7 @@
                         <tr>
                             <td class="text-center">{{ $article->id }}</td>
                             <td>
-                                <p><span class="titleTable">@if($article->visible === 0) <i class="fa fa-eye-slash" aria-hidden="true"></i> | @endif {{ $article->title }}</span></p>
+                                <p><span class="titleTable">@if($article->active === 0) <i class="fa fa-eye-slash" aria-hidden="true"></i> | @endif {{ $article->title }}</span></p>
                                 <p>{{ $article->created_at }} <span class="label-info-bg">{{ $article->category->name }}</span></p>
                             </td>
                             <td>

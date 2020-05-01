@@ -20,7 +20,7 @@
                     <p>{!! \Session::get('success') !!}</p>
                 </div>
             @endif
-                <form action="{{ route('admin.user.create') }}" method="POST" class="form">
+                <form method="POST" class="form">
                     @csrf
                     <h2>Podstawowe informacje</h2>
                     <div class="form-group">
@@ -50,10 +50,10 @@
                                 @endforeach
                             </select>
                         </div>
-                    </div> 
+                    </div>
                     <div class="btnForm">
                         <button type="submit" class="addNewUser"><i class="fa fa-plus"></i></button>
-                    </div>                  
+                    </div>
                 </form>
 @endsection
 @section('admin.script')

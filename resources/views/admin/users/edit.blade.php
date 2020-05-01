@@ -20,8 +20,9 @@
                     <p>{!! \Session::get('success') !!}</p>
                 </div>
             @endif
-                <form action="{{ route('admin.user.edit',['id' => $user->id]) }}" method="POST" class="form">
+                <form action="{{ route('admin.users.update', $user->id) }}" method="POST" class="form">
                     @csrf
+                    @method('PATCH')
                     <h2>Podstawowe informacje</h2>
                     <div class="form-group">
                         <label>Imię:</label>
@@ -50,13 +51,13 @@
                     <div class="form-group">
                         <label>Grupa:</label>
                         <div class="form-input">
-                            <select name="role" required>
+                            <select name="role_id" required>
                                 @foreach($roles as $role)
                                     <option value="{{ $role->id }}" @if($role->id === $user->role_id) selected @endif>{{ $role->name }}</option>
                                 @endforeach
                             </select>
                         </div>
-                    </div> 
+                    </div>
                     <hr>
                     <div class="form-group">
                         <label>Utworzone przez:</label>
@@ -78,7 +79,7 @@
                     </div>
                     <div class="btnForm">
                         <button type="submit" class="addNewUser"><i class="fa fa-plus"></i></button>
-                    </div>                  
+                    </div>
                 </form>
 @endsection
 @section('admin.script')

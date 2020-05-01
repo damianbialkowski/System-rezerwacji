@@ -5,38 +5,47 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use App\Newsletter;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
-    use Notifiable;
+    use Notifiable, SoftDeletes;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
         'firstname', 'username', 'role_id', 'email', 'password',
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
         'password', 'remember_token',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public static function boot()
+    {
+        parent::boot();
+
+        static::updating(function($table) {
+           $table->updated_by = Auth::id()+999;
+        });
+
+        static::deleting(function($table) {
+            $table->deleted_by = Auth::id();
+        });
+
+        static::saving(function($table) {
+            $table->created_by = Auth::id();
+        });
+    }
+
+    public function setPasswordAttribute($password)
+    {
+        return $this->attributes['password'] = Hash::make($password);
+    }
 
     public function articles()
     {
@@ -70,13 +79,7 @@ class User extends Authenticatable
         return $this->username;
     }
 
-    public function isSubscribeNewsletter()
-    {
-        return (Newsletter::where('user_id',$this->id)->exists()) ? true : false;
-        // return ($this->newsletter->user_id == \Auth::user()->id) ? true : false;
-    }
-
-    //while creating user from admin panel
+    //while creating users from admin panel
     public function creator()
     {
         return $this->belongsTo('App\User','created_by','id')->first();

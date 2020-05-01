@@ -8,7 +8,7 @@
               <h1>Rejestracja</h1>
               <hr class="hr_login">
           </div>
-          <form action="{{ route('user.register') }}" method="POST">
+          <form action="{{ route('users.register') }}" method="POST">
           @csrf
           <div class="form-group {{ $errors->has('name') ? 'has-error' : ''}}">
             <label for="username">Nazwa użytkownika:</label>
@@ -42,7 +42,7 @@
         </div>
         <div class="col-md-6">
           <h2 class="text-center">Informacje</h2>
-          
+
         </div>
       </div>
     </section>

@@ -7,8 +7,8 @@
                 </div>
             </div>
                 <!-- <div class="searchUser flex align-items-center">
-                    <input type="text" class="searchDataInput" placeholder="search user">
-                    <i class="fas fa-search findUserByName"></i> 
+                    <input type="text" class="searchDataInput" placeholder="search users">
+                    <i class="fas fa-search findUserByName"></i>
                 </div> -->
 
 
@@ -23,11 +23,11 @@
                     <tr>
                         <td>1</td>
                         <td class="fullname">Name Surname</td>
-                        <td class="user">User</td>
+                        <td class="users">User</td>
                         <td>11.04.2019r.</td>
                         <td class="flex flex-direction-row align-items-center justify-content-center flex-wrap">
-                            <span class="addComment"><a href="" title="Show user info"><i class="far fa-eye"></i></a></span>
-                            <span class="closeTicket"><a href="" title="Delete account"><i class="fas fa-user-minus"></i></a></span>
+                            <span class="addComment"><a href="" title="Show users info"><i class="far fa-eye"></i></a></span>
+                            <span class="closeTicket"><a href="" title="Delete account"><i class="fas fa-users-minus"></i></a></span>
                         </td>
                     </tr>
                 </table>-->
@@ -46,7 +46,7 @@
                     </tbody>
                 </table>
                 <div class="addNewUser flex flex-direction-column justify-content-center align-items-center">
-                    <a href="{{ route('admin.user.create') }}"><i class="fas fa-plus"></i></a>
+                    <a href="{{ route('admin.users.create') }}"><i class="fas fa-plus"></i></a>
                 </div>
 @endsection
 @section('admin.script')
@@ -58,11 +58,11 @@
 
     <script type="text/javascript">
   $(function () {
-    
+
     var table = $('#users_list').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('admin.user.index') }}",
+        ajax: "{{ route('admin.users.index') }}",
         columns: [
             {data: 'id', name: 'id'},
             {data: 'username', name: 'username'},
@@ -75,7 +75,7 @@
             "url": "https://cdn.datatables.net/plug-ins/1.10.19/i18n/Polish.json"
         },
     });
-    
+
   });
 </script>
 @endsection

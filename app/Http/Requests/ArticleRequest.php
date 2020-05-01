@@ -13,7 +13,7 @@ class ArticleRequest extends FormRequest
 // dd(1);
     }
     /**
-     * Determine if the user is authorized to make this request.
+     * Determine if the users is authorized to make this request.
      *
      * @return bool
      */

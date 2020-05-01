@@ -8,7 +8,7 @@ return [
     'enabled' => env('COOKIE_CONSENT_ENABLED', true),
 
     /*
-     * The name of the cookie in which we store if the user
+     * The name of the cookie in which we store if the users
      * has agreed to accept the conditions.
      */
     'cookie_name' => 'laravel_cookie_consent',

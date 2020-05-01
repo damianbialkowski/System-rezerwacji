@@ -22,23 +22,23 @@ class UserController extends Controller
             $data = User::latest()->get();
             // dd($data);
             return Datatables::of($data)
-                    ->addIndexColumn()
-                    ->addColumn('action', function($row){
-   
-                           $btn = '<div class="flex align-items-center justify-content-center flex-wrap">
-                           <a href="'.url("/admin/user/show/".$row->id).'" class="btn-action-table"><i class="far fa-eye"></i></a>
-                           <a href="'.url("/admin/user/edit/".$row->id).'" class="btn-action-table"><i class="fas fa-pencil-alt"></i></a>
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+
+                    $btn = '<div class="flex align-items-center justify-content-center flex-wrap">
+                           <a href="' . route('admin.users.show', $row->id) . '" class="btn-action-table"><i class="far fa-eye"></i></a>
+                           <a href="' . route('admin.users.edit', $row->id) . '" class="btn-action-table"><i class="fas fa-pencil-alt"></i></a>
                        </div>';
-     
-                            return $btn;
-                    })
-                    ->editColumn('role_id',function($data){
-                        return ($data->role_id) ? $data->role->name : 'brak';
-                    })
-                    ->rawColumns(['action'])
-                    ->make(true);
+
+                    return $btn;
+                })
+                ->editColumn('role_id', function ($data) {
+                    return ($data->role_id) ? $data->role->name : 'brak';
+                })
+                ->rawColumns(['action'])
+                ->make(true);
         }
-        return view('admin.pages.user.index');
+        return view('admin.users.index');
     }
 
     /**
@@ -49,28 +49,27 @@ class UserController extends Controller
     public function create()
     {
         $roles = Role::all();
-        return view('admin.pages.user.create',['roles' => $roles]);
+        return view('admin.users.create', ['roles' => $roles]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserRequest $request)
+    public function store(UserRequest $request, User $user)
     {
-        // dd($request->all());
+        dd($request->all());
         $user = new User;
         $user->firstname = $request->get('firstname');
         $user->username = $request->get('username');
         $user->email = $request->get('email');
         $user->role_id = $request->get('role');
         $user->password = bcrypt('test');
-        $user->created_by = 1;
         $user->save();
-        if($user){
-            return redirect()->back()->with('success','Konto użytkownika zostało pomyślnie utworzone.');
+        if ($user) {
+            return redirect()->back()->with('success', 'Konto użytkownika zostało pomyślnie utworzone.');
         }
 
 
@@ -79,53 +78,47 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-
-        return view('admin.pages.user.show');
+        abort(404);
+        return view('admin.users.show');
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         $user = User::findOrFail($id);
         $roles = Role::all();
-        return view('admin.pages.user.edit',['user' => $user,'roles' => $roles]);
+        return view('admin.users.edit', ['user' => $user, 'roles' => $roles]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param \App\User $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        $user = User::findOrFail($id);
-        if($user){
-            $user->firstname = $request->get('firstname');
-            $user->username = $request->get('username');
-            $user->email = $request->get('email');
-            $user->role_id = $request->get('role');
-            $user->updated_by = 1;
-            $user->save();
-            return redirect()->back()->with('success','Użytkownik został pomyślnie zaktualizowany!');
+        $saved = $user->update($request->all());
+        if ($saved) {
+            return redirect()->back()->with('success', trans('admin.users.updated'));
         }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

@@ -33,16 +33,17 @@ Route::group(['namespace' => 'Front','name' => 'front.'], function () {
 
 
 
-Route::group(['namespace' => 'Admin','middleware' => 'admin','prefix' => 'admin','as' => 'admin.'], function (){
+Route::group(['namespace' => 'admin','middleware' => 'admin','prefix' => 'admin','as' => 'admin.'], function (){
     Route::get('/','DashboardController@main')->name('dashboard');
     // admin - article
-    Route::get('/article/create','ArticleController@create')->name('article.create');
-    Route::post('/article/create','ArticleController@store')->name('article.store');
-    Route::get('/article/index','ArticleController@index')->name('article.index');
-    Route::get('/article/show/{id}','ArticleController@show')->name('article.show');
-    Route::get('/article/edit/{id}','ArticleController@edit')->name('article.edit');
-    Route::post('/article/edit/{id}','ArticleController@update')->name('article.update');
-    Route::get('/article/destroy/{id}','ArticleController@destroy')->name('article.destroy');
+//    Route::get('/article/create','ArticleController@create')->name('article.create');
+//    Route::post('/article/create','ArticleController@store')->name('article.store');
+//    Route::get('/article/index','ArticleController@index')->name('article.index');
+//    Route::get('/article/show/{id}','ArticleController@show')->name('article.show');
+//    Route::get('/article/edit/{id}','ArticleController@edit')->name('article.edit');
+//    Route::post('/article/edit/{id}','ArticleController@update')->name('article.update');
+//    Route::get('/article/destroy/{id}','ArticleController@destroy')->name('article.destroy');
+    Route::resource('articles', 'ArticleController');
 
     // admin - category
     Route::get('/category/create','CategoryController@create')->name('category.create');
@@ -57,10 +58,6 @@ Route::group(['namespace' => 'Admin','middleware' => 'admin','prefix' => 'admin'
     Route::patch('/settings/website','SettingsController@updateWebsite')->name('settings.updateWebsite');
     Route::get('/settings/account','SettingsController@editAccount')->name('settings.editAccount');
 
-    // admin - user
-    Route::get('/user/create','UserController@create')->name('user.create');
-    Route::post('/user/create','UserController@store')->name('user.store');
-    Route::get('/user/index','UserController@index')->name('user.index');
-    Route::get('/user/edit/{id}','UserController@edit')->name('user.edit');
-    Route::post('/user/edit/{id}','UserController@update')->name('user.update');
+    // admin - users
+    Route::resource('users', 'UserController');
 });

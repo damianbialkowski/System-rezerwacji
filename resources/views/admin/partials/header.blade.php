@@ -8,13 +8,14 @@
   <meta name="keywords" content="Portal koszykarski">
   <meta name="author" content="Damian Białkowski">
   <meta name="theme-color" content="#000">
-  
+
   <title>Panel administratora - Easy Lay-Up</title>
 
   <link rel="shortcut icon" href="{{ asset('img/favicon.png') }}" />
   <link rel="stylesheet" href="{{ asset('css/admin/style.css') }}">
   <link rel="stylesheet" href="{{ asset('css/admin/datatables.min.css') }}">
   <link href="https://fonts.googleapis.com/css?family=Poppins&display=swap" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
   <script src="{{ asset('js/admin/jquery-3.3.1.min.js') }}"></script>

@@ -19,7 +19,7 @@ Route::group(['namespace' => 'Front','name' => 'front.'], function () {
     Route::get('/', 'HomeController@home')->name('');
     Route::get('/search','SearchController@search');
     Route::get('/articles/{id},{slug}','ArticleController@show');
-    Route::get('/category/{id},{slug}','CategoryController@show');
+    Route::get('/categories/{id},{slug}','CategoryController@show');
 });
 
 // Route::group(['name' => 'auth.', 'prefix' => 'auth'], function () {
@@ -38,13 +38,13 @@ Route::group(['namespace' => 'admin','middleware' => 'admin','prefix' => 'admin'
     // admin - articles
     Route::resource('articles', 'ArticleController');
 
-    // admin - category
-//    Route::get('/category/create','CategoryController@create')->name('category.create');
-//    Route::post('/category/create','CategoryController@store')->name('category.store');
-//    Route::get('/category/index','CategoryController@index')->name('category.index');
-//    Route::get('/category/show/{id}','CategoryController@show')->name('category.show');
-//    Route::get('/category/edit/{id}','CategoryController@edit')->name('category.edit');
-//    Route::post('/category/edit/{id}','CategoryController@update')->name('category.update');
+    // admin - categories
+//    Route::get('/categories/create','CategoryController@create')->name('categories.create');
+//    Route::post('/categories/create','CategoryController@store')->name('categories.store');
+//    Route::get('/categories/index','CategoryController@index')->name('categories.index');
+//    Route::get('/categories/show/{id}','CategoryController@show')->name('categories.show');
+//    Route::get('/categories/edit/{id}','CategoryController@edit')->name('categories.edit');
+//    Route::post('/categories/edit/{id}','CategoryController@update')->name('categories.update');
     Route::resource('categories', 'CategoryController');
 
     // admin - settings

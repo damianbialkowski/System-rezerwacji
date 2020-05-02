@@ -4,12 +4,12 @@
     <section class="container-fluid">
         <h2>{{ $category->name }}</h2>
         <p>Znaleziono: <b>{{ $category->getCategoryArticles()->count() }}</b> wyników</p>
-        {{-- {{dd($category->getCategoryArticles($category->id)->get())}} --}}
+        {{-- {{dd($categories->getCategoryArticles($categories->id)->get())}} --}}
         @php
             $items = $category->getCategoryArticles()->paginate(5);
         @endphp
         @if($items)
-            @foreach($items as $article)      
+            @foreach($items as $article)
                 <a href="{{ $article->url }}" class="link_post" id="post_{{ $article->id }}">
                 <div class="post_category space_top">
                     <img src="{{ $article->getMedia('images')->first() ? $article->getMedia('images')->first()->getFullUrl() : '' }}" title="{{ $article->title }}" class="post_logo" alt="top">

@@ -25,8 +25,8 @@ class CategoryController extends Controller
                 ->addColumn('action', function ($row) {
 
                     $btn = '<div class="flex align-items-center justify-content-center flex-wrap">
-                           <a href="' . url("/admin/category/show/" . $row->id) . '" class="btn-action-table"><i class="far fa-eye"></i></a>
-                           <a href="' . url("/admin/category/edit/" . $row->id) . '" class="btn-action-table"><i class="fas fa-pencil-alt"></i></a>
+                           <a href="' . url("/admin/categories/show/" . $row->id) . '" class="btn-action-table"><i class="far fa-eye"></i></a>
+                           <a href="' . url("/admin/categories/edit/" . $row->id) . '" class="btn-action-table"><i class="fas fa-pencil-alt"></i></a>
                        </div>';
 
                     return $btn;
@@ -37,7 +37,7 @@ class CategoryController extends Controller
                 ->rawColumns(['action'])
                 ->make(true);
         }
-        return view('admin.category.index');
+        return view('admin.categories.index');
     }
 
     /**
@@ -48,9 +48,7 @@ class CategoryController extends Controller
     public function create()
     {
         $categories = Category::all();
-        if ($categories) {
-            return view('admin.category.create', ['categories' => $categories]);
-        }
+        return view('admin.categories.create', ['categories' => $categories]);
     }
 
     /**
@@ -75,7 +73,7 @@ class CategoryController extends Controller
         $category->save();
 
         if ($category) {
-            return redirect('admin/category/index');
+            return redirect('admin/categories/index');
         }
     }
 
@@ -87,7 +85,7 @@ class CategoryController extends Controller
      */
     public function show($id)
     {
-        return view('admin.category.show');
+        return view('admin.categories.show');
     }
 
     /**
@@ -100,7 +98,7 @@ class CategoryController extends Controller
     {
         $category = Category::findOrFail($id);
         $subcategories = Category::where('id', '!=', $id)->get();
-        return view('admin.category.edit', ['category' => $category, 'subcategories' => $subcategories]);
+        return view('admin.categories.edit', ['categories' => $category, 'subcategories' => $subcategories]);
     }
 
     /**

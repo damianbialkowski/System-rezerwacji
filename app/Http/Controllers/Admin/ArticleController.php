@@ -71,7 +71,7 @@ class ArticleController extends Controller
         // dd($request->file('image_article'));
         $article = new Article;
         $article->title = $request->get('title');
-        $article->category_id = $request->get('category');
+        $article->category_id = $request->get('categories');
         $article->visible = ($request->get('visible') == 'on') ? 1 : 0;
         $article->slug = str_slug($request->get('title'), '-');
         $article->content = $request->get('content');
@@ -128,7 +128,7 @@ class ArticleController extends Controller
         $article = Article::findOrFail($id);
         if ($article) {
             $article->title = $request->get('title');
-            $article->category_id = ($request->get('category'));
+            $article->category_id = ($request->get('categories'));
             $article->visible = ($request->get('visible')) ? 1 : 0;
             $article->content = $request->get('content');
             $article->slug = str_slug($request->get('title'), '-');

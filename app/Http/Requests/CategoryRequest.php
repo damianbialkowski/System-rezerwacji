@@ -25,7 +25,7 @@ class CategoryRequest extends FormRequest
     {
         return [
             'name' => 'required|min:5|max:50',
-            // 'category' => 'in:'.Category::
+            // 'categories' => 'in:'.Category::
             'content' => 'max:60',
 
         ];

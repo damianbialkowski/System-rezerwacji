@@ -78,7 +78,7 @@ body,html {font-family: Poppins !important;background-color: #f4f7f6 !important;
     .post_smaller p {font-size: 13px !important;letter-spacing: 0.3px;} */
 
 
-/* section category posts */
+/* section categories posts */
 .category_posts {margin: 30px 10px;}
     .category_posts .post_content h2 {font-size: 1.25rem;}
     .category_section-header {border: 2px solid #000; transform: skewX(20deg);transform-origin: top;width:200px;text-align: center;background-color: #000;color: #fff}
@@ -103,9 +103,9 @@ body,html {font-family: Poppins !important;background-color: #f4f7f6 !important;
         .btn_more_posts a span {font-size: 11px;-webkit-transition: all 0.3s ease;-moz-transition: all 0.3s ease; -o-transition: all 0.3s ease;transition: all 0.3s ease;}
         .btn_more_posts a:hover {box-shadow: inset 150px 0 0 0 #CF5300; padding: 5px 18px;}
         .btn_more_posts a:hover span {opacity: 1;padding-right: 1px;width:30px;}
-        
 
-/* section category */
+
+/* section categories */
 .category_section-info {padding: 0 15px;margin: 15px 0;}
 .category_section-info span {text-align: right;background-color: #000;color: #fff;padding: 0 15px;border-radius: 5px;}
 

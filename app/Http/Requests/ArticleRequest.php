@@ -31,7 +31,7 @@ class ArticleRequest extends FormRequest
     {
         return [
             'title' => 'required|min:5|max:255',
-            // 'category' => 'in:'.Category::
+            // 'categories' => 'in:'.Category::
             'introduction' => 'max:60',
             'content' => 'required|min:50',
 

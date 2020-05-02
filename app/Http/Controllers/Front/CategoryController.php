@@ -21,7 +21,7 @@ class CategoryController extends Controller
         $category = Category::where('id',$id)->first();
         if($category){
             $items = $category->getCategoryArticles()->paginate(10);
-            return view('pages.category',['category' => $category,'items' => $items]);
+            return view('pages.categories',['categories' => $category,'items' => $items]);
         }
         return abort(404);
 

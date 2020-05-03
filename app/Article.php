@@ -2,36 +2,60 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+use App\TranslatableModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
-use Spatie\Translatable\HasTranslations;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Illuminate\Support\Facades\Auth;
 
-class Article extends Model implements HasMedia
+class Article extends TranslatableModel implements HasMedia
 {
-    use HasMediaTrait, SoftDeletes, Sluggable, HasTranslations;
+    use HasMediaTrait, SoftDeletes;
 
     protected $table = 'articles';
     protected $fillable = [
+        'category_id',
+        'active',
         'title',
+        'slug',
         'introduction',
         'content',
-        'slug'
     ];
 
-    public $translatable = ['title', 'slug', 'content'];
+    public $translatable = ['title', 'slug', 'introduction', 'content'];
 
     protected $dates = ['deleted_at'];
 
-    public function sluggable()
+    protected $casts = [
+        'slug' => 'json',
+    ];
+//
+//    public function sluggable()
+//    {
+//        return [
+//            'slug' => [
+//                'source' => 'title'
+//            ]
+//        ];
+//    }
+
+    protected static function boot()
     {
-        return [
-            'slug' => [
-                'source' => 'title'
-            ]
-        ];
+        parent::boot();
+
+        static::creating(function ($model) {
+            $model->created_by = Auth::id();
+            $model->updated_by = Auth::id();
+//            dd($model);
+        });
+    }
+
+    public function setTitleAttribute($value)
+    {
+        $this->attributes['title'] = $value;
+        // todo - find better option
+        $this->attributes['slug'] = json_encode([\App::getLocale() => str_slug($value)]);
     }
 
     public function author()

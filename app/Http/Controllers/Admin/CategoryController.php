@@ -47,7 +47,20 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
+        $categories = Category::get()->toTree();
+
+        $str = '';
+        $traverse = function ($categories, $prefix = '') use (&$traverse, $str) {
+            foreach ($categories as $category) {
+                $str .= "<option value='" . $category->id . "' " . ($category->isRoot() ? 'class="test"' : '') . ">" . $prefix . ' ' . $category->name . '</option>';
+
+                $str .= $traverse($category->children, $prefix);
+                return $str;
+            }
+        };
+
+        $categories = $traverse($categories);
+//        dd($categories);
         return view('admin.categories.create', ['categories' => $categories]);
     }
 

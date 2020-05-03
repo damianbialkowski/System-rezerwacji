@@ -39,8 +39,9 @@
                     <div class="col-md-6">
                         Wybierz kategorię nadrzędną
                         <div class="form-group">
-                            <select size="1" class="form-control" id="parent_id">
+                            <select size="3" class="form-control" id="parent_id">
                                 <option selected>Brak</option>
+                                {!! $categories !!}
                             </select>
                         </div>
                     </div>

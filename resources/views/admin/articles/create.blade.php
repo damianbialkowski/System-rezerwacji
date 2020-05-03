@@ -15,7 +15,7 @@
                     </ul>
                 </div>
             @endif
-                <form method="POST" enctype="multipart/form-data" class="form article">
+                <form action="{{ route('admin.articles.store') }}" method="POST" enctype="multipart/form-data" class="form article">
                     @csrf
                     <div class="header flex justify-content-space-between align-items-center flex-wrap">
                         <h2>Podstawowe informacje</h2>
@@ -24,15 +24,15 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>Tytuł artykułu:</label>
+                        <label for="title">Tytuł artykułu:</label>
                         <div class="form-input">
-                            <input type="text" name="title" value="{{ old('title') }}" required>
+                            <input type="text" name="title" id="title" value="{{ old('title') }}" required>
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>Kategoria:</label>
+                        <label for="category_id">Kategoria:</label>
                         <div class="form-input">
-                            <select name="category" required>
+                            <select name="category_id" id="category_id" required>
                                 @foreach($categories as $category)
                                     <option value="{{ $category->id }}" @if($loop->first) selected @endif>{{ $category->name }}</option>
                                 @endforeach
@@ -46,21 +46,13 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>Widoczny:</label>
-                        <div class="form-input">
-                            <input type="checkbox" name="visible" checked> - tak/nie
-                        </div>
+                        <input type="checkbox" name="active" id="active" value="1" checked>
+                        <label for="active">Aktywny</label>
                     </div>
                     <div class="form-group flex flex-direction-column ckeditor-group">
-                        <label>Treść:</label>
+                        <label for="content">Treść:</label>
                         <div class="form-input">
-                            <textarea name="content">{{ old('content') }}</textarea>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label>Po utworzeniu, przejdź do artykułu:</label>
-                        <div class="form-input">
-                            <input type="checkbox" name="redirect_article"> - tak/nie
+                            <textarea name="content" id="content">{{ old('content') }}</textarea>
                         </div>
                     </div>
                     <div class="btnForm">

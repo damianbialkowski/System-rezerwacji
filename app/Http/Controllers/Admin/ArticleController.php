@@ -66,26 +66,17 @@ class ArticleController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(ArticleRequest $request)
+    public function store(Request $request, Article $article)
     {
-        // dd($request->file('image_article'));
-        $article = new Article;
-        $article->title = $request->get('title');
-        $article->category_id = $request->get('categories');
-        $article->visible = ($request->get('visible') == 'on') ? 1 : 0;
-        $article->slug = str_slug($request->get('title'), '-');
-        $article->content = $request->get('content');
-        $article->created_by = Auth::user()->id;
-        $article->save();
+//        dd(new Article);
+//         dd($request->all());
+         $article->create($request->all());
 
         if ($article && $request->hasFile('image_article') && $request->file('image_article')->isValid()) {
             $article->addMediaFromRequest('image_article')->toMediaCollection('images');
         }
 
-        if ($request->redirect_article) {
-            return redirect('/admin/articles/show/' . $article->id);
-        }
-        return redirect('/admin/articles');
+        return redirect(route('admin.articles.index'));
     }
 
     /**
@@ -109,11 +100,10 @@ class ArticleController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Article $article)
     {
-        $article = Article::findOrFail($id);
         $categories = Category::all();
-        return view('admin.articles.edit', ['articles' => $article, 'categories' => $categories]);
+        return view('admin.articles.edit', ['article' => $article, 'categories' => $categories]);
     }
 
     /**
@@ -126,6 +116,7 @@ class ArticleController extends Controller
     public function update(Request $request, $id)
     {
         $article = Article::findOrFail($id);
+        dd(1);
         if ($article) {
             $article->title = $request->get('title');
             $article->category_id = ($request->get('categories'));

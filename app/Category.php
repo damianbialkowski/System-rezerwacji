@@ -5,12 +5,18 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Cviebrock\EloquentSluggable\Sluggable;
+use Cviebrock\EloquentSluggable\Services\SlugService;
 use Spatie\Translatable\HasTranslations;
+use Kalnoy\Nestedset\NodeTrait;
 use App\Article;
 
 class Category extends Model
 {
-    use SoftDeletes, Sluggable, HasTranslations;
+    use SoftDeletes, HasTranslations;
+    use Sluggable, NodeTrait {
+        NodeTrait::replicate as replicateNode;
+        Sluggable::replicate as replicateSlug;
+    }
 
     protected $table = 'categories';
     protected $fillable = [
@@ -23,6 +29,14 @@ class Category extends Model
         'description',
         'active'
     ];
+
+    public function replicate(array $except = null)
+    {
+        $instance = $this->replicateNode($except);
+        (new SlugService())->slug($instance, true);
+
+        return $instance;
+    }
 
     public function sluggable()
     {

@@ -18,8 +18,8 @@ class HomeController extends Controller
     public function home()
     {
         $categories = Category::get();
-        $last_articles = Article::latest()->where('visible',1)->take(3)->get();
-          
+        $last_articles = Article::latest()->where('active',1)->take(3)->get();
+
         return view('pages.home',['last_articles' => $last_articles,'categories' => $categories]);
 
     }

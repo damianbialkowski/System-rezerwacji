@@ -13,7 +13,7 @@
 Route::get('/cacheClear','AppController@cacheClear');
 Route::get('/configClear','AppController@configClear');
 
-Auth::routes();
+//Auth::routes();
 
 Route::group(['namespace' => 'Front','name' => 'front.'], function () {
     Route::get('/', 'HomeController@home')->name('');
@@ -33,10 +33,10 @@ Route::group(['namespace' => 'Front','name' => 'front.'], function () {
 
 
 
-Route::group(['namespace' => 'admin','middleware' => 'admin','prefix' => 'admin','as' => 'admin.'], function (){
-    Route::get('/','DashboardController@main')->name('dashboard');
-    // admin - articles
-    Route::resource('articles', 'ArticleController');
+//Route::group(['namespace' => 'admin','middleware' => 'admin','prefix' => 'admin','as' => 'admin.'], function (){
+//    Route::get('/','DashboardController@main')->name('dashboard');
+//    // admin - articles
+//    Route::resource('articles', 'ArticleController');
 
     // admin - categories
 //    Route::get('/categories/create','CategoryController@create')->name('categories.create');
@@ -45,13 +45,13 @@ Route::group(['namespace' => 'admin','middleware' => 'admin','prefix' => 'admin'
 //    Route::get('/categories/show/{id}','CategoryController@show')->name('categories.show');
 //    Route::get('/categories/edit/{id}','CategoryController@edit')->name('categories.edit');
 //    Route::post('/categories/edit/{id}','CategoryController@update')->name('categories.update');
-    Route::resource('categories', 'CategoryController');
-
-    // admin - settings
-    Route::get('/settings/website','SettingsController@editWebsite')->name('settings.editWebsite');
-    Route::patch('/settings/website','SettingsController@updateWebsite')->name('settings.updateWebsite');
-    Route::get('/settings/account','SettingsController@editAccount')->name('settings.editAccount');
-
-    // admin - users
-    Route::resource('users', 'UserController');
-});
+//    Route::resource('categories', 'CategoryController');
+//
+//    // admin - settings
+//    Route::get('/settings/website','SettingsController@editWebsite')->name('settings.editWebsite');
+//    Route::patch('/settings/website','SettingsController@updateWebsite')->name('settings.updateWebsite');
+//    Route::get('/settings/account','SettingsController@editAccount')->name('settings.editAccount');
+//
+//    // admin - users
+//    Route::resource('users', 'UserController');
+//});

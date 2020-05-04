@@ -1,10 +1,10 @@
 {
-    "name": "nwidart/admin",
-    "description": "",
+    "name": "DCms/Admin",
+    "description": "Admin module for DCms",
     "authors": [
         {
-            "name": "Nicolas Widart",
-            "email": "n.widart@gmail.com"
+            "name": "Damian Bialkowski",
+            "email": "damianbialkowski8@gmail.com"
         }
     ],
     "extra": {

@@ -26,9 +26,9 @@ class ArticleController extends Controller
                 ->addColumn('action', function ($row) {
 
                     $btn = '<div class="flex align-items-center justify-content-center flex-wrap">
-                           <a href="' . url("/admin/articles/show/" . $row->id) . '" class="btn-action-table" title="Podgląd"><i class="far fa-eye"></i></a>
-                           <a href="' . url("/admin/articles/edit/" . $row->id) . '" class="btn-action-table" title="Edycja"><i class="fas fa-pencil-alt"></i></a>
-                           <a href="' . url("/admin/articles/destroy/" . $row->id) . '" class="btn-action-table prevent" title="Usunięcie"><i class="fas fa-trash-alt"></i></a>
+                           <a href="' . route('admin.articles.show', ['article' => $row->id]) . '" class="btn-action-table" title="Podgląd"><i class="far fa-eye"></i></a>
+                           <a href="' . route('admin.articles.edit', ['article' => $row->id]) . '" class="btn-action-table" title="Edycja"><i class="fas fa-pencil-alt"></i></a>
+                           <a href="' . route('admin.articles.destroy', ['article' => $row->id]) . '" class="btn-action-table prevent" title="Usunięcie"><i class="fas fa-trash-alt"></i></a>
                        </div>';
                     return $btn;
                 })
@@ -42,7 +42,7 @@ class ArticleController extends Controller
                     return str_limit($data->title, 35);
                 })
                 ->rawColumns(['action'])
-                ->make(true);
+                ->make();
         }
         return view('admin.articles.index');
     }
@@ -55,9 +55,7 @@ class ArticleController extends Controller
     public function create()
     {
         $categories = Category::all();
-        if ($categories) {
-            return view('admin.articles.create', ['categories' => $categories]);
-        }
+        return view('admin.articles.create', ['categories' => $categories]);
     }
 
     /**
@@ -66,11 +64,10 @@ class ArticleController extends Controller
      * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Article $article)
+    public function store(ArticleRequest $request, Article $article)
     {
-//        dd(new Article);
-//         dd($request->all());
-         $article->create($request->all());
+        dd($request->all());
+        $article->create($request->all());
 
         if ($article && $request->hasFile('image_article') && $request->file('image_article')->isValid()) {
             $article->addMediaFromRequest('image_article')->toMediaCollection('images');
@@ -82,16 +79,13 @@ class ArticleController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param int $id
+     * @param object $article
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Article $article)
     {
-        $article = Article::findOrFail($id);
         $categories = Category::all();
-        if ($article) {
-            return view('admin.articles.show', ['articles' => $article, 'categories' => $categories]);
-        }
+        return view('admin.articles.show', ['article' => $article, 'categories' => $categories]);
     }
 
     /**

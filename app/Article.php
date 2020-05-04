@@ -28,7 +28,7 @@ class Article extends TranslatableModel implements HasMedia
     protected $dates = ['deleted_at'];
 
     protected $casts = [
-        'slug' => 'json',
+        'slug' => 'array',
     ];
 //
 //    public function sluggable()

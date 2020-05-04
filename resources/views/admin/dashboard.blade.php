@@ -89,9 +89,9 @@
                         </td>
                         <td>
                             <div class="flex align-items-center justify-content-center flex-wrap">
-                                <a href="{{ route('admin.articles.show', ['id' => $article->id]) }}"
+                                <a href="{{ route('admin.articles.show', ['article' => $article->id]) }}"
                                    class="btn-action-table"><i class="far fa-eye"></i></a>
-                                <a href="{{ route('admin.articles.edit', ['id' => $article->id]) }}"
+                                <a href="{{ route('admin.articles.edit', ['article' => $article->id]) }}"
                                    class="btn-action-table"><i class="fas fa-pencil-alt"></i></a>
                             </div>
                         </td>

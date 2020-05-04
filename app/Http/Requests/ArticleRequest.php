@@ -10,8 +10,9 @@ class ArticleRequest extends FormRequest
 
     public function __construct()
     {
-// dd(1);
+
     }
+
     /**
      * Determine if the users is authorized to make this request.
      *
@@ -29,12 +30,14 @@ class ArticleRequest extends FormRequest
      */
     public function rules()
     {
+        $lang = \App::getLocale();
+        $request = request()->all();
+        $slug = str_slug($request['title']);
         return [
             'title' => 'required|min:5|max:255',
-            // 'categories' => 'in:'.Category::
+            'slug' => 'unique:articles,slug->' . $lang,
             'introduction' => 'max:60',
-            'content' => 'required|min:50',
-
+            'content' => 'required|min:5',
         ];
     }
 

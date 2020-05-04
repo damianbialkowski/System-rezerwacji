@@ -1,11 +1,11 @@
 {
-    "name": "Core",
-    "alias": "core",
+    "name": "Admin",
+    "alias": "admin",
     "description": "",
     "keywords": [],
     "order": 0,
     "providers": [
-        "Modules\\Core\\Providers\\CoreServiceProvider"
+        "Modules\\Admin\\Providers\\AdminServiceProvider"
     ],
     "aliases": {},
     "files": [],

@@ -1,12 +1,12 @@
 <?php
 
-namespace Modules\Core\Http\Controllers;
+namespace Modules\Admin\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 
-class CoreController extends Controller
+class AdminController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +14,7 @@ class CoreController extends Controller
      */
     public function index()
     {
-        return view('core::index');
+        return view('admin::index');
     }
 
     /**
@@ -23,7 +23,7 @@ class CoreController extends Controller
      */
     public function create()
     {
-        return view('core::create');
+        return view('admin::create');
     }
 
     /**
@@ -43,7 +43,7 @@ class CoreController extends Controller
      */
     public function show($id)
     {
-        return view('core::show');
+        return view('admin::show');
     }
 
     /**
@@ -53,7 +53,7 @@ class CoreController extends Controller
      */
     public function edit($id)
     {
-        return view('core::edit');
+        return view('admin::edit');
     }
 
     /**

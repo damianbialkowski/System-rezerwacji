@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\Core\Providers;
+namespace Modules\Admin\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 
-class CoreServiceProvider extends ServiceProvider
+class AdminServiceProvider extends ServiceProvider
 {
     /**
      * Boot the application events.
@@ -18,7 +18,7 @@ class CoreServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->registerFactories();
-        $this->loadMigrationsFrom(module_path('Core', 'Database/Migrations'));
+        $this->loadMigrationsFrom(module_path('Admin', 'Database/Migrations'));
     }
 
     /**
@@ -39,10 +39,10 @@ class CoreServiceProvider extends ServiceProvider
     protected function registerConfig()
     {
         $this->publishes([
-            module_path('Core', 'Config/config.php') => config_path('core.php'),
+            module_path('Admin', 'Config/config.php') => config_path('admin.php'),
         ], 'config');
         $this->mergeConfigFrom(
-            module_path('Core', 'Config/config.php'), 'core'
+            module_path('Admin', 'Config/config.php'), 'admin'
         );
     }
 
@@ -53,17 +53,17 @@ class CoreServiceProvider extends ServiceProvider
      */
     public function registerViews()
     {
-        $viewPath = resource_path('views/modules/core');
+        $viewPath = resource_path('views/modules/admin');
 
-        $sourcePath = module_path('Core', 'Resources/views');
+        $sourcePath = module_path('Admin', 'Resources/views');
 
         $this->publishes([
             $sourcePath => $viewPath
         ],'views');
 
         $this->loadViewsFrom(array_merge(array_map(function ($path) {
-            return $path . '/modules/core';
-        }, \Config::get('view.paths')), [$sourcePath]), 'core');
+            return $path . '/modules/admin';
+        }, \Config::get('view.paths')), [$sourcePath]), 'admin');
     }
 
     /**
@@ -73,12 +73,12 @@ class CoreServiceProvider extends ServiceProvider
      */
     public function registerTranslations()
     {
-        $langPath = resource_path('lang/modules/core');
+        $langPath = resource_path('lang/modules/admin');
 
         if (is_dir($langPath)) {
-            $this->loadTranslationsFrom($langPath, 'core');
+            $this->loadTranslationsFrom($langPath, 'admin');
         } else {
-            $this->loadTranslationsFrom(module_path('Core', 'Resources/lang'), 'core');
+            $this->loadTranslationsFrom(module_path('Admin', 'Resources/lang'), 'admin');
         }
     }
 
@@ -90,7 +90,7 @@ class CoreServiceProvider extends ServiceProvider
     public function registerFactories()
     {
         if (! app()->environment('production') && $this->app->runningInConsole()) {
-            app(Factory::class)->load(module_path('Core', 'Database/factories'));
+            app(Factory::class)->load(module_path('Admin', 'Database/factories'));
         }
     }
 

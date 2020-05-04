@@ -11,6 +11,6 @@
 |
 */
 
-Route::prefix('core')->group(function() {
-    Route::get('/', 'CoreController@index');
+Route::prefix('admin')->group(function() {
+    Route::get('/', 'AdminController@index');
 });

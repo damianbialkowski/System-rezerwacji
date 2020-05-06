@@ -37,19 +37,7 @@ class RegisterController extends Controller
     public function store(RegisterRequest $request,User $user)
     {
 
-        $user->create([
-            'username' => $request->username,
-            'role_id' => 2,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-        ]);
 
-        if($user){
-            if(Auth::attempt(['email' => $request->get('email'),'password' => $request->get('password')])){
-                return redirect('/')->with(['success' => 'Konto zostało pomyślnie utworzone']);
-                
-            }
-        }
     }
 
 }

@@ -45,4 +45,11 @@ class Admin extends Authenticatable
     {
         return $this->belongsTo(Roles::class);
     }
+
+    public function setPasswordAttribute($password)
+    {
+        if ($password != '') {
+            $this->attributes['password'] = bcrypt($password);
+        }
+    }
 }

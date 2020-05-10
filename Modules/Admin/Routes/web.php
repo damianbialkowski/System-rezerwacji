@@ -1,7 +1,9 @@
 <?php
 
 Route::prefix('admin')->group(function ($d) {
-    Route::get('/', 'DashboardController@dashboard');
+    Route::get('/', 'DashboardController@dashboard')->name('dashboard');
 
     Route::get('/login', 'Auth\LoginController@showLoginForm');
+
+    Route::resource('admins', 'AdminController');
 });

@@ -2,9 +2,12 @@
 
 namespace Modules\Admin\Http\Controllers;
 
+use App\Role;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Modules\Admin\Http\Controllers\Controller;
+use Modules\Admin\Entities\Admin;
+use DataTables;
 
 class AdminController extends Controller
 {
@@ -12,9 +15,26 @@ class AdminController extends Controller
      * Display a listing of the resource.
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        return view('admin::index');
+        if ($request->ajax()) {
+            $data = Admin::latest()->get();
+            return Datatables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function ($row) {
+                    $btn = '<div class="flex align-items-center justify-content-center flex-wrap">
+                           <a href="' . route('admins.show', $row->id) . '" class="btn-action-table"><i class="far fa-eye"></i></a>
+                           <a href="' . route('admins.edit', $row->id) . '" class="btn-action-table"><i class="fas fa-pencil-alt"></i></a>
+                       </div>';
+                    return $btn;
+                })
+                ->editColumn('role_id', function ($data) {
+                    return ($data->role_id) ? $data->role->name : 'brak';
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+        return $this->view('panel.admins.index');
     }
 
     /**
@@ -23,7 +43,8 @@ class AdminController extends Controller
      */
     public function create()
     {
-        return view('admin::create');
+        $roles = Role::all();
+        return view('admin::panel.admins.create', ['roles' => $roles]);
     }
 
     /**
@@ -33,7 +54,7 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request->all());
     }
 
     /**

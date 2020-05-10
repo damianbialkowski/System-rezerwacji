@@ -55,7 +55,7 @@
 
                 <div class="userTopPanel flex flex-direction-row align-items-center">
                 <a href="{{ url('/') }}" class="btn-website"><i class="fa fa-eye"></i> Podgląd</a>
-                    <span class="userLogo">{{ \Auth::user()->initials() }}</span><p>{{ \Auth::user()->username }}</p>
+                    <span class="userLogo">DB</span><p>Damian</p>
                 </div>
                 <!-- <div class="rightPanel">
                     <i class="fa fa-bars"></i>

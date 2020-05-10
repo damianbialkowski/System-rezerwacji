@@ -4,7 +4,7 @@ namespace Modules\Admin\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Modules\Admin\Repositories\Eloquent\AdminRepository;
-use Modules\Admin\Repositories\Interfaces\AdminRepositoryInterface;
+use Modules\Admin\Repositories\Interfaces\AdminBaseRepositoryInterface;
 
 class RepositoryServiceProvider extends ServiceProvider
 {
@@ -15,7 +15,7 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind(AdminRepositoryInterface::class, AdminRepository::class);
+        $this->app->bind(AdminBaseRepositoryInterface::class, AdminRepository::class);
     }
 
     /**

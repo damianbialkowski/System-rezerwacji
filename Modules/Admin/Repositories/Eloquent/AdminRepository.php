@@ -2,10 +2,10 @@
 
 namespace Modules\Admin\Repositories\Eloquent;
 
-use Modules\Admin\Repositories\Interfaces\AdminRepositoryInterface;
+use Modules\Admin\Repositories\Interfaces\AdminBaseRepositoryInterface;
 use Modules\Admin\Entities\Admin;
 
-class AdminRepository implements AdminRepositoryInterface
+class AdminRepository implements AdminBaseRepositoryInterface
 {
 
     public function getModel()

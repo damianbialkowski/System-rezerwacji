@@ -3,7 +3,7 @@
 namespace Modules\Admin\Repositories;
 
 
-interface Repository
+interface BaseRepository
 {
     public function getAll();
 

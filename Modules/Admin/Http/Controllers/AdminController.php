@@ -8,9 +8,25 @@ use Illuminate\Http\Response;
 use Modules\Admin\Http\Controllers\Controller;
 use Modules\Admin\Entities\Admin;
 use DataTables;
+use phpDocumentor\Reflection\Types\Collection;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use \Modules\Admin\Repositories\Interfaces\AdminRepositoryInterface;
 
 class AdminController extends Controller
 {
+
+    protected $adminRepository;
+
+    public function __construct(AdminRepositoryInterface $adminRepository)
+    {
+        $this->adminRepository = $adminRepository;
+    }
+
+    protected function redirectNotFoundModel()
+    {
+        return $this->redirect('admins.'. $this->$defaultRedirect);
+    }
+
     /**
      * Display a listing of the resource.
      * @return Response
@@ -44,7 +60,7 @@ class AdminController extends Controller
     public function create()
     {
         $roles = Role::all();
-        return view('admin::panel.admins.create', ['roles' => $roles]);
+        return $this->view('panel.admins.create', ['roles' => $roles]);
     }
 
     /**
@@ -59,22 +75,30 @@ class AdminController extends Controller
 
     /**
      * Show the specified resource.
-     * @param int $id
+     * @param Collection $admin
      * @return Response
      */
     public function show($id)
     {
-        return view('admin::show');
+        try {
+            $admin = $this->adminRepository->findById($id);
+            dd($admin);
+            return view('admin::panel.admins.show', ['item' => $admin]);
+        } catch (ModelNotFoundException $e) {
+            dd($e);
+            return $this->redirectNotFound();
+        }
+
     }
 
     /**
      * Show the form for editing the specified resource.
-     * @param int $id
+     * @param Collection $admin
      * @return Response
      */
-    public function edit($id)
+    public function edit(Admin $admin)
     {
-        return view('admin::edit');
+        return view('admin::panel.admins.edit', ['item' => $admin, 'roles' => Role::all()]);
     }
 
     /**

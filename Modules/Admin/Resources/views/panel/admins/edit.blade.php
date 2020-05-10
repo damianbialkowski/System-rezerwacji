@@ -1,5 +1,5 @@
-@extends('layouts.admin')
-@section('admin.main')
+@extends('admin::layouts.admin')
+@section('admin::main')
     <div class="headerTop flex justify-content-space-between flex-wrap">
         <div>
             <h1 class="contentHeader">Edycja użytkownika:</h1>
@@ -20,26 +20,26 @@
             <p>{!! \Session::get('success') !!}</p>
         </div>
     @endif
-    <form action="{{ route('admin.users.update', $user->id) }}" method="POST" class="form">
+    <form action="{{ route('admins.update', $item->id) }}" method="POST" class="form">
         @csrf
         @method('PATCH')
         <h2>Podstawowe informacje</h2>
         <div class="form-group">
             <label>Imię:</label>
             <div class="form-input">
-                <input type="text" name="firstname" value="{{ $user->firstname }}" required>
+                <input type="text" name="firstname" value="{{ $item->firstname }}" required>
             </div>
         </div>
         <div class="form-group">
             <label>Nazwa użytkownika:</label>
             <div class="form-input">
-                <input type="text" name="username" value="{{ $user->username }}" required>
+                <input type="text" name="username" value="{{ $item->username }}" required>
             </div>
         </div>
         <div class="form-group">
             <label>Adres e-mail:</label>
             <div class="form-input">
-                <input type="email" name="email" value="{{ $user->email }}" required>
+                <input type="email" name="email" value="{{ $item->email }}" required>
             </div>
         </div>
         <div class="form-group">
@@ -54,7 +54,7 @@
                 <select name="role_id" required>
                     @foreach($roles as $role)
                         <option value="{{ $role->id }}"
-                                @if($role->id === $user->role_id) selected @endif>{{ $role->name }}</option>
+                                @if($role->id === $item->role_id) selected @endif>{{ $role->name }}</option>
                     @endforeach
                 </select>
             </div>
@@ -63,19 +63,19 @@
         <div class="form-group">
             <label>Utworzone przez:</label>
             <div class="form-input">
-                <span>{{ ($user->creator()) ? $user->creator()->username : 'Konto utworzone przez formularz rejestracyjny' }}</span>
+{{--                <span>{{ ($item->creator()) ? $item->creator()->username : 'Konto utworzone przez formularz rejestracyjny' }}</span>--}}
             </div>
         </div>
         <div class="form-group">
             <label>Data utworzenia:</label>
             <div class="form-input">
-                <span>{{ $user->created_at }}</span>
+                <span>{{ $item->created_at }}</span>
             </div>
         </div>
         <div class="form-group">
             <label>Data aktualizacji:</label>
             <div class="form-input">
-                <span>{{ $user->updated_at }}</span>
+                <span>{{ $item->updated_at }}</span>
             </div>
         </div>
         <div class="btnForm">
@@ -83,9 +83,9 @@
         </div>
     </form>
 @endsection
-@section('admin.script')
-    <script src="{{ asset('js/admin/sidebar.js') }}"></script>
-    <script src="{{ asset('js/admin/topPanel.js') }}"></script>
-    <script src="{{ asset('js/admin/rightPanel.js') }}"></script>
-    <script src="{{ asset('js/admin/users.js') }}"></script>
+@section('admin::script')
+    <script src="{{ asset('modules/admin/js/sidebar.js') }}"></script>
+    <script src="{{ asset('modules/admin/js/topPanel.js') }}"></script>
+    <script src="{{ asset('modules/admin/js/rightPanel.js') }}"></script>
+    <script src="{{ asset('modules/admin/js/users.js') }}"></script>
 @endsection

@@ -10,21 +10,22 @@ use Modules\Admin\Entities\Admin;
 use DataTables;
 use phpDocumentor\Reflection\Types\Collection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use \Modules\Admin\Repositories\Interfaces\AdminBaseRepositoryInterface;
+use \Modules\Admin\Repositories\Interfaces\AdminRepositoryInterface;
+use Modules\Admin\Http\Requests\AdminCreateRequest;
 
 class AdminController extends Controller
 {
 
     protected $adminRepository;
 
-    public function __construct(AdminBaseRepositoryInterface $adminRepository)
+    public function __construct(AdminRepositoryInterface $adminRepository)
     {
         $this->adminRepository = $adminRepository;
     }
 
     protected function redirectNotFoundModel()
     {
-        return $this->redirect('admins.'. $this->$defaultRedirect);
+        return $this->redirect('admins.'. $this->defaultRedirect);
     }
 
     /**
@@ -68,9 +69,13 @@ class AdminController extends Controller
      * @param Request $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(AdminCreateRequest $request)
     {
-        dd($request->all());
+        $data = $request->all();
+        $user = $this->adminRepository->create($data);
+        if ($user) {
+            return $this->redirect('admins.index');
+        }
     }
 
     /**
@@ -82,7 +87,6 @@ class AdminController extends Controller
     {
         try {
             $admin = $this->adminRepository->findById($id);
-            dd($admin);
             return view('admin::panel.admins.show', ['item' => $admin]);
         } catch (ModelNotFoundException $e) {
             dd($e);

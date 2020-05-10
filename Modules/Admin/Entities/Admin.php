@@ -37,7 +37,9 @@ class Admin extends Authenticatable
         });
 
         static::saving(function($table) {
-            $table->created_by = Auth::id();
+            $table->created_by = 1;
+            $table->updated_by = 1;
+            $table->active = 1;
         });
     }
 

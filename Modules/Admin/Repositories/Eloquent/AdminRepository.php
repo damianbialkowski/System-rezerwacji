@@ -2,10 +2,10 @@
 
 namespace Modules\Admin\Repositories\Eloquent;
 
-use Modules\Admin\Repositories\Interfaces\AdminBaseRepositoryInterface;
+use Modules\Admin\Repositories\Interfaces\AdminRepositoryInterface;
 use Modules\Admin\Entities\Admin;
 
-class AdminRepository implements AdminBaseRepositoryInterface
+class AdminRepository implements AdminRepositoryInterface
 {
 
     public function getModel()
@@ -23,7 +23,7 @@ class AdminRepository implements AdminBaseRepositoryInterface
         return $this->getModel()->whereId($id)->first();
     }
 
-    public function create(...$data)
+    public function create(array $data)
     {
         return $this->getModel()->create($data);
     }

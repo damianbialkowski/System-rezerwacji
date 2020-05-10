@@ -10,14 +10,14 @@ use Modules\Admin\Entities\Admin;
 use DataTables;
 use phpDocumentor\Reflection\Types\Collection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use \Modules\Admin\Repositories\Interfaces\AdminRepositoryInterface;
+use \Modules\Admin\Repositories\Interfaces\AdminBaseRepositoryInterface;
 
 class AdminController extends Controller
 {
 
     protected $adminRepository;
 
-    public function __construct(AdminRepositoryInterface $adminRepository)
+    public function __construct(AdminBaseRepositoryInterface $adminRepository)
     {
         $this->adminRepository = $adminRepository;
     }

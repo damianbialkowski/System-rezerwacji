@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Admin\Repositories;
+namespace Modules\Core\Repositories;
 
 
 interface BaseRepository

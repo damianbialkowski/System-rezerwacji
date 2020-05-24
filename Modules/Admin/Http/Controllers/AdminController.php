@@ -2,11 +2,11 @@
 
 namespace Modules\Admin\Http\Controllers;
 
-use App\Role;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Modules\Admin\Http\Controllers\Controller;
 use Modules\Admin\Entities\Admin;
+use App\Role;
 use DataTables;
 use phpDocumentor\Reflection\Types\Collection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -40,8 +40,8 @@ class AdminController extends Controller
                 ->addIndexColumn()
                 ->addColumn('action', function ($row) {
                     $btn = '<div class="flex align-items-center justify-content-center flex-wrap">
-                           <a href="' . route('admins.show', $row->id) . '" class="btn-action-table"><i class="far fa-eye"></i></a>
-                           <a href="' . route('admins.edit', $row->id) . '" class="btn-action-table"><i class="fas fa-pencil-alt"></i></a>
+                           <a href="' . route('admin.admins.show', $row->id) . '" class="btn-action-table"><i class="far fa-eye"></i></a>
+                           <a href="' . route('admin.admins.edit', $row->id) . '" class="btn-action-table"><i class="fas fa-pencil-alt"></i></a>
                        </div>';
                     return $btn;
                 })
@@ -72,6 +72,7 @@ class AdminController extends Controller
     public function store(AdminCreateRequest $request)
     {
         $data = $request->all();
+//        dd($data);
         $user = $this->adminRepository->create($data);
         if ($user) {
             return $this->redirect('admins.index');

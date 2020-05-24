@@ -20,7 +20,7 @@
             <p>{!! \Session::get('success') !!}</p>
         </div>
     @endif
-    <form action="{{ route('admins.update', $item->id) }}" method="POST" class="form">
+    <form action="{{ route('admin.admins.update', $item->id) }}" method="POST" class="form">
         @csrf
         @method('PATCH')
         <h2>Podstawowe informacje</h2>

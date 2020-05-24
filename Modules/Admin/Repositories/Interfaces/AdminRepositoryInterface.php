@@ -2,7 +2,7 @@
 
 namespace Modules\Admin\Repositories\Interfaces;
 
-use Modules\Admin\Repositories\BaseRepository;
+use Modules\Core\Repositories\BaseRepository;
 
 interface AdminRepositoryInterface extends BaseRepository
 {

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Modules\Admin\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Modules\Admin\Http\Requests\LoginRequest;
 
 class LoginController extends Controller
 {
@@ -17,7 +18,7 @@ class LoginController extends Controller
 
     public function __construct()
     {
-//        $this->middleware('guest')->except('logout');
+        $this->middleware('guest')->except('logout');
     }
 
     public function showLoginForm()
@@ -25,12 +26,22 @@ class LoginController extends Controller
         return view('admin::auth.login');
     }
 
-    protected function validateLogin(Request $request)
+//    protected function validateLogin(Request $request)
+//    {
+//        $request->validate([
+//            'email' => 'required|string',
+//            'password' => 'required|string',
+//        ]);
+//    }
+
+    public function postLogin(LoginRequest $request)
     {
-        $request->validate([
-            'email' => 'required|string',
-            'password' => 'required|string',
-        ]);
+
+        if (\Auth::attempt($request->except('_token'))) {
+            $request->session()->regenerate();
+            return redirect($this->redirectTo);
+        }
+        return redirect($this->loginPath);
     }
 
     protected function sendFailedLoginResponse(Request $request)
@@ -48,6 +59,6 @@ class LoginController extends Controller
 
         $request->session()->regenerateToken();
 
-        return $this->loggedOut($request) ?: redirect('/');
+        return $this->loggedOut($request) ?: redirect($this->loginPath);
     }
 }

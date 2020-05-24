@@ -21,7 +21,7 @@
             <p>{!! \Session::get('success') !!}</p>
         </div>
     @endif
-    <form action="{{ route('admins.store')  }}" method="POST" class="form">
+    <form action="{{ route('admin.admins.store')  }}" method="POST" class="form">
         @csrf
         <h2>Podstawowe informacje</h2>
         <div class="form-group">

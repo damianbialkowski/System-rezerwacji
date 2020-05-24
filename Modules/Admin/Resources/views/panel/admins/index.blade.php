@@ -21,7 +21,7 @@
                     </tbody>
                 </table>
                 <div class="addNewUser flex flex-direction-column justify-content-center align-items-center">
-                    <a href="{{ route('admins.create') }}"><i class="fas fa-plus"></i></a>
+                    <a href="{{ route('admin.admins.create') }}"><i class="fas fa-plus"></i></a>
                 </div>
 @endsection
 @section('admin::script')
@@ -37,7 +37,7 @@
     var table = $('#users_list').DataTable({
         processing: true,
         serverSide: true,
-        ajax: "{{ route('admins.index') }}",
+        ajax: "{{ route('admin.admins.index') }}",
         columns: [
             {data: 'id', name: 'id'},
             {data: 'name', name: 'name'},

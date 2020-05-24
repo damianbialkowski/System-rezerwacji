@@ -2,9 +2,9 @@
 
 namespace Modules\Admin\Entities;
 
-use Illuminate\Database\Eloquent\Model;
+use Modules\Core\Entities\CoreModel;
 
-class Roles extends Model
+class Roles extends CoreModel
 {
     protected $fillable = [
         'name',

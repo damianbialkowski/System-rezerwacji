@@ -6,7 +6,6 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 use Modules\Admin\Providers\RepositoryServiceProvider;
 
-
 class AdminServiceProvider extends ServiceProvider
 {
     /**
@@ -21,6 +20,9 @@ class AdminServiceProvider extends ServiceProvider
         $this->registerViews();
         $this->registerFactories();
         $this->loadMigrationsFrom(module_path('Admin', 'Database/Migrations'));
+
+        // DCms
+        $this->registerMiddlewares();
     }
 
     /**
@@ -62,7 +64,7 @@ class AdminServiceProvider extends ServiceProvider
 
         $this->publishes([
             $sourcePath => $viewPath
-        ],'views');
+        ], 'views');
 
         $this->loadViewsFrom(array_merge(array_map(function ($path) {
             return $path . '/modules/admin';
@@ -92,8 +94,25 @@ class AdminServiceProvider extends ServiceProvider
      */
     public function registerFactories()
     {
-        if (! app()->environment('production') && $this->app->runningInConsole()) {
+        if (!app()->environment('production') && $this->app->runningInConsole()) {
             app(Factory::class)->load(module_path('Admin', 'Database/factories'));
+        }
+    }
+
+    /**
+     * DCms
+     * Register middleware list
+     *
+     * @return void
+     */
+    public function registerMiddlewares()
+    {
+        $router = $this->app['router'];
+        $middlewares = config('admin.middlewares');
+        if (is_array($middlewares)) {
+            foreach ($middlewares as $alias => $namespace) {
+                $router->aliasMiddleware($alias, $namespace);
+            }
         }
     }
 

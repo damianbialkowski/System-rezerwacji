@@ -4,12 +4,13 @@ namespace Modules\Admin\Entities;
 
 use Modules\Core\Entities\AuthModel;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Modules\Core\Traits\BootableTrait;
 
 class Admin extends AuthModel
 {
-    use Notifiable, SoftDeletes, BootableTrait;
+    use Notifiable, BootableTrait;
+
+    protected $guard = 'admin';
 
     protected $fillable = [
         'name',

@@ -11,6 +11,6 @@
 |
 */
 
-Route::prefix('core')->group(function() {
-    Route::get('/', 'CoreController@index');
+Route::group(['prefix' => 'core', 'as' => 'core.', 'middleware' => 'web'], function() {
+    Route::get('/', 'ModuleController@initialize');
 });

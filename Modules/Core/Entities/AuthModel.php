@@ -2,9 +2,10 @@
 
 namespace Modules\Core\Entities;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Foundation\Auth\User as Authenticates;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class AuthModel extends Authenticatable
+class AuthModel extends Authenticates
 {
-
+    use SoftDeletes;
 }

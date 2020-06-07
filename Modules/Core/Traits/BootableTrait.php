@@ -2,7 +2,6 @@
 
 namespace Modules\Core\Traits;
 
-use Illuminate\Auth;
 use Carbon\Carbon;
 
 trait BootableTrait
@@ -11,20 +10,22 @@ trait BootableTrait
     {
         parent::boot();
 
-        static::updating(function ($table) {
-            $table->updated_by = Auth::id();
+        $auth_id = \Auth::id();
+
+        static::updating(function ($table) use ($auth_id) {
+            $table->updated_by = $auth_id;
             $table->updated_at = Carbon::now();
         });
 
-        static::deleting(function ($table) {
-            $table->deleted_by = Auth::id();
+        static::deleting(function ($table) use ($auth_id) {
+            $table->deleted_by = $auth_id;
             $table->deleted_at = Carbon::now();
             $table->active = 0;
         });
 
-        static::saving(function ($table) {
-            $table->created_by = 1;
-            $table->updated_by = 1;
+        static::saving(function ($table) use ($auth_id) {
+            $table->created_by = $auth_id;
+            $table->updated_by = $auth_id;
             $table->active = 1;
         });
     }

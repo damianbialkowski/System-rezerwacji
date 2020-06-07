@@ -5,25 +5,28 @@ namespace Modules\Admin\Http\Controllers\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Modules\Admin\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Modules\Admin\Http\Requests\LoginRequest;
+use \Auth;
 
 class LoginController extends Controller
 {
-    use AuthenticatesUsers;
+    use ThrottlesLogins;
 
     protected $redirectTo = '/admin';
     protected $loginPath = '/admin/login';
-    protected $redirectAfterLogout = '/admin';
+    protected $redirectAfterLogout = '/admin/login';
 
     public function __construct()
     {
-        $this->middleware('guest')->except('logout');
+        $this->redirectTo = route('admin.dashboard');
+        $this->loginPath = route('admin.login');
+        $this->redirectAfterLogout = route('admin.login');
     }
 
     public function showLoginForm()
     {
-        return view('admin::auth.login');
+        return $this->view('auth.login');
     }
 
 //    protected function validateLogin(Request $request)
@@ -36,29 +39,23 @@ class LoginController extends Controller
 
     public function postLogin(LoginRequest $request)
     {
-
-        if (\Auth::attempt($request->except('_token'))) {
+        if (Auth::guard('admin')->attempt($request->only('email', 'password'))) {
+            if (Auth::guard('admin')->user()->active == 0) {
+                Auth::guard('admin')->logout();
+            }
             $request->session()->regenerate();
             return redirect($this->redirectTo);
         }
         return redirect($this->loginPath);
     }
 
-    protected function sendFailedLoginResponse(Request $request)
-    {
-        throw ValidationException::withMessages([
-            $this->username() => [trans('auth.failed')],
-        ]);
-    }
-
     public function logout(Request $request)
     {
-        $this->guard()->logout();
+        Auth::guard('admin')->logout();
 
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
-
-        return $this->loggedOut($request) ?: redirect($this->loginPath);
+        return redirect(property_exists($this, 'redirectAfterLogout')
+            ? $this->redirectAfterLogout : '');
     }
 }

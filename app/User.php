@@ -29,15 +29,15 @@ class User extends Authenticatable
     {
         parent::boot();
 
-        static::updating(function($table) {
-           $table->updated_by = Auth::id();
+        static::updating(function ($table) {
+            $table->updated_by = Auth::id();
         });
 
-        static::deleting(function($table) {
+        static::deleting(function ($table) {
             $table->deleted_by = Auth::id();
         });
 
-        static::saving(function($table) {
+        static::saving(function ($table) {
             $table->created_by = Auth::id();
         });
     }
@@ -69,8 +69,8 @@ class User extends Authenticatable
 
     public function getFirstnameById($id = null)
     {
-        if($id){
-            return $this->where('id',$id)->first()->firstname;
+        if ($id) {
+            return $this->where('id', $id)->first()->firstname;
         }
     }
 
@@ -82,13 +82,13 @@ class User extends Authenticatable
     //while creating users from admin panel
     public function creator()
     {
-        return $this->belongsTo('App\User','created_by','id')->first();
+        return $this->belongsTo('App\User', 'created_by', 'id')->first();
     }
 
     // displayig initials in admin panel
     public function initials()
     {
-        return ucfirst(substr($this->firstname,0,1)).''.ucfirst(substr($this->username,0,1));
+        return ucfirst(substr($this->firstname, 0, 1)) . '' . ucfirst(substr($this->username, 0, 1));
     }
 
 }

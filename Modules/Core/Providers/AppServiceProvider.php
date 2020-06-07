@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Providers;
+namespace Modules\Core\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
-use App\Settings;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,8 +26,5 @@ class AppServiceProvider extends ServiceProvider
     {
         Schema::defaultStringLength(191);
 
-        if(\Auth::check()){
-            view()->share('users', \Auth::user());
-        }
     }
 }

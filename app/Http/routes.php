@@ -15,12 +15,12 @@ Route::get('/configClear','AppController@configClear');
 
 //Auth::routes();
 
-Route::group(['namespace' => 'Front','name' => 'front.'], function () {
-    Route::get('/', 'HomeController@home')->name('');
-    Route::get('/search','SearchController@search');
-    Route::get('/articles/{id},{slug}','ArticleController@show');
-    Route::get('/categories/{id},{slug}','CategoryController@show');
-});
+//Route::group(['namespace' => 'Front','name' => 'front.'], function () {
+//    Route::get('/', 'HomeController@home')->name('');
+//    Route::get('/search','SearchController@search');
+//    Route::get('/articles/{id},{slug}','ArticleController@show');
+//    Route::get('/categories/{id},{slug}','CategoryController@show');
+//});
 
 // Route::group(['name' => 'auth.', 'prefix' => 'auth'], function () {
 //     Route::get('/register','RegisterController@create');

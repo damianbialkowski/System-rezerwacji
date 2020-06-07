@@ -1,9 +1,9 @@
 @include('admin::partials.header')
-<body class="flex flex-direction-row">
+<body class="">
 @include('admin::partials.sidebar')
-<section class="sideContent">
+<section class="side-content">
     @include('admin::partials.navbar')
-    <div class="content mTop30">
+    <div class="content-page">
         @yield('admin::main')
     </div>
 </section>

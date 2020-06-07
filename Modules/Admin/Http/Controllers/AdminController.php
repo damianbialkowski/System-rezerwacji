@@ -4,7 +4,7 @@ namespace Modules\Admin\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Modules\Admin\Http\Controllers\Controller;
+use Modules\Admin\Http\Controllers\Controller as CoreController;
 use Modules\Admin\Entities\Admin;
 use App\Role;
 use DataTables;
@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use \Modules\Admin\Repositories\Interfaces\AdminRepositoryInterface;
 use Modules\Admin\Http\Requests\AdminCreateRequest;
 
-class AdminController extends Controller
+class AdminController extends CoreController
 {
 
     protected $adminRepository;

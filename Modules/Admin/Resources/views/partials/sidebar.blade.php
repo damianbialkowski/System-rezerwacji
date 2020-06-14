@@ -12,17 +12,28 @@
 
         <li class="menu-item">
             <a href="#"><i class="fa fa-user"></i>
-                <span>Admins
+                <span>Admin
                     <i class="fa fa-angle-right arrowRight"></i>
                 </span>
             </a>
-            <ul>
+            <ul class="menu-item-collapse">
                 <li><a href="{{ route('admin.admins.index') }}">List</a></li>
-                <li><a href="{{ route('admin.admins.create') }}">Create new admin</a></li>
+                <li><a href="{{ route('admin.admins.create') }}">Add new</a></li>
             </ul>
         </li>
         <li class="menu-item">
             <a href="#"><i class="fa fa-users"></i> <span>Groups</span></a>
+        </li>
+        <li class="menu-item">
+            <a href="#"><i class="fa fa-user"></i>
+                <span>Pages
+                    <i class="fa fa-angle-right arrowRight"></i>
+                </span>
+            </a>
+            <ul class="menu-item-collapse">
+                <li><a href="{{ route('admin.admins.index') }}">List</a></li>
+                <li><a href="{{ route('admin.admins.create') }}">Create new admin</a></li>
+            </ul>
         </li>
     </ul>
 </section>

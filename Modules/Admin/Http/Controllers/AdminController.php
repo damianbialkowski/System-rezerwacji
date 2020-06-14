@@ -25,7 +25,7 @@ class AdminController extends CoreController
 
     protected function redirectNotFoundModel()
     {
-        return $this->redirect('admins.'. $this->defaultRedirect);
+        return $this->redirect('admins.' . $this->defaultRedirect);
     }
 
     /**
@@ -73,6 +73,7 @@ class AdminController extends CoreController
     {
         $data = $request->all();
 //        dd($data);
+        dd($data);
         $user = $this->adminRepository->create($data);
         if ($user) {
             return $this->redirect('admins.index');

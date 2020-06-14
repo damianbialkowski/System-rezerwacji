@@ -58,22 +58,6 @@ body, html {
     margin: 0 5px;
 }
 
-.activeCircle {
-    height: 10px;
-    width: 10px;
-    background-color: green;
-    border-radius: 50%;
-    display: inline-block
-}
-
-.unActiveCircle {
-    height: 10px;
-    width: 10px;
-    background-color: red;
-    border-radius: 50%;
-    display: inline-block
-}
-
 .btn-action-table {
     padding: 10px;
     display: flex;
@@ -86,7 +70,7 @@ body, html {
     transition: .3s background-color, color;
     color: #455160;
     text-decoration: none;
-    font-size: 14px
+    font-size: 14px;
 }
 
 .btn-action-table:hover {
@@ -102,23 +86,6 @@ body, html {
 .btn-action-table.prevent:hover {
     background-color: #000;
 }
-
-.contentHeader {
-    margin: -10px auto 10px auto;
-    color: #5A5A5A
-}
-
-.headerTop {
-    margin: 20px 10px;
-}
-
-.headerTop-hr {
-    width: 40px;
-    border: 0;
-    border: 1px solid #5A5A5A;
-    margin: 0 0 10px 5px;
-}
-
 
 .alert-success {
     margin: 20px 0;
@@ -231,14 +198,30 @@ body, html {
     color: #fff;
     list-style-type: none;
     width: 100%;
-    padding: 15px 20px;
-    font-size: 14px;
+    font-size: 15px;
+    margin-top: 10px;
 }
 
 .menu-item {
-    padding: 5px 0;
+    padding: 2px 20px;
     display: flex;
     flex-direction: column;
+}
+
+.menu-item.active {
+    background-color: #1a1a27;
+}
+
+.menu-item.active > a {
+    color: #fff
+}
+
+.menu-item i:not(.arrowRight) {
+    width: 20px;
+}
+
+.menu-item.active .arrowRight {
+    transform: rotate(90deg);
 }
 
 .menu-item span {
@@ -248,6 +231,7 @@ body, html {
 .menu-item a {
     text-decoration: none;
     color: #a2a3b7;
+    padding: 10px 0;
 }
 
 .menu-item a:hover {
@@ -255,12 +239,16 @@ body, html {
     text-decoration: none;
 }
 
-.menu-item ul li a {
+.menu-item-collapse {
+    display: none;
+}
+
+.menu-item .menu-item-collapse li a {
     position: relative;
     padding: 5px 0 10px 10px;
 }
 
-.menu-item ul li a::before {
+.menu-item .menu-item-collapse li a::before {
     content: '-';
     position: absolute;
     left: -5px;
@@ -270,13 +258,14 @@ body, html {
     float: right;
     position: relative;
     top: 3px;
+    transition: .2s all;
 }
 
-.menu-items > li > ul {
+.menu-items .menu-item-collapse {
     list-style-type: none;
 }
 
-.menu-items > li > ul > li {
+.menu-items .menu-item-collapse > li {
     padding: 5px 20px 5px 20px;
 }
 
@@ -494,34 +483,17 @@ body, html {
     color: #455160;
 }
 
-.fullname a {
-    width: 150px;
-    font-weight: 300;
-    text-decoration: none;
-    color: #000;
-}
-
-.fullname a:hover {
-    text-decoration: underline
-}
-
-.administrator {
-    color: red;
-}
-
 .form {
     background-color: #fff;
     min-height: 200px;
     border-radius: 2px;
     font-size: 15px;
-    padding: 20px 10px;
-    width: 95%;
+    padding: 0 0 15px;
     margin: auto;
 }
 
-.form hr {
-    width: 100%;
-    border: 1px solid #f3f3f3;
+.form-header {
+    font-size: 17px;
 }
 
 .dataTables_wrapper {
@@ -570,6 +542,17 @@ table.dataTable.row-border tbody th, table.dataTable.row-border tbody td, table.
 
 .card-buttons .create_new {
     text-decoration: none;
+    background-color: #1a1a27;
+    color: #f3f3f3;
+    padding: 2px 10px;
+    transition: .5s all;
+    -webkit-transition: .5s all;
+    -moz-transition: .5s all;
+    -o-transition: .5s all;
+}
+
+.card-buttons .create_new:hover {
+    box-shadow: 1px 1px 6px 1px #1a1a27;
 }
 
 .card-columns {
@@ -629,6 +612,42 @@ footer {
 .dataTables_wrapper .dataTables_paginate .paginate_button {
     font-size: 13px;
     color: #000;
+}
+
+
+.btn {
+    text-decoration: none;
+    background-color: #1a1a27;
+    color: #f3f3f3 !important;
+    padding: 2px 10px;
+    display: block;
+    margin-left: auto;
+    transition: .3s all;
+    -webkit-transition: .3s all;
+    -o-transition: .3s all;
+}
+
+.btn:hover {
+    box-shadow: 1px 1px 6px 1px #1a1a27;
+}
+
+.form-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 300px;
+    margin-left: auto;
+}
+
+.btn-back {
+    background-color: #b5b5b5;
+    transition: .3s all;
+    -webkit-transition: .3s all;
+    -o-transition: .3s all;
+}
+
+.btn-back:hover {
+    box-shadow: 1px 1px 6px 1px #d4d4d4;
+    color: #f3f3f3;
 }
 
 /* RWD */

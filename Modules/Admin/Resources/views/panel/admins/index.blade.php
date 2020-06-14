@@ -9,7 +9,7 @@
                     <p class="text-muted">Administration list</p>
                 </div>
                 <div class="card-buttons">
-                    <a href="{{ route('admin.admins.create') }}" class="create_new">Create new</a>
+                    <a href="{{ route('admin.admins.create') }}" class="create_new">Add new</a>
                 </div>
             </div>
         </div>
@@ -36,7 +36,6 @@
 @endsection
 @section('admin::script')
     <script src="{{ asset('modules/admin/js/datatables.min.js') }}"></script>
-    <script src="{{ asset('modules/admin/js/sidebar.js') }}"></script>
 
     <script type="text/javascript">
         $(function () {

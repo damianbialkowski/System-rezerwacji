@@ -42,6 +42,7 @@ class LoginController extends Controller
         if (Auth::guard('admin')->attempt($request->only('email', 'password'))) {
             if (Auth::guard('admin')->user()->active == 0) {
                 Auth::guard('admin')->logout();
+                return redirect($this->redirectAfterLogout);
             }
             $request->session()->regenerate();
             return redirect($this->redirectTo);

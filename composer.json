@@ -19,7 +19,8 @@
         "spatie/laravel-cookie-consent": "^2.9",
         "spatie/laravel-medialibrary": "^7.0.0",
         "spatie/laravel-translatable": "^4.3",
-        "yajra/laravel-datatables-oracle": "~9.0"
+        "yajra/laravel-datatables-oracle": "~9.0",
+        "silber/bouncer": "v1.0.0-rc.8"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

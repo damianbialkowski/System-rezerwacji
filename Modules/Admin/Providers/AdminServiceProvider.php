@@ -23,6 +23,7 @@ class AdminServiceProvider extends ServiceProvider
 
         // DCms
         $this->registerMiddlewares();
+        $this->registerHelpers();
     }
 
     /**
@@ -113,6 +114,15 @@ class AdminServiceProvider extends ServiceProvider
             foreach ($middlewares as $alias => $namespace) {
                 $router->aliasMiddleware($alias, $namespace);
             }
+        }
+    }
+
+    public function registerHelpers()
+    {
+        $files_path = module_path('admin', 'Helpers/*.php');
+
+        foreach (glob($files_path) as $file) {
+            require_once $file;
         }
     }
 

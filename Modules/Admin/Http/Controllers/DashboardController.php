@@ -16,7 +16,7 @@ class DashboardController extends Controller
 
     public function dashboard()
     {
-        $user = \Auth::user();
+        $user = \Auth::user('admin');
 //        return view('admin.dashboard', ['item' => $item, 'user' => $user]);
         return view('admin::dashboard');
     }

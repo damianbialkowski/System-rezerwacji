@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="card-body">
-            @modulelang('admin::admin.register_user')
+            @modulelang('admin.register_user')
             @if($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -34,11 +34,13 @@
                 <h3 class="form-header text-muted">User information</h3>
                 <div class="form-group">
                     <label class="form-control-label" for="name">Name</label>
-                    <input type="text" name="name" id="name" class="form-control" value="{{ old('name') }}" placeholder="Name" required>
+                    <input type="text" name="name" id="name" class="form-control" value="{{ old('name') }}"
+                           placeholder="Name" required>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="email">E-mail</label>
-                    <input type="email" name="email" id="email" class="form-control" value="{{ old('email') }}" placeholder="E-mail" required>
+                    <input type="email" name="email" id="email" class="form-control" value="{{ old('email') }}"
+                           placeholder="E-mail" required>
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" for="email">Name</label>

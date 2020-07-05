@@ -23,10 +23,10 @@ class BladeServiceProvider extends ServiceProvider
         Blade::directive('modulelang', function ($expression) {
             $expression = str_replace("'", '', $expression);
             // current module prefix
-            if (!strpos($expression, '::')) {
+            if (!strpos($expression, '::'))
                 $expression = module_prefix() . '::' . $expression;
-            }
-            return "<?php __('$expression'); ?>";
+
+            return app('translator')->get($expression);
         });
     }
 

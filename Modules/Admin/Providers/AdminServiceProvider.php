@@ -44,7 +44,7 @@ class AdminServiceProvider extends ServiceProvider
     protected function registerConfig()
     {
         $this->publishes([
-            module_path('Admin', 'Config/config.php') => config_path('admin.php'),
+            module_path('Admin', 'Config/config.php') => config_path('admins.php'),
         ], 'config');
         $this->mergeConfigFrom(
             module_path('Admin', 'Config/config.php'), 'admin'

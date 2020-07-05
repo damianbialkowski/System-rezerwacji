@@ -4,8 +4,8 @@
         <div class="card-header">
             <div class="card-title card-columns">
                 <div class="card-description">
-                    <h2 class="card-label">@lang('admin::admin.register_user')</h2>
-                    <p class="text-muted">Register new user</p>
+                    <h2 class="card-label">@modulelang('admins.title')</h2>
+                    <p class="text-muted">@modulelang('admins.title_description')</p>
                 </div>
                 <div class="card-buttons">
 
@@ -13,7 +13,6 @@
             </div>
         </div>
         <div class="card-body">
-            @modulelang('admin.register_user')
             @if($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -31,19 +30,19 @@
 
             <form action="{{ route('admin.admins.store')  }}" method="POST" class="form">
                 @csrf
-                <h3 class="form-header text-muted">User information</h3>
+                <h3 class="form-header text-muted">@modulelang('admins.user_information')</h3>
                 <div class="form-group">
-                    <label class="form-control-label" for="name">Name</label>
+                    <label class="form-control-label" for="name">@modulelang('admins.form.name')</label>
                     <input type="text" name="name" id="name" class="form-control" value="{{ old('name') }}"
                            placeholder="Name" required>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" for="email">E-mail</label>
+                    <label class="form-control-label" for="email">@modulelang('admins.form.email')</label>
                     <input type="email" name="email" id="email" class="form-control" value="{{ old('email') }}"
                            placeholder="E-mail" required>
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" for="email">Name</label>
+                    <label class="form-control-label" for="role_id">@modulelang('admins.form.role')</label>
                     <select class="form-control" name="role_id" required>
                         @foreach($roles as $role)
                             <option value="{{ $role->id }}">{{ $role->name }}</option>
@@ -52,9 +51,9 @@
                 </div>
 
                 <div class="form-buttons">
-                    <button type="submit" class="btn" name="redirect" value="add_new">Add new</button>
-                    <button type="submit" class="btn" name="redirect" value="add_stay">And stay</button>
-                    <a href="{{ route('admin.admins.index') }}" class="btn btn-back">Back</a>
+                    <button type="submit" class="btn" name="redirect" value="add_new">@modulelang('admins.form.add_new')</button>
+                    <button type="submit" class="btn" name="redirect" value="add_stay">@modulelang('admins.form.and_stay')</button>
+                    <a href="{{ route('admin.admins.index') }}" class="btn btn-back">@modulelang('admins.form.back')</a>
                 </div>
             </form>
         </div>

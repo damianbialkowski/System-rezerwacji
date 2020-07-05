@@ -4,7 +4,7 @@
         <div class="card-header">
             <div class="card-title card-columns">
                 <div class="card-description">
-                    <h2 class="card-label">Register user</h2>
+                    <h2 class="card-label">@lang('admin::admin.register_user')</h2>
                     <p class="text-muted">Register new user</p>
                 </div>
                 <div class="card-buttons">
@@ -13,6 +13,7 @@
             </div>
         </div>
         <div class="card-body">
+            @modulelang('admin::admin.register_user')
             @if($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -51,7 +52,7 @@
                 <div class="form-buttons">
                     <button type="submit" class="btn" name="redirect" value="add_new">Add new</button>
                     <button type="submit" class="btn" name="redirect" value="add_stay">And stay</button>
-                    <a href="#" class="btn btn-back">Back</a>
+                    <a href="{{ route('admin.admins.index') }}" class="btn btn-back">Back</a>
                 </div>
             </form>
         </div>

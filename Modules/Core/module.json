@@ -5,6 +5,7 @@
     "keywords": [],
     "order": 0,
     "providers": [
+        "Modules\\Core\\Providers\\BladeServiceProvider",
         "Modules\\Core\\Providers\\CoreServiceProvider"
     ],
     "aliases": {},

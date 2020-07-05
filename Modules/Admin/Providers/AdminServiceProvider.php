@@ -21,7 +21,6 @@ class AdminServiceProvider extends ServiceProvider
         $this->registerFactories();
         $this->loadMigrationsFrom(module_path('Admin', 'Database/Migrations'));
 
-        // DCms
         $this->registerMiddlewares();
         $this->registerHelpers();
     }

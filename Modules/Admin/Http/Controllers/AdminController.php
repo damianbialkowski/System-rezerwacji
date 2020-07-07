@@ -12,6 +12,7 @@ use phpDocumentor\Reflection\Types\Collection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use \Modules\Admin\Repositories\Interfaces\AdminRepositoryInterface;
 use Modules\Admin\Http\Requests\AdminCreateRequest;
+use Modules\Admin\Http\Requests\AdminUpdateRequest;
 
 class AdminController extends CoreController
 {
@@ -66,15 +67,12 @@ class AdminController extends CoreController
 
     /**
      * Store a newly created resource in storage.
-     * @param Request $request
+     * @param AdminCreateRequest $request
      * @return Response
      */
     public function store(AdminCreateRequest $request)
     {
-        $data = $request->all();
-//        dd($data);
-        dd($data);
-        $user = $this->adminRepository->create($data);
+        $user = $this->adminRepository->create($request->all());
         if ($user) {
             return $this->redirect('admins.index');
         }
@@ -104,18 +102,25 @@ class AdminController extends CoreController
      */
     public function edit(Admin $admin)
     {
-        return view('admin::panel.admins.edit', ['item' => $admin, 'roles' => Role::all()]);
+        return $this->view('panel.admins.edit', [
+            'item' => $admin,
+            'roles' => Role::all()
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
-     * @param Request $request
+     * @param AdminCreateRequest $request
      * @param int $id
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(AdminUpdateRequest $request, $id)
     {
-        //
+
+        $user = $this->adminRepository->update($request->user_id, $request->all());
+        if ($user) {
+            return $this->redirect('admins.edit', ['id' => $id]);
+        }
     }
 
     /**

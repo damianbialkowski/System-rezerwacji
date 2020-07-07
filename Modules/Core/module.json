@@ -3,10 +3,11 @@
     "alias": "core",
     "description": "THe core module with the base override classes and logic",
     "keywords": [],
-    "order": 0,
+    "order": 1,
     "providers": [
         "Modules\\Core\\Providers\\CoreServiceProvider",
-        "Modules\\Core\\Providers\\BladeServiceProvider"
+        "Modules\\Core\\Providers\\BladeServiceProvider",
+        "Modules\\Core\\src\\FormBuilder\\FormBuilderServiceProvider"
     ],
     "aliases": {},
     "files": [

@@ -1,0 +1,13 @@
+{
+    "name": "d-dcms/form-builder",
+    "description": "Simple package to manage forms",
+    "keywords": ["laravel", "form"],
+    "version": "0.1",
+    "authors": [
+        {
+            "name": "Damian B",
+            "email": "damianbialkowski8@gmail.com"
+        }
+    ],
+    "require": {}
+}

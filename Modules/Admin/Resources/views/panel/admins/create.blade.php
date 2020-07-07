@@ -49,11 +49,26 @@
                         @endforeach
                     </select>
                 </div>
-
+                <div class="form-group">
+                    <label class="form-control-label" for="email">@modulelang('admins.form.pasword')</label>
+                    <input type="email" name="pasword" id="pasword" class="form-control" value="{{ old('email') }}"
+                           placeholder="E-mail" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" for="email">@modulelang('admins.form.pasword_confirmation')</label>
+                    <input type="email" name="email" id="email" class="form-control" value="{{ old('email') }}"
+                           placeholder="E-mail" required>
+                </div>
                 <div class="form-buttons">
-                    <button type="submit" class="btn" name="redirect" value="add_new">@modulelang('admins.form.add_new')</button>
-                    <button type="submit" class="btn" name="redirect" value="add_stay">@modulelang('admins.form.and_stay')</button>
-                    <a href="{{ route('admin.admins.index') }}" class="btn btn-back">@modulelang('admins.form.back')</a>
+                    <button type="submit" class="btn" name="redirect" value="add_new">
+                        @modulelang('admins.form.add_new')
+                    </button>
+                    <button type="submit" class="btn" name="redirect" value="add_stay">
+                        @modulelang('admins.form.and_stay')
+                    </button>
+                    <a href="{{ route('admin.admins.index') }}" class="btn btn-back">
+                        @modulelang('admins.form.back')
+                    </a>
                 </div>
             </form>
         </div>

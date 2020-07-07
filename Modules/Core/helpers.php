@@ -33,7 +33,6 @@ if (!function_exists('module_trans')) {
     function module_trans($trans)
     {
         $trans = str_replace("'", '', $trans);
-        // current module prefix
         if (!strpos($trans, '::')) {
             $trans = module_prefix() . '::' . $trans;
         }

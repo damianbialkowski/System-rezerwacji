@@ -13,6 +13,11 @@ class AdminRepository implements AdminRepositoryInterface
         return new Admin;
     }
 
+    public function find($id)
+    {
+        return $this->getModel()->where('id', $id)->first();
+    }
+
     public function getAll()
     {
         return $this->getModel()->all();
@@ -26,5 +31,10 @@ class AdminRepository implements AdminRepositoryInterface
     public function create(array $data)
     {
         return $this->getModel()->create($data);
+    }
+
+    public function update($id, array $data)
+    {
+        return $this->find($id)->update($data);
     }
 }

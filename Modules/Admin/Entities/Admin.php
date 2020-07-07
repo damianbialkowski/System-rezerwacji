@@ -25,6 +25,12 @@ class Admin extends AuthModel
         'remember_token'
     ];
 
+    protected $dates = [
+        'created_at',
+        'updated_at',
+        'deleted_at',
+    ];
+
     public function role()
     {
         return $this->belongsTo(Roles::class);

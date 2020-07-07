@@ -10,6 +10,8 @@ return [
         'role' => 'Role',
         'add_new' => 'Add new',
         'and_stay' => 'And stay',
-        'back' => 'Back'
+        'back' => 'Back',
+        'update' => 'Update',
     ],
+    'edit_title' => 'Edit user',
 ];

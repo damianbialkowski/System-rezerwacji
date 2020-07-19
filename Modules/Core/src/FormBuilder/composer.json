@@ -1,6 +1,6 @@
 {
     "name": "d-dcms/form-builder",
-    "description": "Simple package to manage forms",
+    "description": "The form package to manage the forms.",
     "keywords": ["laravel", "form"],
     "version": "0.1",
     "authors": [
@@ -9,5 +9,25 @@
             "email": "damianbialkowski8@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "php": ">=7.1",
+        "illuminate/database": "^5.6@dev|^6|^7",
+        "illuminate/validation": "^5.6@dev|^6|^7",
+        "laravelcollective/html": "^6.1"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Modules\\Core\\src\\FormBuilder\\FormBuilderServiceProvider"
+            ],
+            "aliases": {
+                "FormBuilder": "Modules\\Core\\src\\FormBuilder\\Facades\\FormBuilder"
+            }
+        }
+    },
+    "autoload": {
+        "psr-0": {
+            "Modules\\Core\\src\\FormBuilder": "src/FormBuilder/Helpers/helpers.php"
+        }
+    }
 }

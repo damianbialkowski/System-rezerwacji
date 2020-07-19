@@ -9,7 +9,9 @@
         "Modules\\Core\\Providers\\BladeServiceProvider",
         "Modules\\Core\\src\\FormBuilder\\FormBuilderServiceProvider"
     ],
-    "aliases": {},
+    "aliases": {
+        "FormBuilder": "Modules\\Core\\src\\FormBuilder\\Facades\\FormBuilder"
+    },
     "files": [
         "helpers.php"
     ],

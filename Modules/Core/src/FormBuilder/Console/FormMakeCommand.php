@@ -43,7 +43,7 @@ class FormMakeCommand extends Command
         // todo
         $modules = ['admin', 'core'];
         if (!in_array(strtolower($this->argument('module')), $modules)) {
-            return $this->error('The module' . $this->argument('module') . ' was not found');
+            return $this->error('The module ' . $this->argument('module') . ' was not found');
         }
     }
 
@@ -55,13 +55,15 @@ class FormMakeCommand extends Command
             $this->info("The directory src has been created.");
         }
         if ($this->argument('form_name')) {
-            if (file_exists($module_path . '/Forms/' . $this->argument('form_name') .'.php')) {
+            if (file_exists($module_path . '/Forms/' . $this->argument('form_name') . '.php')) {
                 return $this->error('This file already exists.');
             }
 
             $stub_content_file = file_get_contents($this->getStubFile());
             $stub_content_file = str_replace('{{class}}', $this->argument('form_name'), $stub_content_file);
-            file_put_contents($module_path . '/Forms/' . $this->argument('form_name') .'.php', $stub_content_file);
+            $namespace = 'Module\\' . ucfirst($this->argument('module')) . '\\Forms';
+            $stub_content_file = str_replace('{{namespace}}', $namespace, $stub_content_file);
+            file_put_contents($module_path . '/Forms/' . $this->argument('form_name') . '.php', $stub_content_file);
         }
     }
 

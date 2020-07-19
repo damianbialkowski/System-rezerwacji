@@ -18,7 +18,8 @@
         }
     },
     "require": {
-        "cviebrock/eloquent-sluggable": "^6.0"
+        "cviebrock/eloquent-sluggable": "^6.0",
+        "kris/laravel-form-builder": "1.*"
 
     },
     "autoload": {

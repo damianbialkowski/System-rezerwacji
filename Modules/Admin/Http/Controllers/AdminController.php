@@ -13,9 +13,11 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use \Modules\Admin\Repositories\Interfaces\AdminRepositoryInterface;
 use Modules\Admin\Http\Requests\AdminCreateRequest;
 use Modules\Admin\Http\Requests\AdminUpdateRequest;
+use Modules\Core\src\FormBuilder\Traits\FormBuilderTrait;
 
 class AdminController extends CoreController
 {
+    use FormBuilderTrait;
 
     protected $adminRepository;
 
@@ -102,6 +104,12 @@ class AdminController extends CoreController
      */
     public function edit(Admin $admin)
     {
+        $form = $this->form('Modules\Admin\Forms\AdminForm', [
+            'method' => 'GET',
+            'route' => route('admin.admins.edit', $admin->id),
+        ]);
+//        dd($form);
+
         return $this->view('panel.admins.edit', [
             'item' => $admin,
             'roles' => Role::all()

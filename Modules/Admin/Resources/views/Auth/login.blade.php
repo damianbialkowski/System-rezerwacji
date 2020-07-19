@@ -19,8 +19,8 @@
                             <label for="password">Password</label>
                         </div>
                         <div class="custom-control custom-checkbox mb-3">
-                            <input type="checkbox" class="custom-control-input" id="remember_me">
-                            <label class="custom-control-label" for="remember_me">Remember password</label>
+                            <input type="checkbox" class="custom-control-input" id="remember_me" name="remember_me">
+                            <label class="custom-control-label" for="remember_me" name="remember_me">Remember password</label>
                         </div>
                         <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
                     </form>

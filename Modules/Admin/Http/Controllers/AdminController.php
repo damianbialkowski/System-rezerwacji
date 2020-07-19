@@ -104,15 +104,15 @@ class AdminController extends CoreController
      */
     public function edit(Admin $admin)
     {
-        $form = $this->form('Modules\Admin\Forms\AdminForm', [
-            'method' => 'GET',
-            'route' => route('admin.admins.edit', $admin->id),
+        $form = $this->form(\Modules\Admin\Forms\AdminForm::class, [
+            'method' => 'POST',
+            'route' => ['admin.admins.update', $admin->id],
+            'model' => $admin
         ]);
-//        dd($form);
 
         return $this->view('panel.admins.edit', [
-            'item' => $admin,
-            'roles' => Role::all()
+            'form' => $form,
+            'item' => $admin
         ]);
     }
 
@@ -122,12 +122,11 @@ class AdminController extends CoreController
      * @param int $id
      * @return Response
      */
-    public function update(AdminUpdateRequest $request, $id)
+    public function update(AdminUpdateRequest $request, Admin $admin)
     {
-
-        $user = $this->adminRepository->update($request->user_id, $request->all());
+        $user = $admin->update($request->all());
         if ($user) {
-            return $this->redirect('admins.edit', ['id' => $id]);
+            return $this->redirect('admins.edit', ['id' => $admin->id]);
         }
     }
 

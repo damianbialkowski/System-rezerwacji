@@ -24,7 +24,11 @@
     },
     "autoload": {
         "psr-4": {
-            "Modules\\Core\\": ""
-        }
+            "Modules\\Core\\": "",
+            "src\\FormBuilder\\": "src\\FormBuilder\\"
+        },
+        "files": [
+            "src/FormBuilder/Helpers/helpers.php"
+        ]
     }
 }

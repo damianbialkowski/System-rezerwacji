@@ -8,6 +8,6 @@ trait FormBuilderTrait
 {
     protected function form($name, array $options = [], array $data = [])
     {
-        return \App::make('laravel-form-builder')->create($name, $options, $data);
+        return \App::make('form-builder')->create($name, $options, $data);
     }
 }

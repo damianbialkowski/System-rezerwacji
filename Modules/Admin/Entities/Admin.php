@@ -33,7 +33,7 @@ class Admin extends AuthModel
 
     public function role()
     {
-        return $this->belongsTo(Roles::class);
+        return $this->belongsTo(Role::class);
     }
 
     public function setPasswordAttribute($password)

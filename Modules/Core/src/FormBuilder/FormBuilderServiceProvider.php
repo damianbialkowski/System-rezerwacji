@@ -12,50 +12,6 @@ use Modules\Core\src\FormBuilder\Traits\ValidatesWhenResolved;
 
 class FormBuilderServiceProvider extends ServiceProvider
 {
-
-    /**
-     * Register the form helper.
-     *
-     * @return void
-     */
-    protected function registerFormHelper()
-    {
-        $this->app->singleton('form-helper', function ($app) {
-
-            $configuration = $app['config']->get('form-builder');
-
-            return new FormHelper($app['view'], $app['translator'], $configuration);
-        });
-        $this->app->alias('form-helper', 'Modules\Core\src\FormBuilder\FormHelper');
-    }
-
-    /**
-     * Boot the application events.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        $this->loadViewsFrom(__DIR__ . '/../views', 'form-builder');
-
-        $this->publishes([
-            __DIR__ . '/../views' => base_path('resources/views/vendor/form-builder'),
-            __DIR__ . '/../config/config.php' => config_path('form-builder.php')
-        ]);
-
-        $form = $this->app['form'];
-
-        $form->macro('customLabel', function ($name, $value, $options = []) use ($form) {
-            if (isset($options['for']) && $for = $options['for']) {
-                unset($options['for']);
-                return $form->label($for, $value, $options);
-            }
-
-            return $form->label($name, $value, $options);
-        });
-    }
-
-
     /**
      * Register the service provider.
      *
@@ -69,13 +25,14 @@ class FormBuilderServiceProvider extends ServiceProvider
         $this->registerFormIfHeeded();
 
         $this->mergeConfigFrom(
-            __DIR__ . '/../../config/config.php',
+            __DIR__ . '/config/config.php',
             'form-builder'
         );
 
         $this->registerFormHelper();
 
         $this->app->singleton('form-builder', function ($app) {
+
             return new FormBuilder($app, $app['form-helper'], $app['events']);
         });
 
@@ -90,8 +47,44 @@ class FormBuilderServiceProvider extends ServiceProvider
                 $form->redirectIfNotValid();
             }
         });
+        //TODO
+        include_once(__DIR__ . '../Helpers/helpers.php');
     }
 
+    /**
+     * Register the form helper.
+     *
+     * @return void
+     */
+    protected function registerFormHelper()
+    {
+        $this->app->singleton('form-helper', function ($app) {
+            $configuration = $app['config']->get('form-builder');
+            return new FormHelper($app['view'], $app['translator'], $configuration);
+        });
+        $this->app->alias('form-helper', 'Modules\Core\src\FormBuilder\FormHelper');
+    }
+
+    /**
+     * Boot the application events.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        $this->loadViewsFrom(__DIR__ . '/Resources/views', 'form-builder');
+
+        $form = $this->app['form'];
+
+        $form->macro('customLabel', function ($name, $value, $options = []) use ($form) {
+            if (isset($options['for']) && $for = $options['for']) {
+                unset($options['for']);
+                return $form->label($for, $value, $options);
+            }
+
+            return $form->label($name, $value, $options);
+        });
+    }
 
     public function provides()
     {
@@ -109,7 +102,6 @@ class FormBuilderServiceProvider extends ServiceProvider
 
             $this->app->singleton('form', function ($app) {
 
-                dd(new LaravelForm);
                 // LaravelCollective\HtmlBuilder 5.2 is not backward compatible and will throw an exception
                 $version = substr(Application::VERSION, 0, 3);
                 if (Str::is('5.4', $version)) {
@@ -124,7 +116,6 @@ class FormBuilderServiceProvider extends ServiceProvider
             });
 
             if (!$this->aliasExists('Form')) {
-
                 AliasLoader::getInstance()->alias(
                     'Form',
                     'Collective\Html\FormFacade'

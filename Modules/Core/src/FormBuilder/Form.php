@@ -982,7 +982,6 @@ class Form
         );
 
         $this->setupNamedModel();
-
         return $this->formHelper->getView()
             ->make($this->getTemplate())
             ->with(compact('showStart', 'showFields', 'showEnd'))

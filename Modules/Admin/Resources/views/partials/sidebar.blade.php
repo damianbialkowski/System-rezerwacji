@@ -22,7 +22,7 @@
             </ul>
         </li>
         <li class="menu-item">
-            <a href="#"><i class="fa fa-users"></i> <span>Groups</span></a>
+            <a href="#"><i class="fa fa-users"></i> <span>Roles</span></a>
         </li>
         <li class="menu-item">
             <a href="#"><i class="fa fa-user"></i>

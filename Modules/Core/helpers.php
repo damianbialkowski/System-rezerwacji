@@ -39,3 +39,15 @@ if (!function_exists('module_trans')) {
         return app('translator')->get($trans);
     }
 }
+
+if (!function_exists('getGuardName')) {
+    function getGuardName()
+    {
+        foreach (array_keys(config('auth.guards')) as $guard) {
+            if (auth()->guard($guard)->check()) {
+                return $guard;
+            }
+        }
+        return null;
+    }
+}

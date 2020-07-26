@@ -15,8 +15,9 @@ class AdminUpdateRequest extends FormRequest
     {
         return [
             'name' => 'required|min:2|max:255',
-            'email' => 'required|email|max:255|unique:admins,email,' . $this->user_id . ',id',
-            'role_id' => 'required'
+            'email' => 'required|email|max:255|unique:admins,email,' . $this->email . ',email',
+            'role_id' => 'required',
+            'password' => 'confirmed',
         ];
     }
 

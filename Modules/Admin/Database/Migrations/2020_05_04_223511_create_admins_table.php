@@ -20,7 +20,6 @@ class CreateAdminsTable extends Migration
                 $table->string('email')->unique();
                 $table->string('password');
                 $table->boolean('active')->default(0);
-                $table->integer('role_id')->unsigned();
                 $table->rememberToken();
                 $table->integer('updated_by')->default(null);
                 $table->integer('created_by')->default(null);

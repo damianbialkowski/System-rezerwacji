@@ -10,7 +10,11 @@ trait BootableTrait
     {
         parent::boot();
 
-        $auth_id = \Auth::id();
+        $auth_id = \Auth::guard(getGuardName())->id();
+        static::updated(function ($table) use ($auth_id) {
+            $table->updated_by = $auth_id;
+            $table->updated_at = Carbon::now();
+        });
 
         static::updating(function ($table) use ($auth_id) {
             $table->updated_by = $auth_id;

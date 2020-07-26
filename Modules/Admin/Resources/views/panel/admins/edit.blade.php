@@ -27,42 +27,30 @@
                     <p>{!! \Session::get('success') !!}</p>
                 </div>
             @endif
-                {!! form($form) !!}
-{{--            <form action="{{ route('admin.admins.update', $item->id) }}" method="POST" class="form">--}}
-{{--                @csrf--}}
-{{--                @method('PATCH')--}}
-{{--                <input type="hidden" name="user_id" value="{{ $item->id }}">--}}
-{{--                <h3 class="form-header text-muted">@modulelang('admins.user_information')</h3>--}}
-{{--                <div class="form-group">--}}
-{{--                    <label class="form-control-label" for="name">@modulelang('admins.form.name')</label>--}}
-{{--                    <input type="text" name="name" id="name" class="form-control" value="{{ $item->name }}"--}}
-{{--                           placeholder="{{ module_trans('admins.form.name') }}" required>--}}
-{{--                </div>--}}
-{{--                <div class="form-group">--}}
-{{--                    <label class="form-control-label" for="email">@modulelang('admins.form.email')</label>--}}
-{{--                    <input type="email" name="email" id="email" class="form-control" value="{{ $item->email }}"--}}
-{{--                           placeholder="{{ module_trans('admins.form.email') }}" required>--}}
-{{--                </div>--}}
-{{--                <div class="form-group">--}}
-{{--                    <label>@modulelang('admins.form.role')</label>--}}
-{{--                    <div class="form-input">--}}
-{{--                        <select name="role_id" required>--}}
-{{--                            @foreach($roles as $role)--}}
-{{--                                <option value="{{ $role->id }}"--}}
-{{--                                        @if($role->id === $item->role_id) selected @endif>{{ $role->name }}</option>--}}
-{{--                            @endforeach--}}
-{{--                        </select>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--                <div class="form-buttons">--}}
-{{--                    <button type="submit" class="btn" name="redirect" value="update">--}}
-{{--                        @modulelang('admins.form.update')--}}
-{{--                    </button>--}}
-{{--                    <a href="{{ route('admin.admins.index') }}" class="btn btn-back">--}}
-{{--                        @modulelang('admins.form.back')--}}
-{{--                    </a>--}}
-{{--                </div>--}}
-{{--            </form>--}}
+            {!! form_start($form) !!}
+            @method('PUT')
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-6 col-xs-12">
+                        {!! form_row($form->name) !!}
+                        {!! form_row($form->email) !!}
+                        {!! form_row($form->role_id) !!}
+                        <hr>
+                        <div class="before-password">
+                            <a href="#" class="generate_password">@modulelang('admins.genereate_password')</a>
+                            <span class="generated_password"></span>
+                        </div>
+                        {!! form_row($form->password) !!}
+                    </div>
+                </div>
+                <div class="form-buttons">
+                    {!! form_row($form->update) !!}
+                    <a href="{{ route('admin.admins.index') }}" class="btn btn-back">
+                        @modulelang('admins.form.back')
+                    </a>
+                </div>
+            </div>
+            {!! form_end($form, false) !!}
         </div>
     </div>
 @endsection

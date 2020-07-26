@@ -104,6 +104,7 @@ class AdminController extends CoreController
      */
     public function edit(Admin $admin)
     {
+        unset($admin->password);
         $form = $this->form(\Modules\Admin\Forms\AdminForm::class, [
             'method' => 'POST',
             'route' => ['admin.admins.update', $admin->id],
@@ -126,7 +127,7 @@ class AdminController extends CoreController
     {
         $user = $admin->update($request->all());
         if ($user) {
-            return $this->redirect('admins.edit', ['id' => $admin->id]);
+            return $this->redirect('admins.edit', $admin->id);
         }
     }
 

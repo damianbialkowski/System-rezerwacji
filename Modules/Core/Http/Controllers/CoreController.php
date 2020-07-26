@@ -35,6 +35,6 @@ class CoreController extends BaseController
      */
     public function redirect($route, $parameters = [], $status = 302, $headers = [])
     {
-        return Redirect::route(module_prefix() . '::' . $route, $parameters, $status, $headers);
+        return Redirect::route(module_prefix() . '.' . $route, $parameters, $status, $headers);
     }
 }

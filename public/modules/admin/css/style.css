@@ -650,6 +650,18 @@ footer {
     color: #f3f3f3;
 }
 
+.before-password {
+    margin-bottom: 1rem
+}
+
+.generated_password {
+    background-color: #f3f3f3;
+    color: #222;
+    padding: 1px 10px;
+    border-radius: 3px;
+    margin-left: 5px;
+}
+
 /* RWD */
 @media (min-width: 1025px) and (max-width: 1320px) {
 

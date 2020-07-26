@@ -17,7 +17,6 @@ class Admin extends AuthModel
         'email',
         'password',
         'active',
-        'role_id'
     ];
 
     protected $hidden = [
@@ -31,13 +30,9 @@ class Admin extends AuthModel
         'deleted_at',
     ];
 
-    public function role()
-    {
-        return $this->belongsTo(Role::class);
-    }
-
     public function setPasswordAttribute($password)
     {
         $this->attributes['password'] = bcrypt($password);
     }
+
 }

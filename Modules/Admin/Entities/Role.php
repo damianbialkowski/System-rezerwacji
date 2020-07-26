@@ -16,11 +16,11 @@ class Role extends BouncerRole
     {
         $roles = self::getRoles();
         // TODO: find better option to prepare array
-        $prepared_roles = [];
+        $preparedRoles = [];
         foreach ($roles as $role) {
-            $prepared_roles[$role->id] = $role->name;
+            $preparedRoles[$role->id] = $role->name;
         }
-        return $prepared_roles;
+        return $preparedRoles;
 
     }
 

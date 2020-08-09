@@ -4,13 +4,12 @@ namespace Modules\Admin\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Modules\Admin\Datatables\AdminsDataTable;
 use Modules\Admin\Http\Controllers\Controller as CoreController;
 use Modules\Admin\Entities\Admin;
-use App\Role;
 use DataTables;
 use phpDocumentor\Reflection\Types\Collection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
-use \Modules\Admin\Repositories\Interfaces\AdminRepositoryInterface;
 use Modules\Admin\Http\Requests\AdminCreateRequest;
 use Modules\Admin\Http\Requests\AdminUpdateRequest;
 use Modules\Core\src\FormBuilder\Traits\FormBuilderTrait;
@@ -19,11 +18,11 @@ class AdminController extends CoreController
 {
     use FormBuilderTrait;
 
-    protected $adminRepository;
+    protected $model;
 
-    public function __construct(AdminRepositoryInterface $adminRepository)
+    public function __construct(Admin $admin)
     {
-        $this->adminRepository = $adminRepository;
+        $this->model = $admin;
     }
 
     protected function redirectNotFoundModel()
@@ -35,26 +34,28 @@ class AdminController extends CoreController
      * Display a listing of the resource.
      * @return Response
      */
-    public function index(Request $request)
+    public function index(AdminsDataTable $dataTable)
     {
-        if ($request->ajax()) {
-            $data = Admin::latest()->get();
-            return Datatables::of($data)
-                ->addIndexColumn()
-                ->addColumn('action', function ($row) {
-                    $btn = '<div class="flex align-items-center justify-content-center flex-wrap">
-                           <a href="' . route('admin.admins.show', $row->id) . '" class="btn-action-table"><i class="far fa-eye"></i></a>
-                           <a href="' . route('admin.admins.edit', $row->id) . '" class="btn-action-table"><i class="fas fa-pencil-alt"></i></a>
-                       </div>';
-                    return $btn;
-                })
-                ->editColumn('role_id', function ($data) {
-                    return ($data->role_id) ? $data->role->name : 'brak';
-                })
-                ->rawColumns(['action'])
-                ->make(true);
-        }
-        return $this->view('panel.admins.index');
+        return $dataTable->render('admin::panel.admins.index');
+//        if ($request->ajax()) {1
+//            $data = Admin::latest()->get();
+//            return Datatables::of($data)
+//                ->addIndexColumn()
+//                ->addColumn('action', function ($row) {
+//                    $btn = '<div class="flex align-items-center justify-content-center flex-wrap">
+//                           <a href="' . route('admin.admins.show', $row->id) . '" class="btn-action-table"><i class="far fa-eye"></i></a>
+//                           <a href="' . route('admin.admins.edit', $row->id) . '" class="btn-action-table"><i class="fas fa-pencil-alt"></i></a>
+//                       </div>';
+//                    return $btn;
+//                })
+//                ->editColumn('role_id', function ($data) {
+//                    return ($data->role_id) ? $data->role->name : 'brak';
+//                })
+//                ->rawColumns(['action'])
+//                ->make(true);
+//        }
+
+//        return $this->view('panel.admins.index');
     }
 
     /**
@@ -63,8 +64,12 @@ class AdminController extends CoreController
      */
     public function create()
     {
-        $roles = Role::all();
-        return $this->view('panel.admins.create', ['roles' => $roles]);
+        $form = $this->form(\Modules\Admin\Forms\AdminForm::class, [
+            'method' => 'POST',
+            'route' => ['admin.admins.store']
+        ]);
+
+        return $this->view('panel.admins.create', ['form' => $form]);
     }
 
     /**
@@ -74,7 +79,7 @@ class AdminController extends CoreController
      */
     public function store(AdminCreateRequest $request)
     {
-        $user = $this->adminRepository->create($request->all());
+        $user = $this->model->create($request->all());
         if ($user) {
             return $this->redirect('admins.index');
         }
@@ -125,7 +130,12 @@ class AdminController extends CoreController
      */
     public function update(AdminUpdateRequest $request, Admin $admin)
     {
-        $user = $admin->update($request->all());
+        if ($request->has('password') && $request->password !== '') {
+            $user = $admin->update($request->all());
+        } else {
+            $user = $admin->update($request->except('password'));
+        }
+
         if ($user) {
             return $this->redirect('admins.edit', $admin->id);
         }

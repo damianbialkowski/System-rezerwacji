@@ -10,7 +10,9 @@ trait BootableTrait
     {
         parent::boot();
 
+//        dd(getGuardName());
         $auth_id = \Auth::guard(getGuardName())->id();
+//        dd($auth_id);
         static::updated(function ($table) use ($auth_id) {
             $table->updated_by = $auth_id;
             $table->updated_at = Carbon::now();
@@ -28,6 +30,13 @@ trait BootableTrait
         });
 
         static::saving(function ($table) use ($auth_id) {
+            $table->created_by = $auth_id;
+            $table->updated_by = $auth_id;
+            $table->active = 1;
+        });
+
+
+        static::creating(function ($table) use ($auth_id) {
             $table->created_by = $auth_id;
             $table->updated_by = $auth_id;
             $table->active = 1;

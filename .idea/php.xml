@@ -11,7 +11,6 @@
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php73" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php72" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-mbstring" />
-      <path value="$PROJECT_DIR$/vendor/spatie/laravel-cookie-consent" />
       <path value="$PROJECT_DIR$/vendor/symfony/http-foundation" />
       <path value="$PROJECT_DIR$/vendor/spatie/pdf-to-image" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-ctype" />
@@ -56,7 +55,6 @@
       <path value="$PROJECT_DIR$/vendor/nesbot/carbon" />
       <path value="$PROJECT_DIR$/vendor/mockery/mockery" />
       <path value="$PROJECT_DIR$/vendor/monolog/monolog" />
-      <path value="$PROJECT_DIR$/vendor/yajra/laravel-datatables-oracle" />
       <path value="$PROJECT_DIR$/vendor/doctrine/inflector" />
       <path value="$PROJECT_DIR$/vendor/doctrine/instantiator" />
       <path value="$PROJECT_DIR$/vendor/doctrine/lexer" />
@@ -111,11 +109,19 @@
       <path value="$PROJECT_DIR$/vendor/barryvdh/laravel-debugbar" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php70" />
       <path value="$PROJECT_DIR$/vendor/symfony/polyfill-intl-normalizer" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-util" />
-      <path value="$PROJECT_DIR$/vendor/symfony/polyfill-php56" />
       <path value="$PROJECT_DIR$/vendor/facuz/laravel-themes" />
-      <path value="$PROJECT_DIR$/vendor/jeremeamia/superclosure" />
       <path value="$PROJECT_DIR$/vendor/laravelcollective/html" />
+      <path value="$PROJECT_DIR$/vendor/phpoffice/phpspreadsheet" />
+      <path value="$PROJECT_DIR$/vendor/yajra/laravel-datatables" />
+      <path value="$PROJECT_DIR$/vendor/yajra/laravel-datatables-fractal" />
+      <path value="$PROJECT_DIR$/vendor/yajra/laravel-datatables-buttons" />
+      <path value="$PROJECT_DIR$/vendor/yajra/laravel-datatables-editor" />
+      <path value="$PROJECT_DIR$/vendor/yajra/laravel-datatables-html" />
+      <path value="$PROJECT_DIR$/vendor/markbaker/complex" />
+      <path value="$PROJECT_DIR$/vendor/markbaker/matrix" />
+      <path value="$PROJECT_DIR$/vendor/maatwebsite/excel" />
+      <path value="$PROJECT_DIR$/vendor/league/fractal" />
+      <path value="$PROJECT_DIR$/vendor/yajra/laravel-datatables-oracle" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="7.1" />

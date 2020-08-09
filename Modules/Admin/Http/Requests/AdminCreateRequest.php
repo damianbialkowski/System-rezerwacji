@@ -17,7 +17,8 @@ class AdminCreateRequest extends FormRequest
         return [
             'name' => 'required|min:2|max:255',
             'email' => 'required|string|email|max:255|unique:admins,email,' . $this->email,
-            'role_id' => 'required'
+            'role_id' => 'required',
+            'password' => 'required|confirmed|min:6',
         ];
     }
 

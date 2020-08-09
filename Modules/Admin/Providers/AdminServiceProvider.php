@@ -34,6 +34,10 @@ class AdminServiceProvider extends ServiceProvider
     {
         $this->app->register(RouteServiceProvider::class);
         $this->app->register(RepositoryServiceProvider::class);
+
+//        $this->app->bind(Modules\Admin\Entities\Admin::class, function ($app) {
+//            return new Modules\Admin\Entities\Admin();
+//        });
     }
 
     /**

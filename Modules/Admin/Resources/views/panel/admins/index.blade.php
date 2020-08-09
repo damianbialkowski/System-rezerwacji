@@ -14,20 +14,7 @@
             </div>
         </div>
         <div class="card-body">
-            <table id="admins_list">
-                <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>E-mail</th>
-                    <th>Group</th>
-                    <th>Created at</th>
-                    <th>Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
+            {{ $dataTable->table() }}
         </div>
     </div>
     {{--    <div class="addNewUser flex flex-direction-column justify-content-center align-items-center">--}}
@@ -35,25 +22,5 @@
     {{--    </div>--}}
 @endsection
 @section('admin::script')
-    <script src="{{ asset('modules/admin/js/datatables.min.js') }}"></script>
-
-    <script type="text/javascript">
-        $(function () {
-
-            var table = $('#admins_list').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: "{{ route('admin.admins.index') }}",
-                columns: [
-                    {data: 'id', name: 'id'},
-                    {data: 'name', name: 'name'},
-                    {data: 'email', name: 'email'},
-                    {data: 'role_id', name: 'role_id'},
-                    {data: 'created_at', name: 'created_at'},
-                    {data: 'action', name: 'action', orderable: false, searchable: false},
-                ],
-            });
-
-        });
-    </script>
+    {{ $dataTable->scripts() }}
 @endsection

@@ -7,6 +7,8 @@ return [
     'genereate_password' => 'Generate password',
     'form' => [
         'name' => 'Name',
+        'last_name' => 'Last name',
+        'login' => 'Login',
         'email' => 'E-mail',
         'role' => 'Role',
         'password' => 'New password',

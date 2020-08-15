@@ -33,14 +33,18 @@
                 <div class="row">
                     <div class="col-md-6 col-xs-12">
                         {!! form_row($form->name) !!}
+                        {!! form_row($form->last_name) !!}
+                        {!! form_row($form->login) !!}
                         {!! form_row($form->email) !!}
-                        {!! form_row($form->role_id) !!}
                         <hr>
                         <div class="before-password">
                             <a href="#" class="generate_password">@modulelang('admins.genereate_password')</a>
                             <span class="generated_password"></span>
                         </div>
                         {!! form_row($form->password) !!}
+                    </div>
+                    <div class="col-md-6 col-xs-12">
+                        {!! form_row($form->role_id) !!}
                     </div>
                 </div>
                 <div class="form-buttons">

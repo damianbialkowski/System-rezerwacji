@@ -13,10 +13,13 @@ class Admin extends AuthModel
     protected $guard = 'admin';
 
     protected $fillable = [
+        'last_name',
         'name',
+        'login',
         'email',
         'password',
         'active',
+        'last_login',
     ];
 
     protected $hidden = [
@@ -28,6 +31,7 @@ class Admin extends AuthModel
         'created_at',
         'updated_at',
         'deleted_at',
+        'last_login',
     ];
 
     public function setPasswordAttribute($password)

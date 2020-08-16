@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Database\Migrations\Migration;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
 
 class CreateCategoriesTable extends Migration
 {
@@ -16,17 +16,18 @@ class CreateCategoriesTable extends Migration
         if (!Schema::hasTable('categories')) {
             Schema::create('categories', function (Blueprint $table) {
                 $table->increments('id');
-                $table->integer('parent_id')->nullable()->index();
-                $table->integer('lft')->nullable()->index();
-                $table->integer('rgt')->nullable()->index();
+                $table->unsignedInteger('parent_id')->nullable();
+                $table->integer('lft')->nullable();
+                $table->integer('rgt')->nullable();
                 $table->integer('depth')->nullable();
-                $table->json('name');
-                $table->json('slug');
-                $table->json('description');
+                $table->string('name', 255);
+                $table->string('slug', 255)->unique();
+                $table->text('description');
                 $table->boolean('active')->default(1);
-                $table->integer('updated_by')->default(null);
-                $table->integer('created_by')->default(null);
+                $table->integer('updated_by')->nullable();
+                $table->integer('created_by')->nullable();
                 $table->timestamps();
+                $table->softDeletes();
             });
         }
     }

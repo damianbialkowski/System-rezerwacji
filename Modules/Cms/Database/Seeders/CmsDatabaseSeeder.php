@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\Blog\Database\Seeders;
+namespace Modules\Cms\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
-class BlogDatabaseSeeder extends Seeder
+class CmsDatabaseSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,6 +16,6 @@ class BlogDatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-         $this->call(CategoriesTableSeeder::class);
+        // $this->call("OthersTableSeeder");
     }
 }

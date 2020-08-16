@@ -2,11 +2,10 @@
 
 namespace Modules\Core\Entities;
 
-use Illuminate\Foundation\Auth\User as Authenticates;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Silber\Bouncer\Database\HasRolesAndAbilities;
 
-class AuthModel extends Authenticates
+class AuthModel extends \Illuminate\Foundation\Auth\User
 {
     use SoftDeletes, HasRolesAndAbilities;
 }

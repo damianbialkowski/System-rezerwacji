@@ -1,5 +1,6 @@
 {
     "Blog": true,
     "Core": true,
-    "Admin": true
+    "Admin": true,
+    "Cms": true
 }

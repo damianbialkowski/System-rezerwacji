@@ -2,9 +2,7 @@
 
 namespace Modules\Core\Entities;
 
-use Illuminate\Database\Eloquent\Model;
-
-class CoreModel extends Model
+class CoreModel extends Illuminate\Database\Eloquent\Model
 {
     public function hasAttribute($attribute)
     {

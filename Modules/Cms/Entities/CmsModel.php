@@ -2,9 +2,12 @@
 
 namespace Modules\Cms\Entities;
 
-class CmsModel extends Illuminate\Database\Eloquent\Model
+use Illuminate\Database\Eloquent\Model;
+
+class CmsModel extends Model
 {
-
-    protected $fillable = [];
-
+    public function hasAttribute($attribute)
+    {
+        return array_key_exists($attribute, $this->attributes);
+    }
 }

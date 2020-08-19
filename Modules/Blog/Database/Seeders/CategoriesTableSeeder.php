@@ -25,6 +25,10 @@ class CategoriesTableSeeder extends Seeder
         ];
 
         foreach ($categories as $category) {
+            $categoryExists = Category::where('name', $category)->first();
+            if ($categoryExists) {
+                continue;
+            }
             Category::create([
                 'name' => $category,
                 'description' => 'description of ' . $category,

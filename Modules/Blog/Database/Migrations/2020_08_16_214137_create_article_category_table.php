@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCategoryArticleTable extends Migration
+class CreateArticleCategoryTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class CreateCategoryArticleTable extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable('category_article')) {
-            Schema::create('category_article', function (Blueprint $table) {
+        if (!Schema::hasTable('article_category')) {
+            Schema::create('article_category', function (Blueprint $table) {
                 $table->unsignedInteger('category_id');
                 $table->unsignedInteger('article_id');
                 $table->primary(['category_id', 'article_id']);
@@ -40,6 +40,6 @@ class CreateCategoryArticleTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('category_article');
+        Schema::dropIfExists('article_category');
     }
 }

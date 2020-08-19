@@ -2,15 +2,17 @@
 
 namespace Modules\Blog\Entities;
 
-use Illuminate\Database\Eloquent\Model;
+use Modules\Cms\Entities\CmsModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\Services\SlugService;
 use Kalnoy\Nestedset\NodeTrait;
+use Modules\Cms\Traits\CmsTrait;
 
-class Category extends Model
+class Category extends CmsModel
 {
     use SoftDeletes,
+        CmsTrait,
         Sluggable,
         NodeTrait {
         NodeTrait::replicate as replicateNode;

@@ -24,6 +24,7 @@ class RouteServiceProvider extends ServiceProvider
     public function boot()
     {
         parent::boot();
+        Route::model('article', \Modules\Blog\Entities\Article::class);
     }
 
     /**
@@ -36,6 +37,8 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapApiRoutes();
 
         $this->mapWebRoutes();
+
+        $this->mapFrontRoutes();
     }
 
     /**
@@ -48,8 +51,23 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapWebRoutes()
     {
         Route::middleware('web')
+            ->prefix('admin')
             ->namespace($this->moduleNamespace)
             ->group(module_path('Blog', '/Routes/web.php'));
+    }
+
+    /**
+     * Define the "front" routes for the application.
+     *
+     *
+     * @return void
+     */
+    protected function mapFrontRoutes()
+    {
+//        dd($this->moduleNamespace . '\Frontend');
+        Route::middleware('front')
+            ->namespace($this->moduleNamespace . '\Frontend')
+            ->group(module_path('Blog', '/Routes/front.php'));
     }
 
     /**

@@ -6,7 +6,7 @@ class CoreModel extends Illuminate\Database\Eloquent\Model
 {
     public function hasAttribute($attribute)
     {
-        return (isset($this->{$attribute}));
+        return array_key_exists($attribute, $this->attributes);
     }
 
 }

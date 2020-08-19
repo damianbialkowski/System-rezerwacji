@@ -25,10 +25,13 @@ class CategoriesTableSeeder extends Seeder
         ];
 
         foreach ($categories as $category) {
+<<<<<<< HEAD
             $categoryExists = Category::where('name', $category)->first();
             if ($categoryExists) {
                 continue;
             }
+=======
+>>>>>>> origin/master
             Category::create([
                 'name' => $category,
                 'description' => 'description of ' . $category,

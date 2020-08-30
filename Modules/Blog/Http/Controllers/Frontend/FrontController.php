@@ -5,8 +5,9 @@ namespace Modules\Blog\Http\Controllers\Frontend;
 use Illuminate\Http\Response;
 use Illuminate\Routing\Controller;
 use Modules\Blog\Entities\Article;
+use Modules\Blog\Entities\Category;
 
-class ArticleController extends Controller
+class FrontController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -23,9 +24,9 @@ class ArticleController extends Controller
      * @param object $article
      * @return Response
      */
-    public function show(Article $article)
+    public function show(Category $category, Article $article)
     {
-        dd($article);
+        dd($category, $article->exists);
         return view('blog::show');
     }
 

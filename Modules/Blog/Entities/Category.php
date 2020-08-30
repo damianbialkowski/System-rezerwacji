@@ -47,6 +47,11 @@ class Category extends Model
         ];
     }
 
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
+
     public function articles()
     {
         return $this->belongsToMany(Article::class);

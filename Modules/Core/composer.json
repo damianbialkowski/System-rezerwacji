@@ -1,10 +1,10 @@
 {
-    "name": "nwidart/core",
+    "name": "d-cms/core",
     "description": "",
     "authors": [
         {
-            "name": "Nicolas Widart",
-            "email": "n.widart@gmail.com"
+            "name": "Damian Bialkowski",
+            "email": "damianbialkowski8@gmail.com"
         }
     ],
     "extra": {
@@ -19,8 +19,11 @@
     },
     "require": {
         "cviebrock/eloquent-sluggable": "^6.0",
-        "kris/laravel-form-builder": "1.*"
-
+        "facuz/laravel-themes": "^3.1",
+        "kalnoy/nestedset": "^5.0",
+        "silber/bouncer": "v1.0.0-rc.8",
+        "spatie/laravel-medialibrary": "^7.0.0",
+        "yajra/laravel-datatables": "^1.5"
     },
     "autoload": {
         "psr-4": {

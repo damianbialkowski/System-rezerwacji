@@ -1,10 +1,10 @@
 {
-    "name": "nwidart/blog",
+    "name": "d-cms/blog",
     "description": "",
     "authors": [
         {
-            "name": "Nicolas Widart",
-            "email": "n.widart@gmail.com"
+            "name": "Damian Bialkowski",
+            "email": "damianbialkowski8@gmail.com"
         }
     ],
     "extra": {

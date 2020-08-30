@@ -1,11 +1,14 @@
 {
     "name": "Admin",
     "alias": "admin",
-    "description": "",
+    "description": "Admin panel module",
+    "version": "0.1",
     "keywords": [],
     "order": 2,
     "providers": [
-        "Modules\\Admin\\Providers\\AdminServiceProvider"
+        "Modules\\Admin\\Providers\\AdminServiceProvider",
+        "Maatwebsite\\Sidebar\\SidebarServiceProvider",
+        "Modules\\Admin\\Providers\\SidebarServiceProvider"
     ],
     "aliases": {},
     "files": [],

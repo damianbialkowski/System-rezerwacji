@@ -163,6 +163,8 @@ return [
         Illuminate\View\ViewServiceProvider::class,
 
         Yajra\DataTables\DataTablesServiceProvider::class,
+//        Maatwebsite\Sidebar\SidebarServiceProvider::class
+        \Modules\Admin\Providers\SidebarServiceProvider::class
     ],
 
     /*

@@ -4,7 +4,7 @@ namespace Modules\Admin\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
-use Modules\Admin\Providers\RepositoryServiceProvider;
+use Maatwebsite\Sidebar\SidebarServiceProvider;
 
 class AdminServiceProvider extends ServiceProvider
 {
@@ -23,6 +23,12 @@ class AdminServiceProvider extends ServiceProvider
 
         $this->registerMiddlewares();
         $this->registerHelpers();
+
+//        dd(\View::exists('admin::partials.sidebar'));
+//        \View::creator(
+//            'admin::partials.sidebar',
+//            '\Modules\Admin\src\Sidebar\SidebarCreator'
+//        );
     }
 
     /**
@@ -38,6 +44,10 @@ class AdminServiceProvider extends ServiceProvider
 //        $this->app->bind(Modules\Admin\Entities\Admin::class, function ($app) {
 //            return new Modules\Admin\Entities\Admin();
 //        });
+
+//        $this->app->register(SidebarServiceProvider::class);
+//        $this->app->register(\Modules\Admin\src\Sidebar\AdminSidebar::class);
+//        dd(1);
     }
 
     /**

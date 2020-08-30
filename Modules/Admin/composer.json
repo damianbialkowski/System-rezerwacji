@@ -1,5 +1,5 @@
 {
-    "name": "DCms/Admin",
+    "name": "d-cms/admin",
     "description": "Admin module for DCms",
     "authors": [
         {
@@ -17,9 +17,13 @@
             }
         }
     },
+    "require": {
+        "maatwebsite/laravel-sidebar": "~2.1"
+    },
     "autoload": {
         "psr-4": {
-            "Modules\\Admin\\": ""
+            "Modules\\Admin\\": "",
+            "src\\Sidebar\\": "src\\Sidebar\\"
         }
     }
 }

@@ -25,15 +25,17 @@
             <a href="#"><i class="fa fa-users"></i> <span>Roles</span></a>
         </li>
         <li class="menu-item">
-            <a href="#"><i class="fa fa-user"></i>
-                <span>Pages
+            <a href="#"><i class="fa fa-article"></i>
+                <span>Blog
                     <i class="fa fa-angle-right arrowRight"></i>
                 </span>
             </a>
             <ul class="menu-item-collapse">
-                <li><a href="{{ route('admin.admins.index') }}">List</a></li>
-                <li><a href="{{ route('admin.admins.create') }}">Create new admin</a></li>
+                <li><a href="{{ route('admin.admins.index') }}">Article</a></li>
+                <li><a href="{{ route('admin.admins.create') }}">Category</a></li>
+                <li><a href="{{ route('admin.admins.create') }}">Tag</a></li>
             </ul>
         </li>
     </ul>
+    {!! $sidebar !!}
 </section>

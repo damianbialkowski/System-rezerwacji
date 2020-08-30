@@ -40,6 +40,16 @@ if (!function_exists('module_trans')) {
     }
 }
 
+/**
+ * Check whether the specific module is enabled
+ */
+if (!function_exists('is_module_enabled')) {
+    function is_module_enabled($module)
+    {
+        return array_key_exists($module, app('modules')->all());
+    }
+}
+
 if (!function_exists('getGuardName')) {
     function getGuardName()
     {

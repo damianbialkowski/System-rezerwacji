@@ -18,7 +18,7 @@ Route::get('/configClear','AppController@configClear');
 //Route::group(['namespace' => 'Front','name' => 'front.'], function () {
 //    Route::get('/', 'HomeController@home')->name('');
 //    Route::get('/search','SearchController@search');
-//    Route::get('/articles/{id},{slug}','ArticleController@show');
+//    Route::get('/articles/{id},{slug}','FrontController@show');
 //    Route::get('/categories/{id},{slug}','CategoryController@show');
 //});
 
@@ -36,7 +36,7 @@ Route::get('/configClear','AppController@configClear');
 //Route::group(['namespace' => 'admin','middleware' => 'admin','prefix' => 'admin','as' => 'admin.'], function (){
 //    Route::get('/','DashboardController@main')->name('dashboard');
 //    // admin - articles
-//    Route::resource('articles', 'ArticleController');
+//    Route::resource('articles', 'FrontController');
 
     // admin - categories
 //    Route::get('/categories/create','CategoryController@create')->name('categories.create');

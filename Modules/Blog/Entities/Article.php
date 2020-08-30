@@ -29,6 +29,12 @@ class Article extends CmsModel implements HasMedia
         'published_at',
     ];
 
+    protected $dates = [
+        'published_at',
+        'created_at',
+        'deleted_at',
+    ];
+
     public function sluggable()
     {
         return [

@@ -23,13 +23,16 @@ class AdminSidebar implements Sidebar
 
     public function build()
     {
-        $extender = new \Modules\Admin\Events\Sidebar\SidebarExtender;
-//        dd($extender);
-
-        $this->menu->add(
-            $extender->extendWith($this->menu)
-        );
-
+        foreach (modules() as $module_name => $module) {
+            $class_name = "\Modules\/$module_name\Events\Sidebar\SidebarExtender";
+            $class_name = str_replace('/', '', $class_name);
+            if (class_exists($class_name)) {
+                $extender = new $class_name;
+                $this->menu->add(
+                    $extender->extendWith($this->menu)
+                );
+            }
+        }
     }
 
     public function getMenu()

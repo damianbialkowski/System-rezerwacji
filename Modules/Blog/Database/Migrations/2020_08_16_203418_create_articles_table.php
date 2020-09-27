@@ -26,8 +26,8 @@ class CreateArticlesTable extends Migration
                 $table->boolean('active')->default('1');
                 $table->boolean('published')->default(0);
                 $table->timestamp('published_at')->nullable();
-                $table->integer('updated_by')->nullable()->unsigned();
                 $table->integer('created_by')->nullable()->unsigned();
+                $table->integer('updated_by')->nullable()->unsigned();
                 $table->timestamps();
                 $table->softDeletes();
             });

@@ -18,8 +18,8 @@
         }
     },
     "require": {
-        "cviebrock/eloquent-sluggable": "^6.0",
-        "facuz/laravel-themes": "^3.1",
+        "cviebrock/eloquent-sluggable": "6.0.3",
+        "facuz/laravel-themes": "^3.2",
         "kalnoy/nestedset": "^5.0",
         "silber/bouncer": "v1.0.0-rc.8",
         "spatie/laravel-medialibrary": "^7.0.0",

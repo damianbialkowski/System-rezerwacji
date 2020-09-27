@@ -6,7 +6,13 @@ use Modules\Core\Http\Controllers\CoreController;
 
 class Controller extends CoreController
 {
+    public $modulePrefix;
+    public $routeWithModulePrefix;
 
-    public $defaultRedirect = 'index';
+    public function __construct()
+    {
+        $this->modulePrefix = module_prefix();
+        $this->routeWithModulePrefix = implode('.', [$this->modulePrefix, $this->baseRoute]);
+    }
 
 }

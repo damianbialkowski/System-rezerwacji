@@ -4,7 +4,7 @@
     "description": "Admin panel module",
     "version": "0.1",
     "keywords": [],
-    "order": 2,
+    "order": 1,
     "providers": [
         "Modules\\Admin\\Providers\\AdminServiceProvider",
         "Maatwebsite\\Sidebar\\SidebarServiceProvider",

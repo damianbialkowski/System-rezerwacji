@@ -56,4 +56,9 @@ class Category extends Model
     {
         return $this->belongsToMany(Article::class);
     }
+
+    public function url()
+    {
+        return $this;
+    }
 }

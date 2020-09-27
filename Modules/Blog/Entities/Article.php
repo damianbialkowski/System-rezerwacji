@@ -3,19 +3,9 @@
 namespace Modules\Blog\Entities;
 
 use Modules\Cms\Entities\CmsModel;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
-use Illuminate\Database\Eloquent\SoftDeletes;
-use Cviebrock\EloquentSluggable\Sluggable;
-use Modules\Cms\Traits\CmsTrait;
 
-class Article extends CmsModel implements HasMedia
+class Article extends CmsModel
 {
-    use HasMediaTrait,
-        SoftDeletes,
-        Sluggable,
-        CmsTrait;
-
     protected $fillable = [
         'domain_id',
         'title',
@@ -33,6 +23,10 @@ class Article extends CmsModel implements HasMedia
         'published_at',
         'created_at',
         'deleted_at',
+    ];
+
+    protected $with = [
+        'categories',
     ];
 
     public function sluggable()

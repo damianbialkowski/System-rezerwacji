@@ -4,6 +4,7 @@ namespace Modules\Core\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
+use Illuminate\Support\Facades\Config;
 
 class CoreServiceProvider extends ServiceProvider
 {
@@ -19,6 +20,11 @@ class CoreServiceProvider extends ServiceProvider
         $this->registerViews();
         $this->registerFactories();
         $this->loadMigrationsFrom(module_path('Core', 'Database/Migrations'));
+
+        Config::set('core.current_lang', 'pl');
+        app()->setLocale('pl');
+        $route_status = request()->is('admin/*') ? 'backend' : 'frontend';
+        Config::set('core.route_status', $route_status);
     }
 
     /**

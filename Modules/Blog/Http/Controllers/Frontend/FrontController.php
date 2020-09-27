@@ -15,7 +15,8 @@ class FrontController extends Controller
      */
     public function index()
     {
-        dd(2);
+        $category = Category::where('id', 4)->first();
+//        dd($category->url);
         return view('blog::index');
     }
 

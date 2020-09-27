@@ -1,4 +1,4 @@
-@extends('admin::layouts.admin')
+@extends('admin::layouts.default')
 @section('admin::main')
     <div class="card card-custom">
         <div class="card-header">

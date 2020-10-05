@@ -3,9 +3,9 @@
 namespace Modules\Core\Entities;
 
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Silber\Bouncer\Database\HasRolesAndAbilities;
+use Modules\Core\Traits\ModelTrait;
 
-class AuthModel extends \Illuminate\Foundation\Auth\User
+abstract class AuthModel extends \Illuminate\Foundation\Auth\User
 {
-    use SoftDeletes, HasRolesAndAbilities;
+    use SoftDeletes, ModelTrait;
 }

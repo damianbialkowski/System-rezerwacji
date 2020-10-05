@@ -5,6 +5,7 @@ namespace Modules\Core\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Str;
 
 class CoreServiceProvider extends ServiceProvider
 {
@@ -23,7 +24,7 @@ class CoreServiceProvider extends ServiceProvider
 
         Config::set('core.current_lang', 'pl');
         app()->setLocale('pl');
-        $route_status = request()->is('admin/*') ? 'backend' : 'frontend';
+        $route_status = Str::contains(request()->url(), env('ADMIN_ROUTE')) ? 'backend' : 'frontend';
         Config::set('core.route_status', $route_status);
     }
 
@@ -65,7 +66,7 @@ class CoreServiceProvider extends ServiceProvider
 
         $this->publishes([
             $sourcePath => $viewPath
-        ],'views');
+        ], 'views');
 
         $this->loadViewsFrom(array_merge(array_map(function ($path) {
             return $path . '/modules/core';
@@ -95,7 +96,7 @@ class CoreServiceProvider extends ServiceProvider
      */
     public function registerFactories()
     {
-        if (! app()->environment('production') && $this->app->runningInConsole()) {
+        if (!app()->environment('production') && $this->app->runningInConsole()) {
             app(Factory::class)->load(module_path('Core', 'Database/factories'));
         }
     }

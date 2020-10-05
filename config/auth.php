@@ -73,18 +73,13 @@ return [
     'providers' => [
         'users' => [
             'driver' => 'eloquent',
-            'model' => App\User::class,
+            'model' => Modules\Admin\Entities\Admin::class,
         ],
         // DCms
         'admins' => [
             'driver' => 'eloquent',
             'model' => Modules\Admin\Entities\Admin::class,
         ],
-
-        // 'users' => [
-        //     'driver' => 'database',
-        //     'table' => 'users',
-        // ],
     ],
 
     /*

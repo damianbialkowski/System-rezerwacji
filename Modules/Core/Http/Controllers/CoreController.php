@@ -91,6 +91,10 @@ class CoreController extends BaseController
             $this->baseView,
             'show'
         ];
+        if (method_exists($item, 'attributesToUnset')) {
+            $item->attributesToUnset();
+        }
+
         return $this->view(implode('.', $view), compact('item'));
     }
 
@@ -101,6 +105,10 @@ class CoreController extends BaseController
     public function edit($id)
     {
         $item = (new $this->model)->findOrFail($id);
+
+        if (method_exists($item, 'attributesToUnset')) {
+            $item->attributesToUnset();
+        }
         $form = $this->form($this->form, [
             'method' => 'POST',
             'route' => [implode('.', [$this->routeWithModulePrefix, 'update']), $item->id],

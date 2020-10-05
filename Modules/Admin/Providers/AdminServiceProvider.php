@@ -5,6 +5,9 @@ namespace Modules\Admin\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 use Maatwebsite\Sidebar\SidebarServiceProvider;
+use Modules\Admin\Entities\Admin;
+use Silber\Bouncer\Bouncer;
+use Illuminate\Container\Container;
 
 class AdminServiceProvider extends ServiceProvider
 {
@@ -24,11 +27,10 @@ class AdminServiceProvider extends ServiceProvider
         $this->registerMiddlewares();
         $this->registerHelpers();
 
-//        dd(\View::exists('admin::partials.sidebar'));
-//        \View::creator(
-//            'admin::partials.sidebar',
-//            '\Modules\Admin\src\Sidebar\SidebarCreator'
-//        );
+        if (config('core.route_status') == 'backend') {
+            $this->app->register('Modules\Admin\Providers\SidebarServiceProvider');
+        }
+
     }
 
     /**
@@ -40,14 +42,6 @@ class AdminServiceProvider extends ServiceProvider
     {
         $this->app->register(RouteServiceProvider::class);
         $this->app->register(RepositoryServiceProvider::class);
-
-//        $this->app->bind(Modules\Admin\Entities\Admin::class, function ($app) {
-//            return new Modules\Admin\Entities\Admin();
-//        });
-
-//        $this->app->register(SidebarServiceProvider::class);
-//        $this->app->register(\Modules\Admin\src\Sidebar\AdminSidebar::class);
-//        dd(1);
     }
 
     /**

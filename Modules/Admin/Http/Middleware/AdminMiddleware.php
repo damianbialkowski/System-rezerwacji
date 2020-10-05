@@ -2,7 +2,6 @@
 
 namespace Modules\Admin\Http\Middleware;
 
-use Illuminate\Auth\Middleware\Authenticate as Middleware;
 use Closure;
 
 class AdminMiddleware

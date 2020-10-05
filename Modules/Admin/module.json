@@ -6,9 +6,7 @@
     "keywords": [],
     "order": 1,
     "providers": [
-        "Modules\\Admin\\Providers\\AdminServiceProvider",
-        "Maatwebsite\\Sidebar\\SidebarServiceProvider",
-        "Modules\\Admin\\Providers\\SidebarServiceProvider"
+        "Modules\\Admin\\Providers\\AdminServiceProvider"
     ],
     "aliases": {},
     "files": [],

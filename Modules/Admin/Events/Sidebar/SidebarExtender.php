@@ -17,9 +17,11 @@ class SidebarExtender extends AbstractAdminSidebar
 
                 $item->item('Admin', function (Item $item) {
                     $item->route('admin.admins.index');
+                    $item->icon('');
                 });
-                $item->item('Groups', function (Item $item) {
-                    $item->route('admin.admins.create');
+                $item->item('Roles', function (Item $item) {
+                    $item->route('admin.roles.index');
+                    $item->icon('');
                 });
             });
         });

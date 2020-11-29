@@ -1,4 +1,6 @@
 $(document).ready(function () {
+
+
     $('.alert').on('click', function () {
         $('.alert').hide();
     });
@@ -11,29 +13,15 @@ $(document).ready(function () {
         $('.alert').show().addClass('active-alert');
     });
 
-    $('.menu-item').click(function () {
-        if ($('.menu-item').not(this).hasClass('active') &&
-            $('.menu-item').not(this).find('.menu-item-collapse').is(':visible')) {
-            $('.menu-item').removeClass('active');
-            $('.menu-item').find('.menu-item-collapse').slideUp('fast');
-        }
-        if ($(this).hasClass('active')) {
-            $(this).removeClass('active');
-            $('.menu-item').find('.menu-item-collapse').slideUp('fast');
-        } else {
-            $(this).addClass('active');
-        }
-        if ($(this).find('.menu-item-collapse').length && !$(this).find('.menu-item-collapse').is(':visible')) {
-            $(this).find('.menu-item-collapse').slideDown('fast');
-        }
-    })
-
     $('.generate_password').on('click', function () {
         var randomPassword = randomString();
         $('.generated_password').text(randomPassword);
     });
     $('.generated_password').text(randomString());
 
+    $('#sidebar-menu li').on('click', function () {
+        $(this).toggleClass('active');
+    });
 });
 var password_length = 6;
 
@@ -46,3 +34,16 @@ function randomString() {
     }
     return result;
 }
+
+function collapseMenu() {
+    var sidebar = document.getElementById('sidebar-menu-content');
+    var mainContent = document.getElementById('main-content');
+    if (!sidebar.classList.contains('active')) {
+        sidebar.classList.add('active');
+        mainContent.classList.remove('full-width-content');
+    } else {
+        sidebar.classList.remove('active');
+        mainContent.classList.add('full-width-content');
+    }
+}
+

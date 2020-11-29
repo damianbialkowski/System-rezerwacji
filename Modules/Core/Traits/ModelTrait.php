@@ -2,8 +2,6 @@
 
 namespace Modules\Core\Traits;
 
-use Carbon\Carbon;
-
 trait ModelTrait
 {
     public function attributesToUnset()

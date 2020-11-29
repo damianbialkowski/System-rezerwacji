@@ -9,9 +9,9 @@ use \Silber\Bouncer\Database\HasRolesAndAbilities;
 
 class Admin extends AuthModel
 {
-    use Notifiable, BootableTrait;
+    use Notifiable, BootableTrait, HasRolesAndAbilities;
 
-    protected $guard = 'admin';
+    protected $guard = 'admins';
 
     protected $fillable = [
         'last_name',
@@ -39,24 +39,25 @@ class Admin extends AuthModel
         'last_login',
     ];
 
-    public function __construct(array $attributes = [])
-    {
-        parent::__construct($attributes);
-    }
+    protected $appends = [
+        'role',
+    ];
 
     public function setPasswordAttribute($password)
     {
         $this->attributes['password'] = bcrypt($password);
     }
 
-    public function showableAttributes(): array
+    public function getFilterList()
     {
+        $all = self::withTrashed()->count();
+        $active = self::where('active', 1)->count();
+        $inactive = self::where('active', 0)->count();
+
         return [
-            'id',
-            'name',
-            'email',
-            'created_at',
-            'updated_at'
+            'all' => $all,
+            'active' => $active,
+            'inactive' => $inactive,
         ];
     }
 }

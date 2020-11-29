@@ -1,31 +1,34 @@
 @extends('admin::layouts.auth')
 @section('admin::main')
-    <div class="row">
-        <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-            <div class="card card-signin my-5">
-                <div class="card-body">
-                    <h5 class="card-title text-center">Sign In</h5>
-                    <form action="{{ route('admin.login') }}" method="POST" class="form-signin">
-                        @csrf
-                        <div class="form-label-group">
-                            <input type="email" name="email" id="email" class="form-control" placeholder="Email address"
-                                   required autofocus>
-                            <label for="email">Email address</label>
-                        </div>
-                        <div class="form-label-group">
-                            <input type="password" name="password" id="password" class="form-control"
-                                   placeholder="Password"
-                                   required>
-                            <label for="password">Password</label>
-                        </div>
-                        <div class="custom-control custom-checkbox mb-3">
-                            <input type="checkbox" class="custom-control-input" id="remember_me" name="remember_me">
-                            <label class="custom-control-label" for="remember_me" name="remember_me">Remember password</label>
-                        </div>
-                        <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign in</button>
-                    </form>
-                </div>
-            </div>
+    <div class="login-box">
+        <div class="login-header">
+            <h5 class="text-center">Sign In</h5>
         </div>
+        <form action="{{ route('admin.login') }}" method="POST" class="login-form">
+            @csrf
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-user"></i></span>
+                </div>
+                <input type="email" name="email" class="form-control" placeholder="Email" required autofocus>
+            </div>
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="fa fa-key"></i></span>
+                </div>
+                <input type="password" name="password" class="form-control" placeholder="Password" required>
+            </div>
+            <div class="login-other-options">
+                <div class="form-check">
+                    <input type="checkbox" class="form-check-input" id="remember-me">
+                    <label class="form-check-label" for="remember-me">Remember me</label>
+                </div>
+                <a href="#">Forgot password?</a>
+            </div>
+            <button type="submit" class="btn btn-block">Log In</button>
+        </form>
+    </div>
+    <div class="mt-5 text-center">
+        <p>Copyright &copy; 2020r. - DCms</p>
     </div>
 @endsection

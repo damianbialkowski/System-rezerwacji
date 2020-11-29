@@ -13,7 +13,6 @@ abstract class CmsModel extends BaseModel implements HasMedia
 {
     use HasMediaTrait,
         SoftDeletes,
-        Sluggable,
         CmsTrait;
 
     public function hasAttribute($attribute)

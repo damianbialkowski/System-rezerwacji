@@ -5,6 +5,7 @@ namespace Modules\Admin\src\Sidebar;
 
 use Maatwebsite\Sidebar\Sidebar;
 use Maatwebsite\Sidebar\Menu;
+use CoreCms;
 
 class AdminSidebar implements Sidebar
 {
@@ -23,7 +24,11 @@ class AdminSidebar implements Sidebar
 
     public function build()
     {
-        foreach (modules() as $module_name => $module) {
+        $modules = CoreCms::getModules();
+        foreach ($modules as $module_name => $module) {
+            if (!$module->isEnabled()) {
+                continue;
+            }
             $class_name = "\Modules\/$module_name\Events\Sidebar\SidebarExtender";
             $class_name = str_replace('/', '', $class_name);
             if (class_exists($class_name)) {

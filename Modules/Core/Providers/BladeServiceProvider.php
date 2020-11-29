@@ -15,13 +15,17 @@ class BladeServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->getmoduleLangDirective();
+        $this->registerAppDirectives();
     }
 
-    public function getmoduleLangDirective()
+    public function registerAppDirectives()
     {
         Blade::directive('modulelang', function ($expression) {
-            return "<?php echo module_trans($expression); ?>";
+            return "<?php echo module_trans({$expression}); ?>";
+        });
+
+        Blade::directive('route', function ($expression) {
+            return "<?php echo route({$expression}); ?>";
         });
     }
 

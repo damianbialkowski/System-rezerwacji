@@ -35,7 +35,6 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map()
     {
-        $this->mapApiRoutes();
         $this->mapWebRoutes();
         $this->mapFrontRoutes();
     }
@@ -49,9 +48,10 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapWebRoutes()
     {
-        Route::middleware('web')
-            ->prefix('admin')
-            ->namespace($this->moduleNamespace)
+        Route::prefix(env('ADMIN_ROUTE'))
+            ->as('blog.')
+            ->middleware('web')
+            ->namespace($this->moduleNamespace . '\Backend')
             ->group(module_path('Blog', '/Routes/web.php'));
     }
 
@@ -66,20 +66,5 @@ class RouteServiceProvider extends ServiceProvider
         Route::middleware('front')
             ->namespace($this->moduleNamespace . '\Frontend')
             ->group(module_path('Blog', '/Routes/front.php'));
-    }
-
-    /**
-     * Define the "api" routes for the application.
-     *
-     * These routes are typically stateless.
-     *
-     * @return void
-     */
-    protected function mapApiRoutes()
-    {
-        Route::prefix('api')
-            ->middleware('api')
-            ->namespace($this->moduleNamespace)
-            ->group(module_path('Blog', '/Routes/api.php'));
     }
 }

@@ -10,14 +10,12 @@ use Modules\Admin\Entities\Admin;
 class DashboardController extends Controller
 {
 
-    public function __construct()
-    {
-    }
-
     public function dashboard()
     {
-        $user = \Auth::user('admin');
-//        return view('admin.dashboard', ['item' => $item, 'user' => $user]);
+        $user = \Auth::guard('admin')->user();
+//        dd($user->getForbiddenAbilities());
+//        \Bouncer::allow('Test')->to('create', Admin::class);
+//        \Bouncer::assign('test')->to($user);
         return view('admin::dashboard');
     }
 

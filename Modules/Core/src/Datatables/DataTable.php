@@ -82,13 +82,22 @@ class CoreDataTable extends BaseDataTable
             ->columns($this->getColumns())
             ->minifiedAjax()
             ->orderBy(1)
-            ->buttons(
-                Button::make('create'),
-                Button::make('export'),
-                Button::make('print'),
-                Button::make('reset'),
-                Button::make('reload')
-            );
+            ->parameters([
+                'lengthMenu' => [
+                    [ 10, 25, 50, -1 ],
+                    [ '10 rows', '25 rows', '50 rows', 'Show all' ]
+                ],
+//                'dom'     => 'Bfrtip',
+                'order'   => [[0, 'desc']],
+                'buttons' => [
+                    'pageLength',
+                    'create',
+                    'export',
+                    'print',
+                    'reset',
+                    'reload',
+                ],
+            ]);
     }
 
     /**

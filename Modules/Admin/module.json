@@ -10,5 +10,9 @@
     ],
     "aliases": {},
     "files": [],
-    "requires": []
+    "requires": [],
+    "abilities": [
+        "Modules\\Admin\\Http\\Controllers\\AdminController",
+        "Modules\\Admin\\Http\\Controllers\\RoleController"
+    ]
 }

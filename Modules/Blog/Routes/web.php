@@ -1,6 +1,5 @@
 <?php
 
-Route::group(['prefix' => 'blog', 'as' => 'blog.', 'middleware' => 'web'], function () {
-//    Route::get('/', 'BlogController@index');
-
+Route::middleware(['auth:admin'])->group(function () {
+    Route::resource('articles', 'ArticleController');
 });

@@ -6,7 +6,7 @@
 if (!function_exists('modules')) {
     function modules()
     {
-        return app('modules')->all();
+        return CoreCms::getModules();
     }
 }
 
@@ -24,6 +24,9 @@ if (!function_exists('module_asset')) {
 if (!function_exists('module_prefix')) {
     function module_prefix()
     {
+        if (!request()->route()) {
+            return null;
+        }
         $prefix = str_replace('/', '', request()->route()->getPrefix());
         return $prefix;
     }
@@ -59,5 +62,19 @@ if (!function_exists('getGuardName')) {
             }
         }
         return null;
+    }
+}
+
+if (!function_exists('app_memory_usage')) {
+    function app_memory_usage($uppercase = false)
+    {
+        $size = memory_get_usage(true);
+        $units = ['kb', 'mb', 'gb', 'tb', 'pb'];
+        if ($uppercase) {
+            array_walk($units, function (&$unit) {
+               $unit = strtoupper($unit);
+            });
+        }
+        return round($size / pow(1024, ($i = floor(log($size, 1024)))), 1) . $units[$i];
     }
 }

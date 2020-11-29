@@ -20,7 +20,6 @@
         "maatwebsite/laravel-sidebar": "~2.1",
         "nwidart/laravel-modules": "^6.2",
         "silber/bouncer": "v1.0.0-rc.8",
-        "spatie/laravel-medialibrary": "^7.0.0",
         "wikimedia/composer-merge-plugin": "dev-master",
         "yajra/laravel-datatables": "^1.5"
     },
@@ -41,7 +40,8 @@
     "extra": {
         "laravel": {
             "dont-discover": [
-                "Maatwebsite\\Sidebar\\SidebarSerivceProvider"
+                "maatwebsite/laravel-sidebar",
+                "silber/bouncer"
             ]
         },
         "merge-plugin": {

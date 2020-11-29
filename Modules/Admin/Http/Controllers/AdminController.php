@@ -6,9 +6,6 @@ use Illuminate\Http\Response;
 use Modules\Admin\Datatables\AdminsDataTable;
 use Modules\Admin\Http\Controllers\Controller as CoreController;
 use Modules\Admin\Entities\Admin;
-use DataTables;
-use phpDocumentor\Reflection\Types\Collection;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Modules\Admin\Http\Requests\AdminCreateRequest;
 use Modules\Admin\Http\Requests\AdminUpdateRequest;
 use Modules\Admin\Forms\AdminForm;
@@ -24,6 +21,11 @@ class AdminController extends CoreController
         'store' => AdminCreateRequest::class,
         'update' => AdminUpdateRequest::class,
     ];
+
+    public function __construct()
+    {
+        parent::__construct();
+    }
 
     /**
      * Update the specified resource in storage.

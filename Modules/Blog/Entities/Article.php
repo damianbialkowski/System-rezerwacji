@@ -29,20 +29,6 @@ class Article extends CmsModel
         'categories',
     ];
 
-    public function sluggable()
-    {
-        return [
-            'slug' => [
-                'source' => 'title'
-            ]
-        ];
-    }
-
-    public function getRouteKeyName()
-    {
-        return 'slug';
-    }
-
     public function categories()
     {
         return $this->belongsToMany(Category::class);

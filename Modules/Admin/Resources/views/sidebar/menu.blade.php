@@ -1,4 +1,4 @@
-<ul class="menu-items flex flex-direction-column justify-content-center">
+<ul id="sidebar-menu">
     @foreach($groups as $group)
         {!! $group !!}
     @endforeach

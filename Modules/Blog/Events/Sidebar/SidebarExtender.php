@@ -13,10 +13,11 @@ class SidebarExtender extends AbstractAdminSidebar
     {
         $menu->group($this->getModuleName(), function (Group $group) {
             $group->item('Blog', function (Item $item) {
-                $item->icon('fa fa-user');
+                $item->icon('fa fa-newspaper');
 
-                $item->item('Admin', function (Item $item) {
-                    $item->route('admin.admins.index');
+                $item->item('Articles', function (Item $item) {
+                    $item->icon('fa fa-list');
+                    $item->route('blog.articles.index');
                 });
             });
         });

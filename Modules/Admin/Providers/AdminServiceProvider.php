@@ -6,8 +6,10 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
 use Maatwebsite\Sidebar\SidebarServiceProvider;
 use Modules\Admin\Entities\Admin;
-use Silber\Bouncer\Bouncer;
-use Illuminate\Container\Container;
+use Bouncer;
+use Modules\Admin\src\AbilityManager\AbilityManager;
+use Modules\Admin\src\AbilityManager\AbilityManagerInterface;
+use \CoreCms;
 
 class AdminServiceProvider extends ServiceProvider
 {
@@ -18,19 +20,17 @@ class AdminServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        $router = $this->app['router'];
+        $router->pushMiddlewareToGroup('auth.admin', \Modules\Admin\Http\Middleware\ScopeBouncer::class);
+        $router->pushMiddlewareToGroup('auth.admin', \Modules\Admin\Http\Middleware\AdminMiddleware::class);
+        $this->registerMiddlewares();
+
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();
-        $this->registerFactories();
         $this->loadMigrationsFrom(module_path('Admin', 'Database/Migrations'));
 
-        $this->registerMiddlewares();
         $this->registerHelpers();
-
-        if (config('core.route_status') == 'backend') {
-            $this->app->register('Modules\Admin\Providers\SidebarServiceProvider');
-        }
-
     }
 
     /**
@@ -42,6 +42,18 @@ class AdminServiceProvider extends ServiceProvider
     {
         $this->app->register(RouteServiceProvider::class);
         $this->app->register(RepositoryServiceProvider::class);
+
+        if (CoreCms::isBackend()) {
+            $this->app->register('Modules\Admin\Providers\SidebarServiceProvider');
+            $this->app->register('Modules\Admin\Providers\BouncerServiceProvider');
+            $loader = \Illuminate\Foundation\AliasLoader::getInstance();
+            $loader->alias('Bouncer', 'Silber\Bouncer\BouncerFacade');
+//            $this->app->singleton(AbilityManagerInterface::class, function () {
+//                $bouncer = new \Silber\Bouncer\Bouncer();
+//                return new AbilityManager($bouncer);
+//            });
+        }
+
     }
 
     /**
@@ -92,18 +104,6 @@ class AdminServiceProvider extends ServiceProvider
             $this->loadTranslationsFrom($langPath, 'admin');
         } else {
             $this->loadTranslationsFrom(module_path('Admin', 'Resources/lang'), 'admin');
-        }
-    }
-
-    /**
-     * Register an additional directory of factories.
-     *
-     * @return void
-     */
-    public function registerFactories()
-    {
-        if (!app()->environment('production') && $this->app->runningInConsole()) {
-            app(Factory::class)->load(module_path('Admin', 'Database/factories'));
         }
     }
 

@@ -9,8 +9,9 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Support\Facades\Redirect;
 use Modules\Core\src\FormBuilder\Traits\FormBuilderTrait;
 use Illuminate\Http\Request;
+use Bouncer;
 
-class CoreController extends BaseController
+abstract class CoreController extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests, FormBuilderTrait;
 
@@ -48,6 +49,9 @@ class CoreController extends BaseController
      */
     public function index()
     {
+        if (!Bouncer::can('index', admin())) {
+            return abort(403);
+        }
         $dataTable = new $this->dataTable;
         return $dataTable->render($this->modulePrefix . '::' . $this->baseView . '.index');
     }
@@ -58,12 +62,15 @@ class CoreController extends BaseController
      */
     public function create()
     {
+        if (!Bouncer::can('create', admin())) {
+            return abort(403);
+        }
         $form = $this->form($this->form, [
             'method' => 'POST',
             'route' => [implode('.', [$this->routeWithModulePrefix, 'store'])]
         ]);
 
-        return $this->view('panel.admins.create', ['form' => $form]);
+        return $this->view($this->baseView . '.create', ['form' => $form]);
     }
 
     /**
@@ -73,8 +80,13 @@ class CoreController extends BaseController
      */
     public function store(Request $request)
     {
-        $rules = (new $this->requestList['store'])->rules();
-        $request->validate($rules);
+        if (!Bouncer::can('store', admin())) {
+            return abort(403);
+        }
+        if (count($this->requestList) && isset($this->requestList['store'])) {
+            $rules = (new $this->requestList['store'])->rules();
+            $request->validate($rules);
+        }
 
         (new $this->model)->create($request->all());
         return $this->redirect($this->baseRoute . '.' . $this->defaultRedirect);
@@ -86,16 +98,16 @@ class CoreController extends BaseController
      */
     public function show($id)
     {
+        if (!Bouncer::can('show', admin())) {
+            return abort(403);
+        }
         $item = (new $this->model)->findOrFail($id);
-        $view = [
-            $this->baseView,
-            'show'
-        ];
+
         if (method_exists($item, 'attributesToUnset')) {
             $item->attributesToUnset();
         }
 
-        return $this->view(implode('.', $view), compact('item'));
+        return $this->view($this->baseView . '.show', compact('item'));
     }
 
     /**
@@ -104,6 +116,9 @@ class CoreController extends BaseController
      */
     public function edit($id)
     {
+        if (!Bouncer::can('edit', admin())) {
+            return abort(403);
+        }
         $item = (new $this->model)->findOrFail($id);
 
         if (method_exists($item, 'attributesToUnset')) {
@@ -111,13 +126,10 @@ class CoreController extends BaseController
         }
         $form = $this->form($this->form, [
             'method' => 'POST',
-            'route' => [implode('.', [$this->routeWithModulePrefix, 'update']), $item->id],
+            'route' => [$this->routeWithModulePrefix . '.update', $item->id],
             'model' => $item
         ]);
 
-        return $this->view(implode('.', [$this->baseView, 'edit']), [
-            'form' => $form,
-            'item' => $item
-        ]);
+        return $this->view($this->baseView . '.edit', compact(['item', 'form']));
     }
 }

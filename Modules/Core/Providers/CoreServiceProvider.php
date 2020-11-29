@@ -3,9 +3,8 @@
 namespace Modules\Core\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Database\Eloquent\Factory;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Str;
+use Illuminate\Foundation\AliasLoader;
+use Modules\Core\Foundation\CoreCms;
 
 class CoreServiceProvider extends ServiceProvider
 {
@@ -19,13 +18,7 @@ class CoreServiceProvider extends ServiceProvider
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();
-        $this->registerFactories();
         $this->loadMigrationsFrom(module_path('Core', 'Database/Migrations'));
-
-        Config::set('core.current_lang', 'pl');
-        app()->setLocale('pl');
-        $route_status = Str::contains(request()->url(), env('ADMIN_ROUTE')) ? 'backend' : 'frontend';
-        Config::set('core.route_status', $route_status);
     }
 
     /**
@@ -35,7 +28,12 @@ class CoreServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $loader = AliasLoader::getInstance();
         $this->app->register(RouteServiceProvider::class);
+
+        $this->app->make(CoreCms::class);
+        $this->app->bind('core-cms', CoreCms::class);
+        $loader->alias('CoreCms', \Modules\Core\Facades\CoreCms::class);
     }
 
     /**
@@ -86,18 +84,6 @@ class CoreServiceProvider extends ServiceProvider
             $this->loadTranslationsFrom($langPath, 'core');
         } else {
             $this->loadTranslationsFrom(module_path('Core', 'Resources/lang'), 'core');
-        }
-    }
-
-    /**
-     * Register an additional directory of factories.
-     *
-     * @return void
-     */
-    public function registerFactories()
-    {
-        if (!app()->environment('production') && $this->app->runningInConsole()) {
-            app(Factory::class)->load(module_path('Core', 'Database/factories'));
         }
     }
 

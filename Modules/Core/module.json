@@ -7,10 +7,12 @@
     "providers": [
         "Modules\\Core\\Providers\\CoreServiceProvider",
         "Modules\\Core\\Providers\\BladeServiceProvider",
-        "Modules\\Core\\src\\FormBuilder\\FormBuilderServiceProvider"
+        "Modules\\Core\\src\\FormBuilder\\FormBuilderServiceProvider",
+        "Barryvdh\\Debugbar\\ServiceProvider"
     ],
     "aliases": {
-        "FormBuilder": "Modules\\Core\\src\\FormBuilder\\Facades\\FormBuilder"
+        "FormBuilder": "Modules\\Core\\src\\FormBuilder\\Facades\\FormBuilder",
+        "Debugbar": "Barryvdh\\Debugbar\\Facade"
     },
     "files": [
         "helpers.php"

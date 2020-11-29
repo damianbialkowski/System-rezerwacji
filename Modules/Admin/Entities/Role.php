@@ -22,4 +22,12 @@ class Role extends BouncerRole
 
     }
 
+    public function showableAttributes(): array
+    {
+        return [
+            'name',
+            'title'
+        ];
+    }
+
 }

@@ -1,11 +1,14 @@
-<nav class="nav-header">
-    <div class="nav-header-left">
-
-    </div>
-    <div class="nav-header-right">
-        <a href="{{ url('/') }}" class="btn-website"><i class="fa fa-eye"></i></a>
-        <div class="nav-header-user">
-            <p>Damian</p>
+<header class="navbar-header">
+    <div class="left-side">
+        <div class="collapse-left-side" @click="toggleMenu()">
+            <i class="fa fa-fw fa-bars"></i>
         </div>
     </div>
-</nav>
+    <div class="right-side">
+        <div class="user-info">
+            <span class="initials">D.B.</span>
+            <span>{{ admin()->name }}</span>
+            <i class="fa fa-angle-down"></i>
+        </div>
+    </div>
+</header>

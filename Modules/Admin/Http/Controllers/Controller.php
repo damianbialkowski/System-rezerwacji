@@ -3,6 +3,7 @@
 namespace Modules\Admin\Http\Controllers;
 
 use Modules\Core\Http\Controllers\CoreController;
+use CoreCms;
 
 class Controller extends CoreController
 {
@@ -11,7 +12,7 @@ class Controller extends CoreController
 
     public function __construct()
     {
-        $this->modulePrefix = module_prefix();
+        $this->modulePrefix = strtolower(CoreCms::getModulePrefix(get_called_class()));
         $this->routeWithModulePrefix = implode('.', [$this->modulePrefix, $this->baseRoute]);
     }
 

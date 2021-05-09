@@ -26,7 +26,7 @@ return [
 
     'stubs' => [
         'enabled' => false,
-        'path' => base_path() . '/vendor/nwidart/laravel-modules/src/Commands/stubs',
+        'path' => base_path() . '/Modules/Core/stubs',
         'files' => [
             'routes/web' => 'Routes/web.php',
             'routes/api' => 'Routes/api.php',
@@ -153,10 +153,10 @@ return [
     */
 
     'composer' => [
-        'vendor' => 'nwidart',
+        'vendor' => 'd-cms',
         'author' => [
-            'name' => 'Nicolas Widart',
-            'email' => 'n.widart@gmail.com',
+            'name' => 'Damian Bialkowski',
+            'email' => 'damianbialkowski.info@gmail.com',
         ],
     ],
     /*

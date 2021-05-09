@@ -4,22 +4,36 @@
         <div class="card-header">
             <div class="card-title card-columns">
                 <div class="card-description">
-                    <h2 class="card-label">Admin list</h2>
-                    <p class="text-muted">Administration list</p>
+                    <h2 class="card-label">Article list</h2>
                 </div>
                 <div class="card-buttons">
-                    <a href="{{ route('admin.admins.create') }}" class="create_new">Add new</a>
+                    <a href="{{ admin_route('blog.articles.create') }}"><img src="{{ asset('modules/admin/img/plus-circle.svg') }}"></a>
                 </div>
             </div>
         </div>
-        <div class="card-body">
-            {{ $dataTable->table() }}
+        <div class="card-body no-p-lr">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="card">
+                            @include('admin::panel.partials.filter-list')
+                        </div>
+                    </div>
+                    <div class="col-md-9">
+                        <div class="card card-model-data">
+                            <div class="card-header">
+                                @include('admin::panel.partials.model-search')
+                            </div>
+                            <div class="card-body">
+                                @include('blog::panel.partials.entity-items')
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    {{--    <div class="addNewUser flex flex-direction-column justify-content-center align-items-center">--}}
-    {{--        <a href="{{ route('admin.admins.create') }}"><i class="fas fa-plus"></i></a>--}}
-    {{--    </div>--}}
 @endsection
 @section('admin::script')
-    {{ $dataTable->scripts() }}
+
 @endsection

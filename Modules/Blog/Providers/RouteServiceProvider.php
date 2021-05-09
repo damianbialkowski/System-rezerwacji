@@ -24,8 +24,8 @@ class RouteServiceProvider extends ServiceProvider
     public function boot()
     {
         parent::boot();
-        Route::model('category', \Modules\Blog\Entities\Category::class);
-        Route::model('article', \Modules\Blog\Entities\Article::class);
+//        Route::model('category', \Modules\Blog\Entities\Category::class);
+//        Route::model('article', \Modules\Blog\Entities\Article::class);
     }
 
     /**
@@ -48,10 +48,10 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapWebRoutes()
     {
-        Route::prefix(env('ADMIN_ROUTE'))
-            ->as('blog.')
+        Route::prefix(env('ADMIN_ROUTE', 'admin'))
+            ->as('admin.')
             ->middleware('web')
-            ->namespace($this->moduleNamespace . '\Backend')
+            ->namespace($this->moduleNamespace)
             ->group(module_path('Blog', '/Routes/web.php'));
     }
 

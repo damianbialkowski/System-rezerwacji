@@ -2,18 +2,32 @@
 
 namespace Modules\Admin\Providers;
 
+use Illuminate\Database\Eloquent\Relations\Relation;
+use Modules\Admin\Entities\Role;
 use Silber\Bouncer\BouncerServiceProvider as BaseBouncerServiceProvider;
 use Silber\Bouncer\Database\Models;
+use Bouncer;
 
 class BouncerServiceProvider extends BaseBouncerServiceProvider
 {
+    /**
+     * Bootstrap any application services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        parent::boot();
+        Bouncer::useRoleModel(Role::class);
+        Relation::morphMap([Role::class]);
+    }
 
     /**
      * Get the user model from the application's auth config.
      *
      * @return string
      */
-    protected function getUserModel()
+    protected function getUserModel(): mixed
     {
         $config = $this->app->make('config');
 

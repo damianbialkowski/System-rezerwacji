@@ -29,7 +29,9 @@ class AlterTableAdmins extends Migration
      */
     public function down()
     {
-        if (Schema::hasTable('admins')) {
+        if (Schema::hasTable('admins') &&
+            Schema::hasColumns('admins', ['last_name', 'login', 'last_login'])
+        ) {
             Schema::table('admins', function (Blueprint $table) {
                 $table->dropColumn('last_name');
                 $table->dropColumn('login');

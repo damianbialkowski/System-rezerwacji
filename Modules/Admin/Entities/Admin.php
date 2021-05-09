@@ -4,14 +4,14 @@ namespace Modules\Admin\Entities;
 
 use Modules\Core\Entities\AuthModel;
 use Illuminate\Notifications\Notifiable;
-use Modules\Core\Traits\BootableTrait;
+use Modules\Admin\Traits\BootableTrait;
 use \Silber\Bouncer\Database\HasRolesAndAbilities;
 
 class Admin extends AuthModel
 {
-    use Notifiable, BootableTrait, HasRolesAndAbilities;
+    use Notifiable, HasRolesAndAbilities;
 
-    protected $guard = 'admins';
+    protected $guard = 'admin';
 
     protected $fillable = [
         'last_name',
@@ -45,19 +45,8 @@ class Admin extends AuthModel
 
     public function setPasswordAttribute($password)
     {
-        $this->attributes['password'] = bcrypt($password);
-    }
-
-    public function getFilterList()
-    {
-        $all = self::withTrashed()->count();
-        $active = self::where('active', 1)->count();
-        $inactive = self::where('active', 0)->count();
-
-        return [
-            'all' => $all,
-            'active' => $active,
-            'inactive' => $inactive,
-        ];
+        if (!empty($password)) {
+            $this->attributes['password'] = \Hash::make($password);
+        }
     }
 }

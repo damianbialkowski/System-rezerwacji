@@ -17,7 +17,6 @@ class BlogServiceProvider extends ServiceProvider
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();
-        $this->registerFactories();
         $this->loadMigrationsFrom(module_path('Blog', 'Database/Migrations'));
     }
 
@@ -79,18 +78,6 @@ class BlogServiceProvider extends ServiceProvider
             $this->loadTranslationsFrom($langPath, 'blog');
         } else {
             $this->loadTranslationsFrom(module_path('Blog', 'Resources/lang'), 'blog');
-        }
-    }
-
-    /**
-     * Register an additional directory of factories.
-     *
-     * @return void
-     */
-    public function registerFactories()
-    {
-        if (! app()->environment('production') && $this->app->runningInConsole()) {
-            app(Factory::class)->load(module_path('Blog', 'Database/factories'));
         }
     }
 

@@ -35,4 +35,7 @@ class Field
     const BUTTON_SUBMIT = 'submit';
     const BUTTON_RESET = 'reset';
     const BUTTON_BUTTON = 'button';
+
+    //DCms
+    const EDITOR = 'editor';
 }

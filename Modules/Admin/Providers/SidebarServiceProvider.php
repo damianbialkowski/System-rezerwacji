@@ -3,7 +3,6 @@
 namespace Modules\Admin\Providers;
 
 use Maatwebsite\Sidebar\SidebarServiceProvider as BaseSidebarServiceProvider;
-use Illuminate\Support\Facades\Config;
 
 class SidebarServiceProvider extends BaseSidebarServiceProvider
 {

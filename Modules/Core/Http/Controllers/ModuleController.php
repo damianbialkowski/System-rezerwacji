@@ -9,7 +9,7 @@ use Illuminate\Routing\Controller;
 class ModuleController extends Controller
 {
 
-    protected $modules;
+    protected object $modules;
 
     public function initialize()
     {

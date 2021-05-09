@@ -8,7 +8,7 @@ new Vue({
     },
     watch: {
       searchPhrase(query, old_query) {
-          console.log(query, old_query);
+          console.log(query, old_query, 1);
       }
     },
     methods: {
@@ -24,7 +24,7 @@ new Vue({
             }
         },
         setActiveSidebarElement(event) {
-            let el = event.target;
+            let el = event.target.parentNode;
             if (el.classList.contains('active')) {
                 el.classList.remove('active');
             } else {

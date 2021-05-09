@@ -2,6 +2,7 @@
 
 namespace Modules\Admin\Http\Controllers\Auth;
 
+use Carbon\Carbon;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Modules\Admin\Http\Controllers\Controller;
@@ -13,40 +14,46 @@ class LoginController extends Controller
 {
     use AuthenticatesUsers;
 
-    protected $redirectTo = '/admin';
-    protected $loginPath = '/admin/login';
-    protected $redirectAfterLogout = '/admin/login';
+    protected string $redirectTo = '/admin';
+    protected string $loginPath = '/admin/login';
+    protected string $redirectAfterLogout = '/admin/login';
 
     public function __construct()
     {
         $this->redirectTo = route('admin.dashboard');
-        $this->loginPath = route('admin.login');
-        $this->redirectAfterLogout = route('admin.login');
+        $this->loginPath = $this->redirectAfterLogout = route('admin.login');
+        $this->modulePrefix = strtolower(\Application::getModulePrefix(get_called_class()));
+        $this->middleware('guest')->except('logout');
         $this->middleware('guest:admin')->except('logout');
         \Illuminate\Support\Facades\Auth::setDefaultDriver('admin');
     }
 
-    public function showLoginForm()
+    public function showLoginForm(): object
     {
         return $this->view('auth.login');
     }
 
-    public function postLogin(LoginRequest $request)
+    public function login(LoginRequest $request)
     {
         if ($this->guard()->attempt($request->only('email', 'password'), $request->remember_me)) {
             if ($this->guard()->user()->active == 0) {
                 $this->guard()->logout();
                 return redirect($this->redirectAfterLogout);
             }
-            return redirect($this->redirectTo);
+            return $this->sendLoginResponse($request);
         }
-        return redirect($this->loginPath);
+        if ($request->ajax()) {
+            //TODO: make login accessible through ajax
+        }
+
+        return redirect()->back()->withErrors([
+            'error' => module_lang('login.error_login')
+        ]);
     }
 
     public function logout(Request $request)
     {
         $this->guard()->logout();
-
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect(property_exists($this, 'redirectAfterLogout')
@@ -55,6 +62,13 @@ class LoginController extends Controller
 
     protected function guard()
     {
-        return Auth::guard('admin');
+        return Auth::guard();
+    }
+
+    protected function authenticated(Request $request, $user)
+    {
+        $user->update([
+            'last_login' => Carbon::now()
+        ]);
     }
 }

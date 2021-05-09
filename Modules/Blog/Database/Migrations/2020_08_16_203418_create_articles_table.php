@@ -16,20 +16,25 @@ class CreateArticlesTable extends Migration
         if (!Schema::hasTable('articles')) {
             Schema::create('articles', function (Blueprint $table) {
                 $table->increments('id');
-                $table->unsignedInteger('domain_id');
-                $table->string('title', 255);
-                $table->string('slug', 255)->unique();
-                $table->unsignedInteger('ordering');
+                $table->unsignedBigInteger('domain_id');
+                $table->json('name');
+                $table->json('slug');
                 $table->unsignedInteger('author_id');
-                $table->text('introduction')->nullable();
-                $table->longText('content')->nullable();
-                $table->boolean('active')->default('1');
+                $table->json('introduction');
+                $table->json('content');
+                $table->boolean('active')->default(1);
                 $table->boolean('published')->default(0);
                 $table->timestamp('published_at')->nullable();
                 $table->integer('created_by')->nullable()->unsigned();
                 $table->integer('updated_by')->nullable()->unsigned();
                 $table->timestamps();
                 $table->softDeletes();
+
+                $table->index('domain_id');
+                $table->foreign('domain_id')->references('id')->on('domains');
+
+                $table->index('author_id');
+                $table->foreign('author_id')->references('id')->on('admins');
             });
         }
     }

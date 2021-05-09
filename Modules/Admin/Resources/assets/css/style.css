@@ -8,31 +8,56 @@
 }
 
 body, html {
-    background-color: #f8f8f8;
+    background: #fafafa;
     color: #495057;
-    font-family: Rubik, sans-serif;
+    font-family: Nunito, sans-serif;
     font-weight: 400;
     line-height: 1.5;
 }
 
+ol, ul {
+    padding-left: 0;
+}
+
+a {
+    color: #1a1a27;
+}
+
 .login-page {
     min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .login-box {
     max-width: 400px;
     width: 90%;
-    padding: 20px;
-    box-shadow: 1px 0 20px rgba(0, 0, 0, .1);
+    padding: 40px;
+    -webkit-box-shadow: 0 3px 10px rgba(175, 175, 175, 0.5);
+    box-shadow: 0 3px 10px rgba(175, 175, 175, 0.5);
 }
 
-.login-header h5 {
+.error-login {
+    text-align: center;
     font-weight: bold;
-    padding: 20px 0;
+    color: #e3342f;
+    padding: 0px 0 20px;
+}
+
+.login-header h1 {
+    font-weight: bold;
+    color: #161E2E;
+    font-size: 32px;
 }
 
 .login-form .input-group-text {
     width: 40px;
+}
+
+.login-form a {
+    color: #3490dc;
 }
 
 .login-other-options {
@@ -49,6 +74,10 @@ body, html {
 .login-form .btn {
     background-color: #2a3042;
     color: #fff;
+    min-height: 45px;
+    font-weight: bold;
+    width: 100%;
+    border-radius: 25px;
 }
 
 .login-form .btn:hover {
@@ -140,6 +169,14 @@ body, html {
     letter-spacing: 0.25rem;
 }
 
+.sidebar-menu-header .collapse-left-side {
+    color: #495057;
+    position: absolute;
+    right: 0;
+    opacity: 1;
+    transition: 1s all;
+}
+
 #sidebar-menu {
     list-style: none;
     text-decoration: none;
@@ -148,10 +185,10 @@ body, html {
 }
 
 #sidebar-menu li {
-    padding: 12px 20px;
+    line-height: 30px;
 }
 
-#sidebar-menu li a>i:first-child {
+#sidebar-menu li a > i:first-child {
     min-width: 15px;
     text-align: center;
 }
@@ -162,6 +199,7 @@ body, html {
 
 #sidebar-menu li:hover {
     cursor: pointer;
+    background-color: #f8f8f8;
 }
 
 #sidebar-menu li a {
@@ -169,11 +207,26 @@ body, html {
     text-decoration: none;
 }
 
+#sidebar-menu > li > span {
+    display: block;
+    padding: 0 15px 0;
+}
+
 #sidebar-menu li.active .arrow-right {
     transform: rotate(-180deg);
     -webkit-transform: rotate(-180deg);
     -moz-transform: rotate(-180deg);
     -o-transform: rotate(-180deg);
+}
+
+#sidebar-menu li {
+    padding: 5px 0;
+}
+
+#sidebar-menu .parent.active li.active {
+    background-color: #f8f8f8;
+    border-left: 2px solid #1a1a27;
+    padding-left: 33px;
 }
 
 #sidebar-menu li .menu-title {
@@ -186,14 +239,17 @@ body, html {
 
 #sidebar-menu li.active ul.sub-menu {
     list-style: none;
-    padding-left: 3px;
     display: block;
+    margin-bottom: 0;
+}
+
+#sidebar-menu li.active ul.sub-menu li:not(.active) > span {
+    padding-left: 35px;
 }
 
 #main-content {
-    width: calc(100% - 250px);
+    width: 100%;
     height: 100%;
-    margin-left: 250px;
     transition: .5s all;
 }
 
@@ -215,12 +271,18 @@ body, html {
 .navbar-header .user-info {
     cursor: pointer;
 }
-.navbar-header .user-info .initials {
+
+.navbar-header .user-info .symbol {
     background-color: #2a3042;
     color: #fff;
-    border-radius: 50%;
+    border-radius: 6px;
     padding: 8px;
     margin: 0 3px;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .page-content {
@@ -234,7 +296,7 @@ body, html {
 }
 
 footer.author {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     width: calc(100% - 250px);
     display: flex;
@@ -242,6 +304,11 @@ footer.author {
     padding: 0 10px;
     background-color: #fff;
     color: #74788d;
+}
+
+footer.author p {
+    margin: 0;
+    padding: 10px 0;
 }
 
 .breadcrumb {
@@ -296,10 +363,16 @@ footer.author {
     font-size: 17px;
 }
 
+.card-model-data > .card-body {
+    max-height: 600px;
+    overflow-y: scroll;
+}
+
 .card-custom .card-header {
     background-color: #fff;
 }
 
+.card-header .card-title,
 .card-header .card-title * {
     margin-bottom: 0;
 }
@@ -310,6 +383,10 @@ footer.author {
 
 .card-header .card-title p {
     font-size: 15px;
+}
+
+.title {
+    font-weight: bold;
 }
 
 .card-buttons .create_new {
@@ -363,7 +440,6 @@ footer.author {
     text-decoration: none;
     background-color: #1a1a27;
     color: #f3f3f3;
-    padding: 2px 10px;
     display: block;
     margin-left: auto;
     transition: .3s all;
@@ -372,13 +448,13 @@ footer.author {
 }
 
 .btn:hover {
-    box-shadow: 1px 1px 6px 1px #1a1a27;
+    color: #fff;
 }
 
 .form-buttons {
     display: flex;
     flex-wrap: wrap;
-    max-width: 300px;
+    max-width: 150px;
     margin-left: auto;
 }
 
@@ -395,7 +471,7 @@ footer.author {
 }
 
 .before-password {
-    margin-bottom: 1rem
+    margin-bottom: 1rem;
 }
 
 .generated_password {
@@ -406,34 +482,76 @@ footer.author {
     margin-left: 5px;
 }
 
-/* RWD */
-@media (min-width: 1025px) and (max-width: 1320px) {
+.card-body .item-block {
+    margin-bottom: 15px;
+}
+
+.card-body .card-header {
+    border-bottom: 0;
+}
+
+.item-block-operations {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translate(0, -50%);
+}
+
+.item-block-operations a {
+    color: #1a1a27;
+    padding: 0 5px;
+}
+
+.item-block-operations a.remove:hover {
+    color: #e3342f;
+}
+
+.return-back {
+    color: #1a1a27;
+}
+
+.form input[type=text], .form input[type=email], .form span, .form select, .form textarea {
+    margin: 0;
+    width: 100% !important;
+}
+
+.form.article textarea, .form.category textarea, .form .form-input > span {
+    margin: 0;
+}
+
+.nav-pills .nav-link:not(.active) {
+    color: #000;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    background-color: #1a1a27;
+    border-radius: 0 0 5px 5px;
+}
+
+.invalid-feedback {
+    font-size: 100%;
+}
+
+@media (min-width: 576px) {
 
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
-
-
+@media (min-width: 768px) {
 }
 
-@media (max-width: 767.98px) {
-
-}
-
-@media (max-width: 575.98px) {
-
-    /*.form-group {flex-wrap: wrap;padding: 0;}*/
-    /*    .form-group {display: block}*/
-    .form input[type=text], .form input[type=email], .form span, .form select, .form textarea {
-        margin: 0;
-        width: 100% !important;
+@media (min-width: 992px) {
+    #main-content {
+        width: calc(100% - 250px);
+        height: 100%;
+        margin-left: 250px;
     }
 
-    .form.article textarea, .form.category textarea, .form .form-input > span {
-        margin: 0;
-    }
-
-    .btn-website i {
+    .sidebar-menu-header .collapse-left-side {
         display: none;
+        opacity: 0;
     }
+}
+
+@media (min-width: 1200px) {
+
 }

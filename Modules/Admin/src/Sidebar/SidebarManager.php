@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Modules\Admin\src\Sidebar;
 
 use Maatwebsite\Sidebar\SidebarManager as BaseSidebarManager;

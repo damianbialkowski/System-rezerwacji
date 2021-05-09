@@ -5,6 +5,9 @@
 <?php endif; ?>
 
 <?php if ($showField): ?>
+    <?php if ($name == 'active' || $name == 'default'): ?>
+        <?= Form::hidden($name, 0) ?>
+    <?php endif; ?>
     <?= Form::checkbox($name, $options['value'], $options['checked'], $options['attr']) ?>
 
     <?php if ($showLabel && $options['label'] !== false && $options['label_show']): ?>

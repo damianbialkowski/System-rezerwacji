@@ -3,11 +3,14 @@
     "alias": "cms",
     "description": "",
     "keywords": [],
-    "order": 0,
+    "priority": 3,
     "providers": [
         "Modules\\Cms\\Providers\\CmsServiceProvider"
     ],
     "aliases": {},
     "files": [],
-    "requires": []
+    "requires": [],
+    "abilities": [
+        "Modules\\Cms\\Http\\Controllers\\Backend\\DomainController"
+    ]
 }

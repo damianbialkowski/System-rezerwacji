@@ -1,10 +1,22 @@
 <?php
 
 return [
-    'title' => 'Register user',
-    'title_description' => 'Register new user',
+    'title' => [
+        'type' => [
+            'create' => 'Register user',
+            'show' => '',
+            'edit' => 'Edit user',
+        ]
+    ],
+    'title_description' => [
+        'type' => [
+            'create' => 'Register new user',
+            'show' => '',
+            'edit' => 'Edit user information',
+        ]
+    ],
     'user_information' => 'User information',
-    'genereate_password' => 'Generate password',
+    'generate_password' => 'Generate password',
     'form' => [
         'name' => 'Name',
         'last_name' => 'Last name',

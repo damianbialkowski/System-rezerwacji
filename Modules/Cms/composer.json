@@ -1,10 +1,10 @@
 {
-    "name": "nwidart/cms",
+    "name": "d-cms/cms",
     "description": "",
     "authors": [
         {
-            "name": "Nicolas Widart",
-            "email": "n.widart@gmail.com"
+            "name": "Damian Bialkowski",
+            "email": "damianbialkowski8@gmail.com"
         }
     ],
     "extra": {
@@ -16,6 +16,10 @@
 
             }
         }
+    },
+    "require": {
+        "kalnoy/nestedset": "^5.0",
+        "facuz/laravel-themes": "^3.2"
     },
     "autoload": {
         "psr-4": {

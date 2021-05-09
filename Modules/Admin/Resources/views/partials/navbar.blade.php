@@ -5,10 +5,12 @@
         </div>
     </div>
     <div class="right-side">
-        <div class="user-info">
-            <span class="initials">D.B.</span>
+        <div class="user-info d-flex align-items-center" id="user-info-toggle">
             <span>{{ admin()->name }}</span>
-            <i class="fa fa-angle-down"></i>
+            <div>
+                <span class="symbol">{{ ucfirst(admin()->name[0]) }}</span>
+            </div>
         </div>
+        @include('admin::partials.user_info')
     </div>
 </header>

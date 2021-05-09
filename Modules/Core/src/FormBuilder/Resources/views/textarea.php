@@ -9,7 +9,9 @@
 <?php endif; ?>
 
 <?php if ($showField): ?>
+    <?php $options['attr']['class'] .= ' ckeditor-area'; ?>
     <?= Form::textarea($name, $options['value'], $options['attr']) ?>
+    <?php echo "<script></script>"; ?>
 
     <?php include 'help_block.php' ?>
 <?php endif; ?>

@@ -13,12 +13,14 @@ class CreateDomainsTable extends Migration
      */
     public function up()
     {
-        if (!Schema::hasTable('domain')) {
+        if (!Schema::hasTable('domains')) {
             Schema::create('domains', function (Blueprint $table) {
                 $table->bigIncrements('id');
                 $table->string('name')->unique();
                 $table->string('url', 100)->default('*')->unique();
                 $table->json('options');
+                $table->boolean('active')->default(0)->nullable(false);
+                $table->boolean('default')->default(0)->nullable(false);
                 $table->softDeletes();
                 $table->timestamps();
 
@@ -34,6 +36,6 @@ class CreateDomainsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('domain');
+        Schema::dropIfExists('domains');
     }
 }

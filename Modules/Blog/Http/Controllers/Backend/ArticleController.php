@@ -3,17 +3,19 @@
 namespace Modules\Blog\Http\Controllers\Backend;
 
 use Modules\Admin\Http\Controllers\Controller as CoreController;
-use Modules\Blog\Datatables\ArticlesDataTable;
+use Modules\Blog\Entities\Article;
+use Modules\Blog\Forms\ArticleForm;
+use Modules\Blog\Http\Requests\ArticleRequest;
 
 class ArticleController extends CoreController
 {
-    protected $model = Article::class;
-    protected $dataTable = ArticlesDataTable::class;
-    protected $form = Article::class;
-    protected $baseView = 'panel.articles';
-    protected $baseRoute = 'articles';
-    protected $requestList = [
-//        'store' => AdminCreateRequest::class,
-//        'update' => AdminUpdateRequest::class,
-    ];
+    public function __construct()
+    {
+        $this->model = Article::class;
+        $this->form = ArticleForm::class;
+        $this->baseView = 'panel.articles';
+        $this->baseRoute = 'articles';
+        $this->request = ArticleRequest::class;
+        parent::__construct();
+    }
 }

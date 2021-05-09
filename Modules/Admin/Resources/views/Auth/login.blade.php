@@ -1,34 +1,44 @@
 @extends('admin::layouts.auth')
 @section('admin::main')
     <div class="login-box">
-        <div class="login-header">
-            <h5 class="text-center">Sign In</h5>
+        <div class="login-header mb-4 ">
+            <h1 class="text-center">@module_lang('login.sign_in')</h1>
         </div>
-        <form action="{{ route('admin.login') }}" method="POST" class="login-form">
-            @csrf
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="fa fa-user"></i></span>
-                </div>
-                <input type="email" name="email" class="form-control" placeholder="Email" required autofocus>
+        @if($errors->has('error'))
+            <div class="error-login">
+                <span>{{ $errors->first() }}</span>
             </div>
-            <div class="input-group mb-3">
-                <div class="input-group-prepend">
-                    <span class="input-group-text"><i class="fa fa-key"></i></span>
-                </div>
-                <input type="password" name="password" class="form-control" placeholder="Password" required>
+        @endif
+        @if(Session::has('success'))
+            <div class="text-success">
+                <span>{{ Session::get('success') }}</span>
             </div>
-            <div class="login-other-options">
-                <div class="form-check">
-                    <input type="checkbox" class="form-check-input" id="remember-me">
-                    <label class="form-check-label" for="remember-me">Remember me</label>
-                </div>
-                <a href="#">Forgot password?</a>
+        @endif
+        {!! Form::open(['url' => admin_route('login'), 'method' => 'POST', 'class' => 'login-form']) !!}
+        <div class="input-group mb-4">
+            <input type="email" name="email" class="form-control @error('email') is-invalid @endif"
+                   placeholder="@module_lang('login.email')" required
+                   autofocus>
+            @error('email')
+            <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+        <div class="input-group mb-4">
+            <input type="password" name="password" class="form-control @error('password') is-invalid @endif"
+                   placeholder="@module_lang('login.password')"
+                   required>
+            @error('password')
+            <div class="invalid-feedback">{{ $message }}</div>
+            @enderror
+        </div>
+        <div class="login-other-options">
+            <div class="form-check">
+                <input type="checkbox" class="form-check-input" id="remember-me">
+                <label class="form-check-label" for="remember-me">@module_lang('login.remember_me')</label>
             </div>
-            <button type="submit" class="btn btn-block">Log In</button>
-        </form>
-    </div>
-    <div class="mt-5 text-center">
-        <p>Copyright &copy; 2020r. - DCms</p>
+            <a href="{{ admin_route('password.request') }}">@module_lang('login.forgot_password')</a>
+        </div>
+        <button type="submit" class="btn">@module_lang('login.sign_in')</button>
+        {!! Form::close() !!}
     </div>
 @endsection

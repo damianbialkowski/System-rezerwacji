@@ -8,15 +8,16 @@ class Article extends CmsModel
 {
     protected $fillable = [
         'domain_id',
-        'title',
+        'name',
         'slug',
-        'ordering',
         'author_id',
         'introduction',
         'content',
         'active',
         'published',
         'published_at',
+        'created_by',
+        'updated_by'
     ];
 
     protected $dates = [
@@ -25,8 +26,18 @@ class Article extends CmsModel
         'deleted_at',
     ];
 
-    protected $with = [
-        'categories',
+    protected $casts = [
+        'name' => 'json',
+        'slug' => 'json',
+        'introduction' => 'json',
+        'content' => 'json'
+    ];
+
+    public $translatable = [
+        'name',
+        'slug',
+        'introduction',
+        'content'
     ];
 
     public function categories()

@@ -10,7 +10,8 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Modules\\Admin\\Providers\\AdminServiceProvider"
+                "Modules\\Admin\\Providers\\AdminServiceProvider",
+                "Facuz\\Theme\\ThemeServiceProvider"
             ],
             "aliases": {
 
@@ -18,9 +19,9 @@
         }
     },
     "require": {
-        "maatwebsite/laravel-sidebar": "~2.1",
-        "silber/bouncer": "v1.0.0-rc.8",
-        "laravel/ui": "1.x-dev"
+        "maatwebsite/laravel-sidebar": "^2.4",
+        "laravel/ui": "^3.0",
+        "facuz/laravel-themes": "^3.2"
     },
     "autoload": {
         "psr-4": {

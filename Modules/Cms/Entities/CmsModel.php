@@ -2,21 +2,36 @@
 
 namespace Modules\Cms\Entities;
 
-use Illuminate\Database\Eloquent\Model as BaseModel;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Modules\Core\Entities\CoreModel;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Modules\Cms\Traits\CmsTrait;
+use Modules\Admin\Traits\OnlineModel;
+use Modules\Core\Traits\Translatable;
 
-abstract class CmsModel extends BaseModel implements HasMedia
+class CmsModel extends CoreModel
 {
-    use HasMediaTrait,
-        SoftDeletes,
-        CmsTrait;
+    use SoftDeletes,
+        Sluggable,
+        CmsTrait,
+        OnlineModel,
+        Translatable;
 
-    public function hasAttribute($attribute)
+    protected $dates = [
+        'deleted_at',
+        'created_at',
+        'updated_at'
+    ];
+
+    public $translatable = [];
+
+    public function sluggable(): array
     {
-        return array_key_exists($attribute, $this->attributes);
+        return [
+            'slug' => [
+                'source' => 'name'
+            ]
+        ];
     }
+
 }

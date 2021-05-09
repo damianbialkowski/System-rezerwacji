@@ -39,6 +39,9 @@ return [
     'collection'    => 'form-builder::collection',
     'static'        => 'form-builder::static',
 
+
+    'editor'        => 'form-builder::editor',
+
     // Remove the laravel-form-builder:: prefix above when using template_prefix
     'template_prefix'   => '',
 

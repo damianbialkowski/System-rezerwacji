@@ -5,7 +5,7 @@
     <?php endif; ?>
 
     <?php if ($showLabel && $options['label'] !== false && $options['label_show']): ?>
-        <?= Form::customLabel($name, module_trans('admins.form.' . $options['real_name']), $options['label_attr']) ?>
+        <?= Form::customLabel($name, module_lang('form.' . $options['real_name']), $options['label_attr']) ?>
     <?php endif; ?>
 
     <?php if ($showField): ?>

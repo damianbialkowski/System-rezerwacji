@@ -1,14 +1,16 @@
 {
     "name": "Blog",
     "alias": "blog",
-    "description": "The blog system for Cms",
+    "description": "The blog module for Cms",
     "keywords": [],
-    "order": 1,
+    "priority": 2,
     "providers": [
         "Modules\\Blog\\Providers\\BlogServiceProvider"
     ],
     "aliases": {},
     "files": [],
-    "version" : "0.1",
-    "requires": []
+    "requires": [],
+    "abilities": [
+        "Modules\\Blog\\Http\\Controllers\\Backend\\ArticleController"
+    ]
 }

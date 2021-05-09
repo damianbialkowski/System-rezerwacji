@@ -2,63 +2,46 @@
 
 namespace Modules\Blog\Entities;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Modules\Cms\Entities\CmsNestedModel;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Cviebrock\EloquentSluggable\Services\SlugService;
-use Kalnoy\Nestedset\NodeTrait;
 
-class Category extends Model
+class Category extends CmsNestedModel
 {
-    use SoftDeletes,
-        Sluggable,
-        NodeTrait {
-        NodeTrait::replicate as replicateNode;
-        Sluggable::replicate as replicateSlug;
-    }
+//    use NodeTrait {
+//        NodeTrait::replicate as replicateNode;
+//        Sluggable::replicate as replicateSlug;
+//    }
 
     protected $fillable = [
+        '_lft',
+        '_rgt',
         'parent_id',
-        'lft',
-        'rgt',
-        'depth',
         'name',
         'slug',
         'description',
         'active',
+        'params',
         'updated_by',
         'created_by'
     ];
 
-    public function replicate(array $except = null)
-    {
-        $instance = $this->replicateNode($except);
-        (new SlugService())->slug($instance, true);
+    protected $casts = [
+        'name' => 'json',
+        'slug' => 'json',
+        'description' => 'json',
+    ];
 
-        return $instance;
-    }
-
-    public function sluggable()
-    {
-        return [
-            'slug' => [
-                'source' => 'name'
-            ]
-        ];
-    }
-
-    public function getRouteKeyName()
-    {
-        return 'slug';
-    }
+//    public function replicate(array $except = null)
+//    {
+//        $instance = $this->replicateNode($except);
+//        (new SlugService())->slug($instance, true);
+//
+//        return $instance;
+//    }
 
     public function articles()
     {
-        return $this->belongsToMany(Article::class);
-    }
-
-    public function url()
-    {
-        return $this;
+        return $this->hasMany(Article::class);
     }
 }

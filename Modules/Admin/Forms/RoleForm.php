@@ -11,12 +11,12 @@ class RoleForm extends Form
     public function buildForm()
     {
         $this
-            ->add('_method', 'hidden', ['value' => 'PUT'])
-            ->add('name', 'text')
-            ->add('title', 'text')
+            ->add('name')
+            ->add('title')
+            ->add('active', 'checkbox')
             ->add('update', 'submit',
                 [
-                    'label' => module_trans('admins.form.update'),
+                    'label' => module_lang('form.update'),
                     'attr' => [
                         'class' => 'btn',
                     ]

@@ -4,7 +4,7 @@
     "description": "Admin panel module",
     "version": "0.1",
     "keywords": [],
-    "order": 1,
+    "priority": 1,
     "providers": [
         "Modules\\Admin\\Providers\\AdminServiceProvider"
     ],
@@ -12,7 +12,7 @@
     "files": [],
     "requires": [],
     "abilities": [
-        "Modules\\Admin\\Http\\Controllers\\AdminController",
-        "Modules\\Admin\\Http\\Controllers\\RoleController"
+        "Modules\\Admin\\Http\\Controllers\\Backend\\AdminController",
+        "Modules\\Admin\\Http\\Controllers\\Backend\\RoleController"
     ]
 }

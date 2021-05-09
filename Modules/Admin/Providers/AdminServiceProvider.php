@@ -4,15 +4,27 @@ namespace Modules\Admin\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory;
-use Maatwebsite\Sidebar\SidebarServiceProvider;
+use Modules\Admin\Providers\SidebarServiceProvider;
+use Modules\Admin\Providers\BouncerServiceProvider;
 use Modules\Admin\Entities\Admin;
 use Bouncer;
-use Modules\Admin\src\AbilityManager\AbilityManager;
-use Modules\Admin\src\AbilityManager\AbilityManagerInterface;
-use \CoreCms;
+use Application;
+use Modules\Admin\Entities\Role;
+use Modules\Admin\Observers\RoleObserver;
+use Modules\Admin\Observers\AdminObserver;
 
 class AdminServiceProvider extends ServiceProvider
 {
+    /**
+     * @var string $moduleName
+     */
+    protected $moduleName = 'Admin';
+
+    /**
+     * @var string $moduleNameLower
+     */
+    protected $moduleNameLower = 'admin';
+
     /**
      * Boot the application events.
      *
@@ -21,16 +33,17 @@ class AdminServiceProvider extends ServiceProvider
     public function boot()
     {
         $router = $this->app['router'];
-        $router->pushMiddlewareToGroup('auth.admin', \Modules\Admin\Http\Middleware\ScopeBouncer::class);
-        $router->pushMiddlewareToGroup('auth.admin', \Modules\Admin\Http\Middleware\AdminMiddleware::class);
+//        $router->pushMiddlewareToGroup('web', \Modules\Admin\Http\Middleware\AdminMiddleware::class);
+        $router->pushMiddlewareToGroup('web', \Modules\Admin\Http\Middleware\ScopeBouncer::class);
         $this->registerMiddlewares();
 
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();
-        $this->loadMigrationsFrom(module_path('Admin', 'Database/Migrations'));
+        $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
 
         $this->registerHelpers();
+        $this->registerObservers();
     }
 
     /**
@@ -42,18 +55,10 @@ class AdminServiceProvider extends ServiceProvider
     {
         $this->app->register(RouteServiceProvider::class);
         $this->app->register(RepositoryServiceProvider::class);
-
-        if (CoreCms::isBackend()) {
-            $this->app->register('Modules\Admin\Providers\SidebarServiceProvider');
-            $this->app->register('Modules\Admin\Providers\BouncerServiceProvider');
-            $loader = \Illuminate\Foundation\AliasLoader::getInstance();
-            $loader->alias('Bouncer', 'Silber\Bouncer\BouncerFacade');
-//            $this->app->singleton(AbilityManagerInterface::class, function () {
-//                $bouncer = new \Silber\Bouncer\Bouncer();
-//                return new AbilityManager($bouncer);
-//            });
-        }
-
+        $this->app->register(SidebarServiceProvider::class);
+        $this->app->register(BouncerServiceProvider::class);
+        $loader = \Illuminate\Foundation\AliasLoader::getInstance();
+        $loader->alias('Bouncer', 'Silber\Bouncer\BouncerFacade');
     }
 
     /**
@@ -64,10 +69,10 @@ class AdminServiceProvider extends ServiceProvider
     protected function registerConfig()
     {
         $this->publishes([
-            module_path('Admin', 'Config/config.php') => config_path('admins.php'),
+            module_path($this->moduleName, 'Config/config.php') => config_path($this->moduleNameLower . '.php'),
         ], 'config');
         $this->mergeConfigFrom(
-            module_path('Admin', 'Config/config.php'), 'admin'
+            module_path($this->moduleName, 'Config/config.php'), $this->moduleNameLower
         );
     }
 
@@ -78,17 +83,15 @@ class AdminServiceProvider extends ServiceProvider
      */
     public function registerViews()
     {
-        $viewPath = resource_path('views/modules/admin');
+        $viewPath = resource_path('views/modules/' . $this->moduleNameLower);
 
-        $sourcePath = module_path('Admin', 'Resources/views');
+        $sourcePath = module_path($this->moduleName, 'Resources/views');
 
         $this->publishes([
             $sourcePath => $viewPath
-        ], 'views');
+        ], ['views', $this->moduleNameLower . '-module-views']);
 
-        $this->loadViewsFrom(array_merge(array_map(function ($path) {
-            return $path . '/modules/admin';
-        }, \Config::get('view.paths')), [$sourcePath]), 'admin');
+        $this->loadViewsFrom(array_merge($this->getPublishableViewPaths(), [$sourcePath]), $this->moduleNameLower);
     }
 
     /**
@@ -98,12 +101,12 @@ class AdminServiceProvider extends ServiceProvider
      */
     public function registerTranslations()
     {
-        $langPath = resource_path('lang/modules/admin');
+        $langPath = resource_path('lang/modules/' . $this->moduleNameLower);
 
         if (is_dir($langPath)) {
-            $this->loadTranslationsFrom($langPath, 'admin');
+            $this->loadTranslationsFrom($langPath, $this->moduleNameLower);
         } else {
-            $this->loadTranslationsFrom(module_path('Admin', 'Resources/lang'), 'admin');
+            $this->loadTranslationsFrom(module_path($this->moduleName, 'Resources/lang'), $this->moduleNameLower);
         }
     }
 
@@ -138,8 +141,25 @@ class AdminServiceProvider extends ServiceProvider
      *
      * @return array
      */
-    public function provides()
+    public function provides(): array
     {
         return [];
+    }
+
+    public function registerObservers()
+    {
+        Role::observe(RoleObserver::class);
+        Admin::observe(AdminObserver::class);
+    }
+
+    private function getPublishableViewPaths(): array
+    {
+        $paths = [];
+        foreach (\Config::get('view.paths') as $path) {
+            if (is_dir($path . '/modules/' . $this->moduleNameLower)) {
+                $paths[] = $path . '/modules/' . $this->moduleNameLower;
+            }
+        }
+        return $paths;
     }
 }

@@ -24,8 +24,6 @@ class RouteServiceProvider extends ServiceProvider
     public function boot()
     {
         parent::boot();
-
-
     }
 
     /**
@@ -35,8 +33,6 @@ class RouteServiceProvider extends ServiceProvider
      */
     public function map()
     {
-        $this->mapApiRoutes();
-
         $this->mapWebRoutes();
     }
 
@@ -49,25 +45,10 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapWebRoutes()
     {
-        Route::prefix(env('ADMIN_ROUTE'))
+        Route::prefix(env('ADMIN_ROUTE', 'admin'))
             ->as('admin.')
             ->middleware('web')
             ->namespace($this->moduleNamespace)
             ->group(module_path('Admin', '/Routes/web.php'));
-    }
-
-    /**
-     * Define the "api" routes for the application.
-     *
-     * These routes are typically stateless.
-     *
-     * @return void
-     */
-    protected function mapApiRoutes()
-    {
-        Route::prefix('api')
-            ->middleware('api')
-            ->namespace($this->moduleNamespace)
-            ->group(module_path('Admin', '/Routes/api.php'));
     }
 }

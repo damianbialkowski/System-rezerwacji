@@ -16,18 +16,19 @@ class CreateCategoriesTable extends Migration
         if (!Schema::hasTable('categories')) {
             Schema::create('categories', function (Blueprint $table) {
                 $table->increments('id');
-                $table->unsignedInteger('parent_id')->nullable();
-                $table->integer('lft')->nullable();
-                $table->integer('rgt')->nullable();
-                $table->integer('depth')->nullable();
-                $table->string('name', 255);
-                $table->string('slug', 255)->unique();
-                $table->text('description');
+                $table->nestedSet();
+                $table->json('name');
+                $table->json('slug');
+                $table->json('description');
                 $table->boolean('active')->default(1);
-                $table->integer('updated_by')->nullable();
-                $table->integer('created_by')->nullable();
+                $table->json('params')->nullable();
+                $table->unsignedInteger('updated_by')->nullable();
+                $table->unsignedInteger('created_by')->nullable();
                 $table->timestamps();
                 $table->softDeletes();
+
+                $table->foreign('updated_by')->references('id')->on('admins');
+                $table->foreign('created_by')->references('id')->on('admins');
             });
         }
     }

@@ -21,25 +21,28 @@ class ArticlesTableSeeder extends Seeder
         Article::truncate();
         $faker = new \Faker\Generator();
         $faker->addProvider(new \Faker\Provider\Lorem($faker));
-        $categories = Category::all();
-        foreach ($categories as $category) {
+        $domain = resolve('Domain');
+        $domainLanguage = $domain->default_language;
+//        dd($domainLanguage->id);
+        $counter = 10;
+        $i = 0;
+        do {
             $title = $faker->sentence(5);
             $randomNumberOfSentences = mt_rand(50, 300);
             $content = $faker->sentence($randomNumberOfSentences);
             $article = new Article;
             $data = [
-                'domain_id' => 1,
-                'title' => $title,
-                'ordering' => $article->getNextOrdering($article),
-                'author_id' => 0,
-                'introduction' => str_limit($content, 250),
-                'content' => $content,
+                'domain_id' => $domain->id,
+                'name' => [$domainLanguage->locale => $title],
+                'slug' => [$domainLanguage->locale => str_slug($title)],
+                'author_id' => 1,
+                'introduction' => [$domainLanguage->locale => str_limit($content, 250)],
+                'content' => [$domainLanguage->locale => $content],
                 'active' => 1,
-                'published' => 1,
-                'published_at' => \Carbon\Carbon::now(),
+                'published' => 0,
             ];
             $item = $article->create($data);
-            $item->categories()->attach($category->id);
-        }
+            $i++;
+        } while ($i < $counter);
     }
 }

@@ -2,9 +2,11 @@
 
 namespace Modules\Core\Entities;
 
-class CoreModel extends Illuminate\Database\Eloquent\Model
+use Illuminate\Database\Eloquent\Model;
+
+class CoreModel extends Model
 {
-    public function hasAttribute($attribute)
+    public function hasAttribute($attribute): bool
     {
         return array_key_exists($attribute, $this->attributes);
     }

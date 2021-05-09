@@ -10,13 +10,18 @@ use Illuminate\Support\Facades\Redirect;
 use Modules\Core\src\FormBuilder\Traits\FormBuilderTrait;
 use Illuminate\Http\Request;
 use Bouncer;
+use Modules\Admin\src\Presenter\Presenter;
+use Modules\Admin\Traits\FormController;
 
 abstract class CoreController extends BaseController
 {
-    use AuthorizesRequests, DispatchesJobs, ValidatesRequests, FormBuilderTrait;
+    use AuthorizesRequests, DispatchesJobs, ValidatesRequests, FormBuilderTrait, FormController;
 
-    protected $model;
-    protected $defaultRedirect = 'index';
+    protected string $model;
+    protected string $defaultRedirect = 'index';
+    public string $modulePrefix;
+    public string $routeWithModulePrefix;
+    public array $searchableColumns = [];
 
     /**
      * Rewrite view method to a module scope
@@ -25,9 +30,9 @@ abstract class CoreController extends BaseController
      * @param array $mergeData
      * @return \Illuminate\Contracts\View\View
      */
-    public function view($view, $data = [], $mergeData = [])
+    public function view($view, $data = [], $mergeData = []): object
     {
-        return view(module_prefix() . '::' . $view, $data, $mergeData);
+        return view($this->modulePrefix . '::' . $view, $data, $mergeData);
     }
 
     /**
@@ -40,37 +45,39 @@ abstract class CoreController extends BaseController
      */
     public function redirect($route, $parameters = [], $status = 302, $headers = [])
     {
-        return Redirect::route(module_prefix() . '.' . $route, $parameters, $status, $headers);
+        return Redirect::route($route, $parameters, $status, $headers);
     }
 
     /**
      * Display a listing of the resource.
      * @return Response
      */
-    public function index()
+    public function index(): object
     {
-        if (!Bouncer::can('index', admin())) {
+        if (!Bouncer::can('index', $this->model)) {
             return abort(403);
         }
-        $dataTable = new $this->dataTable;
-        return $dataTable->render($this->modulePrefix . '::' . $this->baseView . '.index');
+        $entity = new $this->model;
+        $data = (new Presenter($entity, $this->searchableColumns))->withFilters()->getData();
+        return $this->view($this->baseView . '.index', compact(['entity', 'data']));
     }
 
     /**
      * Show the form for creating a new resource.
      * @return Response
      */
-    public function create()
+    public function create(): object
     {
-        if (!Bouncer::can('create', admin())) {
+        if (!Bouncer::can('create', $this->model)) {
             return abort(403);
         }
         $form = $this->form($this->form, [
             'method' => 'POST',
-            'route' => [implode('.', [$this->routeWithModulePrefix, 'store'])]
+            'route' => [$this->routeWithModulePrefix . '.' . 'store']
         ]);
 
-        return $this->view($this->baseView . '.create', ['form' => $form]);
+        $item = new $this->model;
+        return $this->view($this->baseView . '.create', ['form' => $form, 'item' => $item]);
     }
 
     /**
@@ -80,12 +87,11 @@ abstract class CoreController extends BaseController
      */
     public function store(Request $request)
     {
-        if (!Bouncer::can('store', admin())) {
+        if (!Bouncer::can('create', $this->model)) {
             return abort(403);
         }
-        if (count($this->requestList) && isset($this->requestList['store'])) {
-            $rules = (new $this->requestList['store'])->rules();
-            $request->validate($rules);
+        if (isset($this->requestList['store'])) {
+            $this->validateForm($request, new $this->requestList['store']);
         }
 
         (new $this->model)->create($request->all());
@@ -96,40 +102,61 @@ abstract class CoreController extends BaseController
      * Show the specified resource.
      * @return Response
      */
-    public function show($id)
+    public function show($id): object
     {
-        if (!Bouncer::can('show', admin())) {
+        if (!Bouncer::can('show', $this->model)) {
             return abort(403);
         }
-        $item = (new $this->model)->findOrFail($id);
-
-        if (method_exists($item, 'attributesToUnset')) {
-            $item->attributesToUnset();
-        }
-
-        return $this->view($this->baseView . '.show', compact('item'));
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     * @return Response
-     */
-    public function edit($id)
-    {
-        if (!Bouncer::can('edit', admin())) {
-            return abort(403);
-        }
-        $item = (new $this->model)->findOrFail($id);
+        $item = (new $this->model)->withTrashed()->findOrFail($id);
 
         if (method_exists($item, 'attributesToUnset')) {
             $item->attributesToUnset();
         }
         $form = $this->form($this->form, [
             'method' => 'POST',
+            'model' => $item
+        ]);
+        $form->disableFields();
+
+        $entity = new $this->model;
+        return $this->view($this->baseView . '.show', compact(['form', 'item', 'entity']));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     * @return Response
+     */
+    public function edit($id): object
+    {
+        if (!Bouncer::can('edit', $this->model)) {
+            return abort(403);
+        }
+        $item = (new $this->model)->withTrashed()->findOrFail($id);
+
+        if (method_exists($item, 'attributesToUnset')) {
+            $item->attributesToUnset();
+        }
+        $form = $this->form($this->form, [
+            'method' => 'PUT',
             'route' => [$this->routeWithModulePrefix . '.update', $item->id],
             'model' => $item
         ]);
 
-        return $this->view($this->baseView . '.edit', compact(['item', 'form']));
+        $entity = new $this->model;
+        return $this->view($this->baseView . '.edit', compact(['item', 'form', 'entity']));
+    }
+
+    public function update(Request $request, $id)
+    {
+        if (!Bouncer::can('edit', $this->model)) {
+            return abort(403);
+        }
+        if (isset($this->requestList['update'])) {
+            $this->validateForm($request, new $this->requestList['update'], $id);
+        }
+        $item = (new $this->model)->findOrFail($id);
+        $item->update($request->all());
+
+        return $this->redirect($this->routeWithModulePrefix . '.' . $this->defaultRedirect);
     }
 }

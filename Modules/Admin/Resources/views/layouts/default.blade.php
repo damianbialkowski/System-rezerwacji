@@ -12,7 +12,7 @@
             </div>
         </div>
         <footer class="author">
-            <p>Copyright 2020 &copy; DCMS by Damian Białkowski</p>
+            <p>Copyright {{ date('Y') }} &copy; DCMS by @cms_author</p>
         </footer>
     </div>
 </div>

@@ -2,10 +2,50 @@
 
 namespace Modules\Admin\Entities;
 
-use Silber\Bouncer\Database\Role as BouncerRole;
+use Illuminate\Database\Eloquent\Model;
+use Modules\Admin\Traits\OnlineModel;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Silber\Bouncer\Database\Concerns\IsRole;
+use Silber\Bouncer\Database\Models;
 
-class Role extends BouncerRole
+class Role extends Model
 {
+    use OnlineModel, SoftDeletes, IsRole;
+
+    protected $fillable = [
+        'name',
+        'title',
+        'level',
+        'active'
+    ];
+
+    protected $dates = [
+        'created_at',
+        'updated_at'
+    ];
+
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'id' => 'int',
+        'level' => 'int',
+    ];
+
+    /**
+     * Constructor.
+     *
+     * @param array $attributes
+     */
+    public function __construct(array $attributes = [])
+    {
+        $this->table = Models::table('roles');
+
+        parent::__construct($attributes);
+    }
+
     public static function getRoles()
     {
         return self::all();
@@ -19,7 +59,6 @@ class Role extends BouncerRole
             $preparedRoles[$role->id] = $role->name;
         }
         return $preparedRoles;
-
     }
 
     public function showableAttributes(): array
@@ -28,6 +67,11 @@ class Role extends BouncerRole
             'name',
             'title'
         ];
+    }
+
+    public function hasAny()
+    {
+        return \DB::table('assigned_roles')->where('role_id', $this->id)->count();
     }
 
 }

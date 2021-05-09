@@ -35,3 +35,15 @@ function randomString() {
     return result;
 }
 
+function collapseMenu() {
+    var sidebar = document.getElementById('sidebar-menu-content');
+    var mainContent = document.getElementById('main-content');
+    if (!sidebar.classList.contains('active')) {
+        sidebar.classList.add('active');
+        mainContent.classList.remove('full-width-content');
+    } else {
+        sidebar.classList.remove('active');
+        mainContent.classList.add('full-width-content');
+    }
+}
+

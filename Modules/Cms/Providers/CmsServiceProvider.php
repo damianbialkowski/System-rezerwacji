@@ -3,7 +3,9 @@
 namespace Modules\Cms\Providers;
 
 use Illuminate\Support\ServiceProvider;
-use Illuminate\Database\Eloquent\Factory;
+use Modules\Cms\Entities\Domain;
+use Modules\Cms\Entities\Language;
+use Modules\Cms\Observers\DomainObserver;
 
 class CmsServiceProvider extends ServiceProvider
 {
@@ -17,8 +19,14 @@ class CmsServiceProvider extends ServiceProvider
         $this->registerTranslations();
         $this->registerConfig();
         $this->registerViews();
-        $this->registerFactories();
         $this->loadMigrationsFrom(module_path('Cms', 'Database/Migrations'));
+        $this->registerObservers();
+
+        if (config('core.route_status') == 'frontend') {
+            $this->setDomain();
+        } else {
+            $this->setBackend();
+        }
     }
 
     /**
@@ -83,18 +91,6 @@ class CmsServiceProvider extends ServiceProvider
     }
 
     /**
-     * Register an additional directory of factories.
-     *
-     * @return void
-     */
-    public function registerFactories()
-    {
-        if (! app()->environment('production') && $this->app->runningInConsole()) {
-            app(Factory::class)->load(module_path('Cms', 'Database/factories'));
-        }
-    }
-
-    /**
      * Get the services provided by the provider.
      *
      * @return array
@@ -102,5 +98,31 @@ class CmsServiceProvider extends ServiceProvider
     public function provides()
     {
         return [];
+    }
+
+    public function registerObservers()
+    {
+        Domain::observe(DomainObserver::class);
+    }
+
+    public function setDomain()
+    {
+        $request = request();
+        $host = $request->getHost();
+        $domain = Domain::where('url', $host)->where('active', 1)->first();
+        if (!$domain) {
+            $domain = Domain::where('default', 1)->where('active', 1)->first();
+        }
+        if ($domain) {
+            $domain->init();
+        }
+    }
+
+    public function setBackend()
+    {
+        $app = $this->app;
+        $app->singleton('Languages', function () {
+            return Language::all();
+        });
     }
 }

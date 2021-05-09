@@ -12,7 +12,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    protected $moduleNamespace = 'Modules\Core\Http\Controllers';
+    protected string $moduleNamespace = 'Modules\Core\Http\Controllers';
 
     /**
      * Called before routes are registered.

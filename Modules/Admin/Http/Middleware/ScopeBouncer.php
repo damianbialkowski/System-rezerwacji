@@ -2,6 +2,7 @@
 
 namespace Modules\Admin\Http\Middleware;
 
+use Illuminate\Http\Request;
 use Silber\Bouncer\Bouncer;
 use Closure;
 
@@ -31,9 +32,9 @@ class ScopeBouncer
      * @param \Closure $next
      * @return mixed
      */
-    public function handle($request, Closure $next)
+    public function handle(Request $request, Closure $next)
     {
-        $auth_user = auth()->guard('admin')->user();
+        $auth_user = auth('admin')->user();
         if ($auth_user) {
             $this->bouncer->scope()->to($auth_user->id);
         }

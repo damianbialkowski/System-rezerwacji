@@ -5,6 +5,7 @@ namespace Modules\Core\Providers;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Foundation\AliasLoader;
+use Modules\Core\Console\InstallCommand;
 use Modules\Core\Foundation\Application;
 use Config;
 use Modules\Core\src\Installation\Installation;
@@ -35,6 +36,10 @@ class CoreServiceProvider extends ServiceProvider
         $this->registerConfig();
         $this->registerViews();
         $this->loadMigrationsFrom(module_path($this->moduleName, 'Database/Migrations'));
+
+        $this->commands([
+            InstallCommand::class,
+        ]);
     }
 
     /**
@@ -89,7 +94,7 @@ class CoreServiceProvider extends ServiceProvider
             module_path($this->moduleName, 'Config/config.php'), $this->moduleNameLower
         );
         $this->mergeConfigFrom(
-            module_path($this->moduleName, 'Config/Installation.php'), $this->moduleNameLower
+            module_path($this->moduleName, 'Config/installation.php'), $this->moduleNameLower
         );
     }
 

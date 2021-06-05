@@ -4,7 +4,6 @@ namespace Modules\Admin\Entities;
 
 use Modules\Core\Entities\AuthModel;
 use Illuminate\Notifications\Notifiable;
-use Modules\Admin\Traits\BootableTrait;
 use \Silber\Bouncer\Database\HasRolesAndAbilities;
 
 class Admin extends AuthModel
@@ -23,7 +22,7 @@ class Admin extends AuthModel
         'last_login',
     ];
 
-    protected $attributesUnset = [
+    protected array $attributesUnset = [
         'password'
     ];
 
@@ -41,6 +40,12 @@ class Admin extends AuthModel
 
     protected $appends = [
         'role',
+    ];
+
+    public array $searchableColumns = [
+        'name',
+        'active',
+        'deleted_at'
     ];
 
     public function setPasswordAttribute($password)

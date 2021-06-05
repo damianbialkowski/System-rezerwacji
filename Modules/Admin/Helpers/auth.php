@@ -3,7 +3,7 @@
 if (!function_exists('admin')) {
     function admin(): object
     {
-        return \Auth::guard('admin')->user();
+        return Illuminate\Support\Facades\Auth::guard('admin')->user();
     }
 }
 

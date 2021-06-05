@@ -49,7 +49,7 @@ class RoleController extends CoreController
         if (!Bouncer::can('show', $this->model)) {
             return abort(403);
         }
-        $item = (new $this->model)->withTrashed()->findOrFail($id);
+        $item = $this->model::findOrFail($id);
         $modules = (new AbilityManager)->init($item)->getModulesAbilities();;
         if (method_exists($item, 'attributesToUnset')) {
             $item->attributesToUnset();
@@ -73,7 +73,7 @@ class RoleController extends CoreController
         if (!Bouncer::can('edit', $this->model)) {
             return abort(403);
         }
-        $item = (new $this->model)->withTrashed()->findOrFail($id);
+        $item = $this->model::findOrFail($id);
         $modules = (new AbilityManager)->init($item)->getModulesAbilities();
         if (method_exists($item, 'attributesToUnset')) {
             $item->attributesToUnset();
@@ -87,5 +87,4 @@ class RoleController extends CoreController
         $entity = new $this->model;
         return $this->view($this->baseView . '.edit', compact(['item', 'form', 'entity', 'modules']));
     }
-
 }

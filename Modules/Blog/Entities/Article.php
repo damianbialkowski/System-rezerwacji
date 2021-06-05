@@ -3,9 +3,12 @@
 namespace Modules\Blog\Entities;
 
 use Modules\Cms\Entities\CmsModel;
+use Modules\Cms\Traits\CmsTrait;
 
 class Article extends CmsModel
 {
+    use CmsTrait;
+
     protected $fillable = [
         'domain_id',
         'name',
@@ -33,21 +36,31 @@ class Article extends CmsModel
         'content' => 'json'
     ];
 
-    public $translatable = [
+    public array $translatable = [
         'name',
         'slug',
         'introduction',
         'content'
     ];
 
-    public function categories()
+    public function categories(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
         return $this->belongsToMany(Category::class);
     }
 
-    public function user()
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
         return $this->belongsTo(Admin::class);
+    }
+
+    public function getLinkAction()
+    {
+        return 'link-action';
+    }
+
+    public function generateCustomLink()
+    {
+        return 'articles/article-test';
     }
 
 }

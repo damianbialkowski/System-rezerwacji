@@ -16,5 +16,4 @@ class AbilityManager
     {
         return $this->ability->getModulesAbilities();
     }
-
 }

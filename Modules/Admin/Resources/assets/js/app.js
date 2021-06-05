@@ -30,6 +30,14 @@ new Vue({
             } else {
                 el.classList.add('active');
             }
+        },
+        userInfoToggle(active = false) {
+            const userInfo = document.getElementById('user-info');
+            if (active) {
+                userInfo.classList.add('active');
+            } else {
+                userInfo.classList.remove('active');
+            }
         }
     }
 })

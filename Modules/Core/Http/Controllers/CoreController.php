@@ -3,6 +3,7 @@
 namespace Modules\Core\Http\Controllers;
 
 use Illuminate\Foundation\Bus\DispatchesJobs;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
@@ -41,9 +42,9 @@ abstract class CoreController extends BaseController
      * @param array $parameters
      * @param int $status
      * @param array $headers
-     * @return \Illuminate\Http\RedirectResponse
+     * @return RedirectResponse
      */
-    public function redirect($route, $parameters = [], $status = 302, $headers = [])
+    public function redirect($route, array $parameters = [], int $status = 302, array $headers = []): RedirectResponse
     {
         return Redirect::route($route, $parameters, $status, $headers);
     }
@@ -90,12 +91,12 @@ abstract class CoreController extends BaseController
         if (!Bouncer::can('create', $this->model)) {
             return abort(403);
         }
-        if (isset($this->requestList['store'])) {
-            $this->validateForm($request, new $this->requestList['store']);
+        if (isset($this->request)) {
+            $this->validateForm($request, new $this->request);
         }
 
-        (new $this->model)->create($request->all());
-        return $this->redirect($this->baseRoute . '.' . $this->defaultRedirect);
+        $this->model::create($request->all());
+        return $this->redirect($this->routeWithModulePrefix . '.' . $this->defaultRedirect);
     }
 
     /**
@@ -131,7 +132,7 @@ abstract class CoreController extends BaseController
         if (!Bouncer::can('edit', $this->model)) {
             return abort(403);
         }
-        $item = (new $this->model)->withTrashed()->findOrFail($id);
+        $item = $this->model::withTrashed()->findOrFail($id);
 
         if (method_exists($item, 'attributesToUnset')) {
             $item->attributesToUnset();
@@ -151,11 +152,11 @@ abstract class CoreController extends BaseController
         if (!Bouncer::can('edit', $this->model)) {
             return abort(403);
         }
-        if (isset($this->requestList['update'])) {
-            $this->validateForm($request, new $this->requestList['update'], $id);
+        if (isset($this->request)) {
+            $this->validateForm($request, new $this->request, $id);
         }
-        $item = (new $this->model)->findOrFail($id);
-        $item->update($request->all());
+        $item = $this->model::findOrFail($id);
+        $item->fill($request->all())->save();
 
         return $this->redirect($this->routeWithModulePrefix . '.' . $this->defaultRedirect);
     }

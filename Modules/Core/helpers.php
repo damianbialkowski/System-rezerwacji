@@ -29,7 +29,7 @@ if (!function_exists('module_prefix')) {
         }
         $prefix = request()->route()->getPrefix();
         if (str_contains($prefix, '/')) {
-            $prefix = (explode('/', $prefix))[0];
+            $prefix = (explode('/', $prefix))[1];
         }
         return $prefix;
     }
@@ -43,11 +43,11 @@ if (!function_exists('module_lang')) {
         }
         $trans = str_replace("'", '', $trans);
         $controller = request()->route()->controller;
-        $baseRoute = $controller->getBaseRoute();
         if (!strpos($trans, '::')) {
             if (!$moduleName) {
                 $modulePrefix = module_prefix();
                 $transNew = $modulePrefix . '::';
+                $baseRoute = $controller->getBaseRoute();
                 if ($baseRoute) {
                     $transNew .= $baseRoute . '.';
                 }

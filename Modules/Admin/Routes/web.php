@@ -20,7 +20,7 @@ Route::group(['prefix' => 'password', 'as' => 'password.'], function () {
 
 Route::middleware(['auth:admin'])->group(function () {
     Route::get('/', [DashboardController::class, 'dashboard'])->name('dashboard');
-    Route::get('logout', [LoginController::class, 'logout'])->name('logout');
+    Route::post('logout', [LoginController::class, 'logout'])->name('logout');
     Route::resource('admins', AdminController::class);
     Route::resource('roles', RoleController::class);
 });

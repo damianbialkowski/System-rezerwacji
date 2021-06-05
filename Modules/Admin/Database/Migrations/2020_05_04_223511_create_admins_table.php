@@ -13,7 +13,7 @@ class CreateAdminsTable extends Migration
      */
     public function up()
     {
-        if(!Schema::hasTable('admins')) {
+        if (!Schema::hasTable('admins')) {
             Schema::create('admins', function (Blueprint $table) {
                 $table->increments('id');
                 $table->string('name')->nullable();
@@ -21,8 +21,8 @@ class CreateAdminsTable extends Migration
                 $table->string('password');
                 $table->boolean('active')->default(0);
                 $table->rememberToken();
-                $table->integer('updated_by')->default(null);
-                $table->integer('created_by')->default(null);
+                $table->integer('updated_by')->nullable();
+                $table->integer('created_by')->nullable();
                 $table->timestamps();
                 $table->softDeletes();
             });

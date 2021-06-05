@@ -11,7 +11,7 @@ trait BootableTrait
         parent::boot();
 
         dd(getGuardName());
-//        $auth_id = \Auth::guard(getGuardName())->id();
+//        $auth_id = \auth::guard(getGuardName())->id();
 ////        dd($auth_id);
 //        static::updated(function ($table) use ($auth_id) {
 //            $table->updated_by = $auth_id;

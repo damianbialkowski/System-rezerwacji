@@ -7,9 +7,7 @@
     <div id="main-content">
         @include('admin::partials.navbar')
         <div class="page-content">
-            <div class="container-fluid">
-                @yield('admin::main')
-            </div>
+            @yield('admin::main')
         </div>
         <footer class="author">
             <p>Copyright {{ date('Y') }} &copy; DCMS by @cms_author</p>

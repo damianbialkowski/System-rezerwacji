@@ -12,7 +12,6 @@ use Modules\Core\Traits\Translatable;
 class CmsModel extends CoreModel
 {
     use SoftDeletes,
-        Sluggable,
         CmsTrait,
         OnlineModel,
         Translatable;
@@ -23,7 +22,15 @@ class CmsModel extends CoreModel
         'updated_at'
     ];
 
-    public $translatable = [];
+    public array $translatable = [
+        'name',
+    ];
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        $this->bootBaseTrait();
+    }
 
     public function sluggable(): array
     {

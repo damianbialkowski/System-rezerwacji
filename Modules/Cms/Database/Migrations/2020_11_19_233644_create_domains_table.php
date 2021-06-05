@@ -18,7 +18,7 @@ class CreateDomainsTable extends Migration
                 $table->bigIncrements('id');
                 $table->string('name')->unique();
                 $table->string('url', 100)->default('*')->unique();
-                $table->json('options');
+                $table->json('options')->nullable();
                 $table->boolean('active')->default(0)->nullable(false);
                 $table->boolean('default')->default(0)->nullable(false);
                 $table->softDeletes();

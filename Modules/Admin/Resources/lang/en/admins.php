@@ -3,7 +3,7 @@
 return [
     'title' => [
         'type' => [
-            'create' => 'Register user',
+            'create' => 'Create new user',
             'show' => '',
             'edit' => 'Edit user',
         ]

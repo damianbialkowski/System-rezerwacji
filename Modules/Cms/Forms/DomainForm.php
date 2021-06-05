@@ -12,6 +12,5 @@ class DomainForm extends Form
         $this->add('url');
         $this->add('active', 'checkbox');
         $this->add('default', 'checkbox');
-
     }
 }

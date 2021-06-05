@@ -12,14 +12,6 @@ class RoleForm extends Form
     {
         $this
             ->add('name')
-            ->add('title')
-            ->add('active', 'checkbox')
-            ->add('update', 'submit',
-                [
-                    'label' => module_lang('form.update'),
-                    'attr' => [
-                        'class' => 'btn',
-                    ]
-                ]);
+            ->add('title');
     }
 }

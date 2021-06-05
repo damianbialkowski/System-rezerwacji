@@ -13,7 +13,7 @@ class AddSoftDeletesToRolesTable extends Migration
      */
     public function up()
     {
-        if (!Schema::hasColumn('roles', 'deleted_at')) {
+        if (Schema::hasTable('roles') && !Schema::hasColumn('roles', 'deleted_at')) {
             Schema::table('roles', function (Blueprint $table) {
                 $table->softDeletes();
             });
@@ -27,7 +27,7 @@ class AddSoftDeletesToRolesTable extends Migration
      */
     public function down()
     {
-        if (Schema::hasColumn('roles', 'deleted_at')) {
+        if (Schema::hasTable('roles') && Schema::hasColumn('roles', 'deleted_at')) {
             Schema::table('roles', function (Blueprint $table) {
                 $table->dropSoftDeletes();
             });

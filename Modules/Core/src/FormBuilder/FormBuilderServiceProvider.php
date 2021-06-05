@@ -48,7 +48,7 @@ class FormBuilderServiceProvider extends ServiceProvider
             }
         });
         //TODO
-        include_once(__DIR__ . '../Helpers/helpers.php');
+        include_once(__DIR__ . '/Helpers/helpers.php');
     }
 
     /**

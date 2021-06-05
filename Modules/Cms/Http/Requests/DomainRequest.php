@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class DomainRequest extends FormRequest
 {
-    protected int $modelId;
+    protected $modelId = null;
 
     /**
      * Get the validation rules that apply to the request.

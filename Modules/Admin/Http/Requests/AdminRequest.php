@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class AdminRequest extends FormRequest
 {
-    protected int $modelId;
+    protected ?int $modelId = null;
 
     /**
      * Get the validation rules that apply to the request.
@@ -17,11 +17,11 @@ class AdminRequest extends FormRequest
     {
         return [
             'name' => 'required|min:2|max:255',
-            'last_name' => 'min:2|max:255',
-            'login' => 'max:255',
+            'last_name' => 'max:255',
+            'login' => 'required|min:2|max:255',
             'email' => 'required|email|max:255|unique:admins,email,' . $this->modelId,
             'role_id' => 'required',
-            'password' => 'confirmed',
+            'password' => 'confirmed|min:6',
         ];
     }
 

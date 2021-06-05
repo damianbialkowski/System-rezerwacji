@@ -9,5 +9,8 @@ return [
         'default' => 'Default',
         'active' => 'Active',
         'inactive' => 'Inactive'
-    ]
+    ],
+    'edit' => 'Edit',
+    'save' => 'Save',
+    'delete' => 'Delete'
 ];

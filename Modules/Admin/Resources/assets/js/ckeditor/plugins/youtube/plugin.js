@@ -358,7 +358,7 @@ function handleEmbedChange(el, api) {
 
 /**
  * JavaScript function to match (and return) the video Id
- * of any valid Youtube Url, given as input string.
+ * of any valid Youtube Link, given as input string.
  * @author: Stephan Schmitz <eyecatchup@gmail.com>
  * @url: http://stackoverflow.com/a/10315969/624466
  */

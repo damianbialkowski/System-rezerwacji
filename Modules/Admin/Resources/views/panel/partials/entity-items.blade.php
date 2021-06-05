@@ -2,7 +2,7 @@
     @foreach($data['items'] as $item)
         <div class="item-block card">
             <div class="card-header">
-                <span class="title">#{{$item->id}}: {{ $item->url }}</span>
+                <span class="title">#{{$item->id}}: {{ $item->name }}</span>
             </div>
             <div class="card-body">
                 @if($item->updated_at)

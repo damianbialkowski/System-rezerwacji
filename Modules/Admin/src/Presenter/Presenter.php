@@ -20,7 +20,7 @@ class Presenter
     public function withFilters(): object
     {
         $filterList = $this->model->filter_list;
-        if (!is_array($filterList) || $filterList === null) {
+        if (!is_array($filterList)) {
             return $this;
         }
         $baseUrl = request()->url();
@@ -52,7 +52,7 @@ class Presenter
     {
         $search = '';
         $status = 1;
-        $columns = $this->checkSearchableColumns();
+        $columns = $this->getSearchableColumns();
         if (request()->has('search') && request()->get('search')) {
             $search = strtolower(trim(request()->get('search')));
         }
@@ -63,8 +63,11 @@ class Presenter
                 $status = $status[1];
             }
         }
-
-        $items = $this->model->withTrashed()->where(function ($q) use ($search, $columns) {
+        $model = $this->model;
+        if (in_array('deleted_at', $columns)) {
+            $model->withTrashed();
+        }
+        $items = $model->where(function ($q) use ($search, $columns) {
             if ($search && count($columns)) {
                 if (count($columns) == 1) {
                     $q->whereRaw("lower({$columns[0]}) like (?)", ["%{$search}%"]);
@@ -78,10 +81,10 @@ class Presenter
                     }
                 }
             }
-        })->where(function ($q) use ($status) {
-            if (($status == 0 || $status == 1)) {
+        })->where(function ($q) use ($status, $model, $columns) {
+            if (in_array('active', $columns) && ($status == 0 || $status == 1)) {
                 $q->where('active', $status);
-            } elseif ($status == 2) {
+            } elseif ($status == 2 && in_array('deleted_at', $columns)) {
                 $q->onlyTrashed();
             }
         })->paginate();
@@ -93,14 +96,15 @@ class Presenter
         ];
     }
 
-    public function checkSearchableColumns(): array
+    public function getSearchableColumns(): array
     {
-        if (empty($this->searchableColumns)) {
+        $searchableColumns = $this->model->searchableColumns;
+        if (empty($searchableColumns)) {
             if (in_array('name', $this->model->getFillable())) {
-                $this->searchableColumns[] = 'name';
+                $searchableColumns[] = 'name';
             }
         }
-        return $this->searchableColumns;
+        return $searchableColumns;
     }
 
     public function paginate($items, $perPage = 15, $page = null, $options = []): object

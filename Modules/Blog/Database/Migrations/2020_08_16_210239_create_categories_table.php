@@ -26,9 +26,6 @@ class CreateCategoriesTable extends Migration
                 $table->unsignedInteger('created_by')->nullable();
                 $table->timestamps();
                 $table->softDeletes();
-
-                $table->foreign('updated_by')->references('id')->on('admins');
-                $table->foreign('created_by')->references('id')->on('admins');
             });
         }
     }

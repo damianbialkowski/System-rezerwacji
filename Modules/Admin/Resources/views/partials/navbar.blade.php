@@ -5,8 +5,8 @@
         </div>
     </div>
     <div class="right-side">
-        <div class="user-info d-flex align-items-center" id="user-info-toggle">
-            <span>{{ admin()->name }}</span>
+        <div class="user-info d-flex align-items-center" id="user-info-toggle" @click="userInfoToggle(true)">
+            <span class="pr-1">{{ admin()->name }}</span>
             <div>
                 <span class="symbol">{{ ucfirst(admin()->name[0]) }}</span>
             </div>

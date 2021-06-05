@@ -13,7 +13,7 @@ class AddActiveColumnToRolesTable extends Migration
      */
     public function up()
     {
-        if (!Schema::hasColumn('roles', 'active')) {
+        if (Schema::hasTable('roles') && !Schema::hasColumn('roles', 'active')) {
             Schema::table('roles', function (Blueprint $table) {
                 $table->boolean('active')->after('scope')->default(true);
             });
@@ -27,7 +27,7 @@ class AddActiveColumnToRolesTable extends Migration
      */
     public function down()
     {
-        if (Schema::hasColumn('roles', 'active')) {
+        if (Schema::hasTable('roles') && Schema::hasColumn('roles', 'active')) {
             Schema::table('roles', function (Blueprint $table) {
                 $table->dropColumn('active');
             });

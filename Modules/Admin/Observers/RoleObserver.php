@@ -11,12 +11,12 @@ class RoleObserver
     /**
      * Handle the Role "saving" event.
      *
-     * @param \Modules\Admin\Entities\Role $role
+     * @param Role $role
      * @return void
      */
     public function saving(Role $role)
     {
-        if ($role->id != 1) {
+        if ($role->id != 1 && request()->has('abilities')) {
             $abilities = request()->get('abilities');
             foreach ($abilities as $model => $crud) {
                 foreach ($crud as $method => $status) {
@@ -33,7 +33,7 @@ class RoleObserver
     /**
      * Handle the Role "saved" event.
      *
-     * @param \Modules\Admin\Entities\Role $role
+     * @param Role $role
      * @return void
      */
     public function saved(Role $role)
@@ -45,7 +45,7 @@ class RoleObserver
     /**
      * Handle the User "deleting" event.
      *
-     * @param \Modules\Admin\Entities\Role $role
+     * @param Role $role
      * @return void
      */
     public function deleting(Role $role)

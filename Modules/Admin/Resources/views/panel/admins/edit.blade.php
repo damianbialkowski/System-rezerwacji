@@ -1,1 +1,1 @@
-@include('admin::panel.admins.form')
+@include('admin::panel.admins.form', ['edit' => 1])

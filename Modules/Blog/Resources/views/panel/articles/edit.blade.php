@@ -1,1 +1,1 @@
-@include('blog::panel.articles.form')
+@include('blog::panel.articles.form', ['edit' => 1])

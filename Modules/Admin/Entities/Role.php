@@ -10,7 +10,7 @@ use Silber\Bouncer\Database\Models;
 
 class Role extends Model
 {
-    use OnlineModel, SoftDeletes, IsRole;
+    use OnlineModel, IsRole;
 
     protected $fillable = [
         'name',
@@ -51,7 +51,7 @@ class Role extends Model
         return self::all();
     }
 
-    public static function prepareRolesSelect()
+    public static function prepareRolesSelect(): array
     {
         $roles = self::getRoles();
         $preparedRoles = [];

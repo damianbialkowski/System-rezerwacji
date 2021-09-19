@@ -1,6 +1,6 @@
 {
-    "name": "d-cms/admin",
-    "description": "Admin module for DCms",
+    "name": "owncms/admin",
+    "description": "Admin module for Own CMS",
     "authors": [
         {
             "name": "Damian Bialkowski",

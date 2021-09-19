@@ -1,10 +1,12 @@
 {
-    "name": "laravel/laravel",
+    "name": "owncms/base",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "Our Own CMS project that was built using Laravel",
     "keywords": [
         "framework",
-        "laravel"
+        "laravel",
+        "cms",
+        "Project"
     ],
     "license": "MIT",
     "require": {

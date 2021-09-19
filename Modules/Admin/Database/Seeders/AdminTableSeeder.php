@@ -17,9 +17,9 @@ class AdminTableSeeder extends Seeder
     {
 //        Model::unguard();
         DB::table('admins')->insert([
-            'name' => 'Damian',
-            'email' => 'damianbialkowski8@gmail.com',
-            'password' => bcrypt('test'),
+            'name' => 'admin',
+            'email' => 'admin@admin.com',
+            'password' => bcrypt('admin'),
             'active' => 1,
             'updated_by' => 1,
             'created_by' => 1,

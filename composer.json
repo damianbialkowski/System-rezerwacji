@@ -1,7 +1,7 @@
 {
     "name": "owncms/base",
     "type": "project",
-    "description": "Our Own CMS project that was built using Laravel",
+    "description": "Own CMS project that was built using Laravel",
     "keywords": [
         "framework",
         "laravel",
@@ -10,7 +10,7 @@
     ],
     "license": "MIT",
     "require": {
-        "php": "^7.3|^8.0",
+        "php": "^7.4|^8.0",
         "facuz/laravel-themes": "^3.2",
         "fideloper/proxy": "^4.0",
         "laravel/framework": "^8.0",
@@ -48,14 +48,11 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "app/",
             "Modules\\": "Modules/"
         }
     },
     "autoload-dev": {
-        "psr-4": {
-            "Tests\\": "tests/"
-        }
+        "psr-4": {}
     },
     "minimum-stability": "dev",
     "prefer-stable": true,

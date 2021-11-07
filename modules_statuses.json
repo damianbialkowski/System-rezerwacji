@@ -4,5 +4,6 @@
     "Admin": true,
     "Cms": true,
     "Test": true,
-    "UrlGenerator": true
+    "UrlGenerator": true,
+    "LearningPlatform": true
 }

@@ -34,7 +34,7 @@ return [
             'views/master' => 'Resources/views/layouts/auth.blade.php',
             'scaffold/config' => 'Config/config.php',
             'composer' => 'composer.json',
-            'assets/js/app' => 'Resources/assets/js/app.js',
+            'assets/js/app' => 'Resources/assets/js/admin.js',
             'assets/sass/app' => 'Resources/assets/sass/app.scss',
             'webpack' => 'webpack.mix.js',
             'package' => 'package.json',
@@ -138,7 +138,7 @@ return [
     */
 
     'scan' => [
-        'enabled' => false,
+        'enabled' => true,
         'paths' => [
             base_path('vendor/*/*'),
         ],
@@ -153,7 +153,7 @@ return [
     */
 
     'composer' => [
-        'vendor' => 'd-cms',
+        'vendor' => 'owncms',
         'author' => [
             'name' => 'Damian Bialkowski',
             'email' => 'damianbialkowski.info@gmail.com',

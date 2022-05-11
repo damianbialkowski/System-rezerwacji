@@ -1,4 +1,4 @@
-name: dbcms
+name: system-zarzadzania-hotelami-pl
 type: laravel
 docroot: public
 php_version: "8.0"

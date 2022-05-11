@@ -11,15 +11,17 @@
     "license": "MIT",
     "require": {
         "php": "^7.4|^8.0",
-        "facuz/laravel-themes": "^3.2",
         "fideloper/proxy": "^4.0",
-        "laravel/framework": "^8.0",
+        "laravel/framework": "^8",
         "laravel/helpers": "dev-master",
         "laravel/tinker": "^2.0",
-        "laravel/ui": "^3.0",
+        "laravel/ui": "^3",
         "maatwebsite/laravel-sidebar": "^2.4",
-        "nwidart/laravel-modules": "^8.0",
-        "wikimedia/composer-merge-plugin": "dev-master"
+        "nwidart/laravel-modules": "^9.0",
+        "wikimedia/composer-merge-plugin": "dev-master",
+        "owncms/core": "dev-master",
+        "owncms/admin": "dev-master",
+        "owncms/cms": "dev-master"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.5",

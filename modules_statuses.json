@@ -1,10 +1,6 @@
 {
-    "Blog": true,
     "Core": true,
     "Admin": true,
     "Cms": true,
-    "Test": true,
-    "UrlGenerator": true,
-    "LearningPlatform": true,
     "Booking": true
 }

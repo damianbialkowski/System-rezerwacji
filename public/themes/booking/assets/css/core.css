@@ -1,0 +1,32 @@
+h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5 {
+    font-weight: bold;
+    line-height: 1.4;
+    margin: 0;
+}
+
+h1, .h1 {
+    font-size: 30px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.text-gray {
+    color: rgba(33,37,41, 0.8);
+}
+
+.text-bold {
+    font-weight: bold;
+}
+
+.bb-1 {
+    border-bottom: 1px solid #bdbdbd;
+}
+
+.small-hr {
+    width: 20px;
+    border: 0;
+    height: 1px;
+    margin: 0;
+}

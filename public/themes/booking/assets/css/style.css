@@ -1,0 +1,153 @@
+:root {
+    --white: #fff;
+    --orange: #ff9958;
+    --black: #282828;
+}
+
+body, html {
+    font-family: 'Poppins', sans-serif;
+}
+
+.landscape--screen {
+    background: url('../img/landscape_home.jpg') fixed center;
+    min-height: 400px;
+    display: flex;
+    align-items: center;
+}
+
+.navbar {
+    transition: .5s background-color;
+}
+
+.navbar-scrolled {
+    background-color: rgba(33, 37, 41, 0.8);
+}
+
+.navbar-scrolled .navbar-brand {
+    border: 1px solid #fff;
+}
+
+.landscape--screen h1 {
+    font-size: 40px;
+    color: var(--white);
+
+}
+
+.log-in--link {
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    color: #fff;
+}
+
+.nav-item {
+    margin: 0 20px;
+}
+
+.nav-link {
+    padding: 10px 20px !important;
+}
+
+.navbar-brand {
+    border-radius: 10px 0 10px 0;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    padding: 0 17px;
+}
+
+.dark-navbar {
+    background-color: var(--black);
+}
+
+.dark-navbar .btn--check {
+
+}
+
+.btn--check {
+    background-color: var(--orange);
+    color: var(--white);
+    border-radius: 15px 0 15px 0;
+}
+
+.dark-navbar .navbar-brand {
+    color: var(--white);
+    border: 1px solid var(--white);
+}
+
+.dark-navbar .nav-item {
+    color: var(--white);
+}
+
+.nav-item .nav-link, .navbar-brand {
+    color: var(--white);
+    transition: .5s all;
+}
+
+.nav-link.log-in--link {
+    font-weight: bold;
+    background-color: var(--white);
+    color: #000;
+}
+
+.nav-item .nav-link:not(.log-in--link):hover {
+    border-bottom: 1px solid var(--white);
+}
+
+.padd-big {
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+body:not(.home) .main {
+    margin-top: 80px;
+}
+
+.btn--orange {
+    background-color: var(--orange);
+    color: var(--white);
+}
+
+.btn--orange:hover {
+    color: #fff !important;
+}
+
+.login--wrapper, .register--wrapper {
+    max-width: 400px;
+}
+
+.offer--name, .offer--name:hover {
+    color: #000;
+}
+
+.filter--wrapper {
+    border: 1px solid #bdbdbd;
+    border-radius: 2px;
+}
+
+.filter--item:not(:last-child) {
+    border-bottom: 1px solid #bdbdbd;
+}
+
+.filter--item {
+    padding: 7px;
+}
+
+.offer-item__content .card-title {
+    color: #000;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+#offerComment .nice-select {
+    line-height: 29px;
+}
+
+.opinion-list {
+    height: 100%;
+    align-items: center;
+}
+
+footer ul {
+    list-style-type: none;
+}

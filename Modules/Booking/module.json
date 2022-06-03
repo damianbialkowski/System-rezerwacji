@@ -8,6 +8,8 @@
         "Modules\\Booking\\Providers\\BookingServiceProvider"
     ],
     "aliases": {},
-    "files": [],
+    "files": [
+        "helpers.php"
+    ],
     "requires": []
 }

@@ -10,12 +10,12 @@ class BookingServiceProvider extends ModuleServiceProvider
     /**
      * @var string $moduleName
      */
-    protected $moduleName = 'Booking';
+    protected string $moduleName = 'Booking';
 
     /**
      * @var string $moduleNameLower
      */
-    protected $moduleNameLower = 'booking';
+    protected string $moduleNameLower = 'booking';
 
     /**
      * Register the service provider.

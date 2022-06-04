@@ -220,7 +220,7 @@ a {
 }
 
 #sidebar-menu li {
-    padding: 5px 0;
+    padding: 5px 10px;
 }
 
 #sidebar-menu .parent.active li.active {

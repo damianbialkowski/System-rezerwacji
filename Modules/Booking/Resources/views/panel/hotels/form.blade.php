@@ -91,6 +91,9 @@
                                 <div class="tab-pane" id="rooms" role="tabpanel"
                                      aria-labelledby="pills-rooms-tab">
                                     <div class="row">
+                                        <div class="w-100 ml-auto">
+                                            <a style="width: 150px;margin-bottom: 20px;" href="{{ route('admin.booking.hotels.rooms.create', ['hotel' => $item->id]) }}" class="btn btn--edit">Create room</a>
+                                        </div>
                                         @if(($rooms = $form->getModel()->rooms()->get()) && $rooms->count())
                                             @foreach($rooms as $room)
                                                 <div class="item-block card">
@@ -114,7 +117,18 @@
                                                             @endif
                                                         </div>
                                                     </div>
-                                                    @include('admin::panel.partials.crud-operations', ['item' => $room])
+                                                    <div class="item-block-operations">
+                                                        @can('show', $item)
+                                                            <a href="{{ route('admin.booking.hotels.rooms.show', ['hotel' => $item, 'room' => $room]) }}" class="show"><i class="fas fa-eye"></i></a>
+                                                        @endcan
+                                                        @can('edit', $item)
+                                                            <a href="{{ route('admin.booking.hotels.rooms.edit', ['hotel' => $item, 'room' => $room]) }}" class="edit"><i class="fas fa-edit"></i></a>
+                                                        @endcan
+                                                        @can('delete', $item)
+                                                            <a href="{{ route('admin.booking.hotels.rooms.destroy', ['hotel' => $item, 'room' => $room]) }}" class="remove"><i class="fas fa-trash-alt"></i></a>
+                                                        @endcan
+                                                    </div>
+
                                                 </div>
                                             @endforeach
                                         @else

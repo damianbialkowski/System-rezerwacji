@@ -34,7 +34,7 @@
                     </div>
                 </div>
                 @foreach($items as $item)
-                    <div class="card offer-item__wrapper d-flex p-3">
+                    <div class="card offer-item__wrapper d-flex p-3 mt-2">
                         <div class="row g-0">
                             @if($media = $item->getMedia('image')->first())
                                 <div class="col-md-4">

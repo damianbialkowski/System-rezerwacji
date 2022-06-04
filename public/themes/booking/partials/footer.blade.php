@@ -5,10 +5,10 @@
                 <span class="text-bold text-light">Details</span>
                 <ul class="text-light p-0 mt-2 ml-0">
                     <li>
-                        <a>My account</a>
+                        <a href="{{ route('Front::cms.profile') }}" style="color: #fff">My account</a>
                     </li>
                     <li>
-                        <a>Reservations</a>
+                        <a href="{{ route('Front::booking.reservations.index') }}" style="color: #fff">Reservations</a>
                     </li>
                 </ul>
             </div>

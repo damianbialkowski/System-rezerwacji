@@ -11,10 +11,13 @@ class RoomForm extends BaseCmsForm
         $this->add('name');
         $this->add('slug');
 
-        $this->add('short_content', 'textarea');
+        $this->add('short_content', 'textarea', [
+            'id' => 'textarea-editor'
+        ]);
         $this->add('content', 'textarea');
 
         $this->add('active', 'checkbox');
+        $this->add('promoted', 'checkbox');
 
         $this->add('cost', 'number', [
             'rules' => 'min:1'

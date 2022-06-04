@@ -20,7 +20,13 @@ return [
             'name' => 'Name',
             'slug' => 'Slug',
             'cost' => 'Cost',
-            'quantity_places' => 'Quantity places',
+            'quantity_places' => 'Seats'
         ]
+    ],
+    'form' => [
+        'name' => 'Name',
+        'slug' => 'Slug',
+        'cost' => 'Cost',
+        'quantity_places' => 'Seats'
     ]
 ];

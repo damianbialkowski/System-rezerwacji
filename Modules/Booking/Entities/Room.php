@@ -16,6 +16,7 @@ class Room extends CmsModel
         'short_content',
         'content',
         'active',
+        'promoted',
         'cost',
         'quantity_places'
     ];
@@ -33,5 +34,26 @@ class Room extends CmsModel
     public function opinions()
     {
         return Opinion::where('entity_id', $this->id)->where('entity_type', get_class($this));
+    }
+
+    public function attributeValues()
+    {
+        $attributeIds = \DB::table('room_attribute_value')
+        ->where('room_id', $this->id)
+        ->distinct()
+        ->select('attribute_id')
+        ->get()
+        ->pluck('attribute_id')->toArray();
+        $valuesIds = \DB::table('room_attribute_value')
+            ->where('room_id', $this->id)
+            ->distinct()
+            ->select('attribute_value_id')
+            ->get()
+            ->pluck('attribute_value_id')->toArray();
+        return Attribute::with(['values' => function ($q) use ($valuesIds) {
+            $q->whereIn('id', $valuesIds);
+        }])->whereHas('values',  function ($q) use ($valuesIds) {
+            return $q->whereIn('id', $valuesIds);
+        })->whereIn('id', $attributeIds);
     }
 }

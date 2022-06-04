@@ -25,29 +25,40 @@ $(document).ready(() => {
                 items: 1
             },
             600: {
-                items: 3
+                items: 1
             },
             1000: {
-                items: 2
+                items: 1
             }
         }
     });
 
-    $('#offerComment').on('submit', (e) => {
-        e.preventDefault();
-        let serializedData = $('#offerComment').serialize();
-        $.ajax({
-            url: $('#offerComment').attr('action'),
-            type: "POST",
-            data: serializedData,
-            success: function (response) {
-                console.log(respone);
-            },
-            error: function (jqXHR, textStatus, errorThrown) {
-                console.log(textStatus, errorThrown);
+    if ($('#offerComment').length) {
+        $('#offerComment').on('submit', (e) => {
+            e.preventDefault();
+            let serializedData = $('#offerComment').serialize();
+            $.ajax({
+                url: $('#offerComment').attr('action'),
+                type: "POST",
+                data: serializedData,
+                success: function (response) {
+                    console.log(respone);
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.log(textStatus, errorThrown);
+                }
+            });
+        });
+    }
+
+    if ($('#datepicker-date').length) {
+        $('#datepicker-date').daterangepicker({
+            locale: {
+                format: 'DD-MM-YYYY',
+                separator: ' <-> '
             }
         });
-    });
+    }
 });
 
 function checkScroll()

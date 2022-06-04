@@ -3,8 +3,8 @@
     <div class="page-content__top">
         <div class="container-fluid page-content__top-content">
             <div class="page-content__top-details">
-                {{--                <a href="{{ build_crud_route('index') }}" class="return-back"><i--}}
-                {{--                        class="fas fa-long-arrow-alt-left"></i> @lang('cms::form.back')</a>--}}
+                <a href="{{ build_crud_route('index') }}" class="return-back"><i
+                        class="fas fa-long-arrow-alt-left"></i> @lang('cms::form.back')</a>
                 @if($item->id)
                     <h2 class="font-weight-bold">{{ $item->name }}</h2>
                 @else
@@ -21,7 +21,7 @@
                     <button type="submit" class="btn btn--create"
                             form="global--form">@lang('admin::main.save')</button>
                 @else
-                    <a class="btn btn--edit" href="{{ route('admin.booking.hotels.rooms.edit', ['hotel' => $item->hotel->id, 'room' => $item]) }}">@lang('admin::main.edit')</a>
+                    <a class="btn btn--edit" href="{{ build_crud_route('edit', $item) }}">@lang('admin::main.edit')</a>
                 @endif
             </div>
         </div>
@@ -37,62 +37,36 @@
                                    role="tab"
                                    aria-controls="pills-general" aria-selected="true">@lang('admin::form.general')</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="pills-content-tab" data-toggle="pill" href="#content"
-                                   role="tab"
-                                   aria-controls="pills-content" aria-selected="true">@lang('admin::form.content')</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" id="pills-media-tab" data-toggle="pill"
-                                   href="#media"
-                                   role="tab"
-                                   aria-controls="pills-media"
-                                   aria-selected="true">@lang('admin::form.media')</a>
-                            </li>
+                            {{--                            <li class="nav-item">--}}
+                            {{--                                <a class="nav-link" id="pills-media-tab" data-toggle="pill" href="#media"--}}
+                            {{--                                   role="tab"--}}
+                            {{--                                   aria-controls="pills-media" aria-selected="true">@lang('admin::form.media')</a>--}}
+                            {{--                            </li>--}}
                         </ul>
                     </div>
                 </div>
                 <div class="card-body">
                     @include('admin::partials.alerts.success')
-                    {!! form_start($form, ['id' => 'global--form', 'files' => true, 'room' => 1]) !!}
-                    {!! form_row($form->hotel_id) !!}
+                    {!! form_start($form, ['id' => 'global--form', 'files' => true]) !!}
                     <div class="container-fluid">
                         <div class="tab-content">
-                            <div class="tab-pane fade show active" id="general" role="tabpanel"
+                            <div class="tab-pane active fade show" id="general" role="tabpanel"
                                  aria-labelledby="pills-general-tab">
                                 <div class="row">
                                     <div class="col-md-6 col-xs-12">
-                                        {!! form_row($form->name) !!}
+                                        {!! form_row($form->date_from) !!}
                                     </div>
                                     <div class="col-md-6 col-xs-12">
-                                        {!! form_row($form->slug) !!}
+                                        {!! form_row($form->date_to) !!}
                                     </div>
                                     <div class="col-md-6 col-xs-12">
-                                        {!! form_row($form->cost) !!}
+                                        {!! form_row($form->total_price) !!}
                                     </div>
                                     <div class="col-md-6 col-xs-12">
-                                        {!! form_row($form->quantity_places) !!}
-                                    </div>
-                                    <div class="col-md-3 col-xs-12">
-                                        {!! form_row($form->active) !!}
-                                    </div>
-                                    <div class="col-md-3 col-xs-12">
-                                        {!! form_row($form->promoted) !!}
+                                        {!! form_row($form->cancelled_at) !!}
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane" id="content" role="tabpanel"
-                                 aria-labelledby="pills-content-tab">
-                                <div class="row">
-                                    <div class="col-12">
-                                        {!! form_row($form->short_content) !!}
-                                    </div>
-                                    <div class="col-12">
-                                        {!! form_row($form->content) !!}
-                                    </div>
-                                </div>
-                            </div>
-                            @include('cms::partials.form_media_fields')
                         </div>
                         {!! form_end($form, false) !!}
                     </div>

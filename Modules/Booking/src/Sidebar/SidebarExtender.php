@@ -10,6 +10,7 @@ use Bouncer;
 use Modules\Booking\Entities\Attribute;
 use Modules\Booking\Entities\City;
 use Modules\Booking\Entities\Hotel;
+use Modules\Booking\Entities\Reservation;
 use Modules\Booking\Entities\Room;
 
 class SidebarExtender extends AbstractAdminSidebar
@@ -21,6 +22,7 @@ class SidebarExtender extends AbstractAdminSidebar
             'canRoom' => Bouncer::can('index', Room::class),
             'canCity' => Bouncer::can('index', City::class),
             'canAttribute' => Bouncer::can('index', Attribute::class),
+            'canReservation' => Bouncer::can('index', Reservation::class),
         ];
 
         if ($this->hasAnyPermissions($permissions)) {
@@ -46,6 +48,12 @@ class SidebarExtender extends AbstractAdminSidebar
                             if ($permissions['canAttribute']) {
                                 $item->item(trans('booking::sidebar.attributes'), function (Item $item) {
                                     $item->route($this->adminRoute('booking.attributes.index'));
+                                    $item->icon('');
+                                });
+                            }
+                            if ($permissions['canReservation']) {
+                                $item->item(trans('booking::sidebar.reservations'), function (Item $item) {
+                                    $item->route($this->adminRoute('booking.reservations.index'));
                                     $item->icon('');
                                 });
                             }

@@ -31,7 +31,7 @@ return array(
     'events' => array(
 
         'before' => function ($theme) {
-            $theme->setTitle(resolve('CmsDomain')->name ?? 'Default title');
+            $theme->setTitle('Default title');
             $theme->setAuthor('Damian Białkowski');
         },
 
@@ -43,7 +43,7 @@ return array(
                         [
                             '//cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css'
                         ]
-                    ],
+                    ]
                 ]
             );
             $asset->themePath()->add(
@@ -54,6 +54,7 @@ return array(
                             'css/nice-select.css',
                             'css/owl.carousel.min.css',
                             'css/owl.theme.default.min.css',
+                            'css/daterangepicker.css',
                             'css/core.css',
                             'css/style.css'
                         ]
@@ -65,6 +66,8 @@ return array(
                             'js/jquery.nice-select.min.js',
                             'js/owl.carousel.js',
                             'js/bootstrap.bundle.min.js',
+                            'js/moment.min.js',
+                            'js/daterangepicker.min.js',
                             'js/script.js',
                         ]
                     ]

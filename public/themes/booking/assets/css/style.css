@@ -151,3 +151,42 @@ body:not(.home) .main {
 footer ul {
     list-style-type: none;
 }
+
+.home-search--offers_wrapper {
+    margin-top: -70px;
+    background-color: #fff;
+    padding: 26px;
+    border-radius: 5px;
+    box-shadow: rgb(99 99 99 / 20%) 0px 2px 8px 0px;
+}
+
+.home-search--offers_wrapper .btn--wrapper {
+    height: 100%;
+    display: flex;
+    background-color: var(--orange);
+    color: #fff !important;
+    border-radius: 5px;
+    justify-content: center;
+}
+
+.home-search--offers_wrapper .btn--wrapper i {
+    color: #fff;
+}
+
+.search--wrapper form{
+    position: relative;
+}
+
+.search--wrapper input {
+    padding: 15px;
+}
+
+.search--wrapper button {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
+.home-search--offers_wrapper .nice-select .list {
+    width: 100% !important;
+}

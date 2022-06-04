@@ -16,6 +16,7 @@ use \Backend\HotelController;
 use \Backend\HotelRoomController;
 use \Backend\AttributeController;
 use \Backend\AttributeValueController;
+use \Backend\ReservationController;
 
 Route::group(['prefix' => 'booking', 'as' => 'booking.', 'middleware' => ['auth:admin']], function () {
     Route::resource('cities', CityController::class);
@@ -23,4 +24,5 @@ Route::group(['prefix' => 'booking', 'as' => 'booking.', 'middleware' => ['auth:
     Route::resource('hotels.rooms', HotelRoomController::class);
     Route::resource('attributes', AttributeController::class);
     Route::resource('attributes.values', AttributeValueController::class);
+    Route::resource('reservations', ReservationController::class);
 });

@@ -36,7 +36,6 @@ class CityController extends CoreController
         $item->fill($request->all())->save();
 
         $item->syncFormMedia($request);
-        dd('end');
 
         return $this->redirect($this->routeWithModulePrefix . '.' . $this->defaultRedirect);
     }

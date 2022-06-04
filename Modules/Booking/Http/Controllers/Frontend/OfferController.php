@@ -51,7 +51,7 @@ class OfferController extends Controller
 
         return $this->view('booking.offers.show', [
             'item' => $item,
-            'items' => []
+            'attributeValues' => $item->attributeValues()->get()
         ]);
     }
 

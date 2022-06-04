@@ -38,9 +38,10 @@ class HotelRoomController extends CoreController
         if (!Bouncer::can('create', $hotel)) {
             return abort(403);
         }
+
         $form = $this->form($this->form, [
             'method' => 'POST',
-            'url' => route($this->routeWithModulePrefix . '.' . 'store', ['hotel' => 1])
+            'url' => route($this->routeWithModulePrefix . '.rooms.' . 'store', ['hotel' => request()->route('hotel')])
         ]);
 
         $item = new $this->model;
@@ -65,8 +66,8 @@ class HotelRoomController extends CoreController
         $form = $this->form($this->form, [
             'method' => 'PUT',
             'route' => [
-                $this->routeWithModulePrefix . '.update',
-                ['hotel' => $item->id, 'room' => request()->route('room')]
+                $this->routeWithModulePrefix . '.rooms.update',
+                ['room' => request()->route('room'), 'hotel' => $item->id]
             ],
             'model' => $item
         ]);
@@ -83,13 +84,36 @@ class HotelRoomController extends CoreController
         if (isset($this->request)) {
             $this->validateForm($request, new $this->request, $id);
         }
+
         $item = $this->model::findOrFail($id);
         $item->fill($request->all())->save();
 
         $item->syncFormMedia($request);
 
-        return $this->redirect($this->routeWithModulePrefix . '.' . $this->defaultRedirect, [
+        return $this->redirect($this->routeWithModulePrefix . '.rooms.' . $this->defaultRedirect, [
             'hotel' => $item->hotel_id
         ]);
+    }
+
+
+    /**
+     * Store a newly created resource in storage.
+     * @param Request $request
+     * @return Response
+     */
+    public function store(Request $request)
+    {
+        if (!Bouncer::can('create', $this->model)) {
+            return abort(403);
+        }
+        if (isset($this->request)) {
+            $this->validateForm($request, new $this->request);
+        }
+        $data = $request->all();
+        $data['hotel_id'] = request()->route('hotel');
+        $item = $this->model::create($data);
+
+        $item->syncFormMedia($request);
+        return $this->redirect($this->routeWithModulePrefix . '.' . $this->defaultRedirect);
     }
 }
